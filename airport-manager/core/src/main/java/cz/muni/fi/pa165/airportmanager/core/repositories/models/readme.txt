@@ -1,1 +1,1 @@
-DAOs are to be put into this package
+Entities are to be put into this package
