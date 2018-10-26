@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.core.repositories.dao;
 
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.Destination;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +11,7 @@ import java.util.List;
  * @author kotrc
  * Created on 25.10.2018
  */
+@Repository
 public class DestinationDaoImpl implements DestinationDao {
 
     @PersistenceContext
