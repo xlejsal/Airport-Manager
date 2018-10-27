@@ -6,6 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
+ * Simple entity class modeling flight Steward,
+ * attributes *name* and *surname* mustn't be null
+ * and are not nullable, to have at least something set
+ * in stone to identify them.
+ *
  * @author Stepan Benes
  * Created on 2018-10-25
  */

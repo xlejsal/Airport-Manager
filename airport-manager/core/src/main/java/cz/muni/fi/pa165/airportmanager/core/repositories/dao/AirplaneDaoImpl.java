@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
+ * @see cz.muni.fi.pa165.airportmanager.core.repositories.dao.AirplaneDao
+ *
  * @author Stepan Benes
  * Created on 2018-10-25
  */
@@ -34,8 +36,8 @@ public class AirplaneDaoImpl implements AirplaneDao {
     }
 
     @Override
-    public List<Airplane> findByName(String n){
-        return em.createQuery("SELECT a FROM Airplanes a WHERE a.name = :name ", Airplane.class).setParameter("name", "%"+n+"%").getResultList();
+    public Airplane findByName(String n){
+        return em.createQuery("SELECT a FROM Airplanes a WHERE a.name = :name ", Airplane.class).setParameter("name", "%"+n+"%").getSingleResult();
     }
 
     @Override

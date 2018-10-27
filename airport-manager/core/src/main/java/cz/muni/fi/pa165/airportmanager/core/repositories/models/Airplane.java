@@ -6,6 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
+ * Simple entity class modeling real life Airplane,
+ * each is given a unique non-nullable *name*, its *type*
+ * and *company* name are also required to not be null.
+ *
  * @author Stepan Benes
  * Created on 2018-10-25
  */

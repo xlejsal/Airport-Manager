@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
+ * @see cz.muni.fi.pa165.airportmanager.core.repositories.dao.StewardDao
+ *
  * @author Stepan Benes
  * Created on 2018-10-25
  */
