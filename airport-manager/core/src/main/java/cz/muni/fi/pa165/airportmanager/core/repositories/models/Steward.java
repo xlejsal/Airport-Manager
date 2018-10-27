@@ -42,4 +42,7 @@ public class Steward {
     private String gender;
 
     private String nationality;
+
+    @ManyToMany(mappedBy = "stewards")
+    private Set<Flight> flights = new HashSet<Flight>();
 }
