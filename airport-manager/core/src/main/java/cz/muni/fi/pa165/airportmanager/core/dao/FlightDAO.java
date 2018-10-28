@@ -25,6 +25,13 @@ public interface FlightDAO {
     FlightPO create(FlightPO flight);
 
     /**
+     * Updates the flight with the same id in the database with the data of the given flight.
+     * @param flight To be updated.
+     * @return Returns the updated flight.
+     */
+    FlightPO update(FlightPO flight);
+
+    /**
      * Deletes the flight from the database.
      * @param flight Flight to be deleted.
      */

@@ -30,6 +30,11 @@ public class FlightDAOImpl implements FlightDAO {
     }
 
     @Override
+    public FlightPO update(FlightPO flight) {
+        return repository.save(flight);
+    }
+
+    @Override
     public void delete(FlightPO flight) {
         repository.delete(flight);
     }
