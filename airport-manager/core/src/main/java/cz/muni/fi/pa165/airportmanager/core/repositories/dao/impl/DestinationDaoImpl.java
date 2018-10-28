@@ -1,10 +1,12 @@
-package cz.muni.fi.pa165.airportmanager.core.repositories.dao;
+package cz.muni.fi.pa165.airportmanager.core.repositories.dao.impl;
 
-import cz.muni.fi.pa165.airportmanager.core.repositories.models.Destination;
+import cz.muni.fi.pa165.airportmanager.core.repositories.DestinationRepository;
+import cz.muni.fi.pa165.airportmanager.core.repositories.dao.DestinationDao;
+import cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -14,26 +16,28 @@ import java.util.List;
 @Repository
 public class DestinationDaoImpl implements DestinationDao {
 
-    @PersistenceContext
-    private EntityManager em;
+    @Autowired
+    private DestinationRepository repository;
 
     @Override
-    public void create(Destination destination) {
-        em.persist(destination);
+    public DestinationPO create(DestinationPO destinationPO) {
+        return repository.save(destinationPO);
     }
 
     @Override
-    public void remove(Long id) {
-        em.remove(findById(id));
+    public void delete(DestinationPO destinationPO) {
+        repository.delete(destinationPO);
     }
 
     @Override
-    public Destination findById(Long id) {
-        return em.find(Destination.class, id);
+    public DestinationPO findById(Long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Destination> findAll() {
-        return em.createQuery("select a from Destinations a", Destination.class).getResultList();
+    public List<DestinationPO> findAll() {
+        List<DestinationPO> allDestinations = new LinkedList<>();
+        repository.findAll().forEach(allDestinations::add);
+        return allDestinations;
     }
 }
