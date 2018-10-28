@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
+ * DestinationPO defined by city and country
+ * plus a unique airport code
  * @author kotrc
  * Created on 25.10.2018
  */
@@ -17,8 +19,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name="Destinations")
-public class Destination {
+@Table(name="Destination")
+public class DestinationPO {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -26,7 +28,7 @@ public class Destination {
 
     @NotNull
     @Column(nullable = false, unique = true)
-    private String airport;
+    private String airportCode;
 
     @NotNull
     @Column(nullable = false)

@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.core.repositories.dao;
 
-import cz.muni.fi.pa165.airportmanager.core.repositories.models.Destination;
+import cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO;
 
 import java.util.List;
 
@@ -12,27 +12,28 @@ import java.util.List;
 public interface DestinationDao {
 
     /**
-     * Creates destination
-     * @param destination
-     */
-    public void create(Destination destination);
+     * Creates destinationPO and saves it to database
+     * @param destinationPO
+     * @return the saved destination
+     * */
+    DestinationPO create(DestinationPO destinationPO);
 
     /**
-     * Removes destination with param id
-     * @param id
+     * Deletes destination from database
+     * @param destinationPO
      */
-    public void remove(Long id);
+    void delete(DestinationPO destinationPO);
 
     /**
-     * Finds destination with param id
+     * Finds destination with param id in database
      * @param id
      * @return destination with param id or null if there is no destination with param id
      */
-    public Destination findById(Long id);
+    DestinationPO findById(Long id);
 
     /**
-     * Finds all destinations
+     * Finds all destinations in database
      * @return all destinations
      */
-    public List<Destination> findAll();
+    List<DestinationPO> findAll();
 }
