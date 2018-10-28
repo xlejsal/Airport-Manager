@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode
 @Entity
 @Table(name="Airplanes")
-public class Airplane {
+public class AirplanePO {
     @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -33,13 +33,16 @@ public class Airplane {
     private String name;
 
     //Possibly make enums for type and company ?
+    @EqualsAndHashCode.Exclude
     @NotNull
     @Column(nullable = false)
     private String type;
 
+    @EqualsAndHashCode.Exclude
     @NotNull
     @Column(nullable = false)
     private String company;
 
+    @EqualsAndHashCode.Exclude
     private int capacity;
 }

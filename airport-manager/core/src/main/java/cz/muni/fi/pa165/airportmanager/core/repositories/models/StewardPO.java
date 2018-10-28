@@ -4,10 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 /**
  * Simple entity class modeling flight Steward,
- * attributes *name* and *surname* mustn't be null
+ * attributes *name* and *surname*  and *birthDate* mustn't be null
  * and are not nullable, to have at least something set
  * in stone to identify them.
  *
@@ -23,7 +24,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode
 @Entity
 @Table(name="Stewards")
-public class Steward {
+public class StewardPO {
     @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,11 +38,15 @@ public class Steward {
     @Column(nullable = false)
     private String surname;
 
-    private int age;
+    @NotNull
+    @Column(nullable = false)
+    private LocalDate birthDate;
 
     //String for now .. but who's supposed to enum 60+ genders ._.
+    @EqualsAndHashCode.Exclude
     private String gender;
 
+    @EqualsAndHashCode.Exclude
     private String nationality;
 
     @ManyToMany(mappedBy = "stewards")
