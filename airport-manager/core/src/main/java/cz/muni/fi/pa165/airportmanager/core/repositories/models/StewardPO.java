@@ -24,6 +24,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="Stewards")
 public class Steward {
+    @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

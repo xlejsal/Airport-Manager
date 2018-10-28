@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="Airplanes")
 public class Airplane {
+    @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
