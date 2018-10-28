@@ -34,7 +34,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "Flight")
-public class FlightDAO {
+public class FlightPO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -46,17 +46,17 @@ public class FlightDAO {
     private LocalDateTime arrivalTime;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
-    private AirportDAO origin;
+    private AirportPO origin;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
-    private AirportDAO destination;
+    private AirportPO destination;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
-    private AirplaneDAO airplane;
+    private AirplanePO airplane;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JoinTable(name = "Flight_Steward",
             joinColumns = @JoinColumn(name = "flight_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "steward_id", referencedColumnName = "id"))
-    private Set<StewardDAO> stewards;
+    private Set<StewardPO> stewards;
 }
