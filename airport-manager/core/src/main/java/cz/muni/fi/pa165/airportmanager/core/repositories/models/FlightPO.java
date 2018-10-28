@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.airportmanager.core.repositories.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -32,14 +34,18 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = {"flightNumber", "departureTime"})
 @Entity
-@Table(name = "Flight")
+@Table(name = "Flight", uniqueConstraints = @UniqueConstraint(columnNames = {"flightNumber", "departureTime"}))
 public class FlightPO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
+    private String flightNumber;
+
+    @Column(nullable = false, updatable = false)
     private LocalDateTime departureTime;
 
     @Column(nullable = false)
