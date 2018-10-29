@@ -30,6 +30,11 @@ public class DestinationDaoImpl implements DestinationDao {
     }
 
     @Override
+    public DestinationPO update(DestinationPO destinationPO) {
+        return repository.save(destinationPO);
+    }
+
+    @Override
     public DestinationPO findById(Long id) {
         return repository.findById(id).orElse(null);
     }

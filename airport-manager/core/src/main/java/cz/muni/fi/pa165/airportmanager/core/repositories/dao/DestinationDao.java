@@ -25,6 +25,13 @@ public interface DestinationDao {
     void delete(DestinationPO destinationPO);
 
     /**
+     * Updates the destination in database
+     * @param destinationPO
+     * @return updated destination
+     */
+    DestinationPO update(DestinationPO destinationPO);
+
+    /**
      * Finds destination with param id in database
      * @param id
      * @return destination with param id or null if there is no destination with param id

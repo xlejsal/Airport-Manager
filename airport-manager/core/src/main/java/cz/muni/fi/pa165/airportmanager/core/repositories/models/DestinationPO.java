@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"airportCode"})
 @Entity
 @Table(name="Destination")
 public class DestinationPO {
@@ -27,7 +27,7 @@ public class DestinationPO {
     private Long id;
 
     @NotNull
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, updatable = false)
     private String airportCode;
 
     @NotNull
