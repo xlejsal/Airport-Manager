@@ -8,7 +8,7 @@ import java.util.List;
  * @author Vojtech Lejsal (lejsal.vojtech@gmail.com)
  * Created on 2018-10-28
  */
-public interface FlightDAO {
+public interface FlightDao {
 
     /**
      * Finds the flight with the specified id in the database.

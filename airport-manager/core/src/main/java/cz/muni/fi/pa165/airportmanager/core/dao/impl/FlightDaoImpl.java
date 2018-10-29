@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.core.dao.impl;
 
-import cz.muni.fi.pa165.airportmanager.core.dao.FlightDAO;
+import cz.muni.fi.pa165.airportmanager.core.dao.FlightDao;
 import cz.muni.fi.pa165.airportmanager.core.repositories.FlightRepository;
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created on 2018-10-28
  */
 @Repository
-public class FlightDAOImpl implements FlightDAO {
+public class FlightDaoImpl implements FlightDao {
 
     @Autowired
     private FlightRepository repository;
