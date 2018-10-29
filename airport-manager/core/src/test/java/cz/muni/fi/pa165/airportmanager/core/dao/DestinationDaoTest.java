@@ -31,19 +31,19 @@ public class DestinationDaoTest {
 
     @Before
     public void initialize(){
-        DestinationPO dest1 = DestinationPO.builder()
+        dest1 = DestinationPO.builder()
                 .airportCode("BRB")
                 .city("Torshavn")
                 .country("Faroe Isles")
                 .build();
 
-        DestinationPO dest2 = DestinationPO.builder()
+        dest2 = DestinationPO.builder()
                 .airportCode("FFS")
                 .city("Bucharest")
                 .country("Romania")
                 .build();
 
-        DestinationPO dest3 = DestinationPO.builder()
+        dest3 = DestinationPO.builder()
                 .airportCode("BBQ")
                 .city("Brno")
                 .country("Czechia")
@@ -71,8 +71,8 @@ public class DestinationDaoTest {
         dest.setCountry("Moravia");
         dao.update(dest);
 
-        DestinationPO check = dao.findById(dest3.getId());
-        Assert.assertEquals(check.getCity(), "Moravia");
+        DestinationPO check = dao.findById(dest.getId());
+        Assert.assertEquals(check.getCountry(), "Moravia");
     }
 
     @Test
