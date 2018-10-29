@@ -51,5 +51,5 @@ public class StewardPO {
     private String nationality;
 
     @ManyToMany(mappedBy = "stewards")
-    private Set<FlightPO> flights = new HashSet<>();
+    private Set<FlightPO> flights;
 }
