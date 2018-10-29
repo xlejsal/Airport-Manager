@@ -5,6 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Simple entity class modeling flight Steward,
@@ -21,7 +23,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"name", "surname", "birthDay"})
+@EqualsAndHashCode(of = {"name", "surname", "birthDate"})
 @Entity
 @Table(name="Stewards")
 public class StewardPO {
@@ -49,5 +51,5 @@ public class StewardPO {
     private String nationality;
 
     @ManyToMany(mappedBy = "stewards")
-    private Set<Flight> flights = new HashSet<Flight>();
+    private Set<FlightPO> flights = new HashSet<>();
 }

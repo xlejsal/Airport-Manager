@@ -1,7 +1,7 @@
-package cz.muni.fi.pa165.airportmanager.core.repositories.dao.impl;
+package cz.muni.fi.pa165.airportmanager.core.dao.impl;
 
 import cz.muni.fi.pa165.airportmanager.core.repositories.DestinationRepository;
-import cz.muni.fi.pa165.airportmanager.core.repositories.dao.DestinationDao;
+import cz.muni.fi.pa165.airportmanager.core.dao.DestinationDao;
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

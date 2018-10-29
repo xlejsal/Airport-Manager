@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.airportmanager.core.repositories.dao;
+package cz.muni.fi.pa165.airportmanager.core.dao;
 
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO;
 
