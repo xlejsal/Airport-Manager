@@ -5,13 +5,14 @@ import cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO;
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.StewardPO;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -20,11 +21,13 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Tests
  * @author kotrc
  * Created on 29.10.2018
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class FlightDaoTest {
 
     @Autowired
@@ -41,19 +44,21 @@ public class FlightDaoTest {
 
     private AirplanePO airplaneBig;
     private AirplanePO airplaneSmall;
+    private DestinationPO destination;
+    private DestinationPO origin;
     private FlightPO flight;
     private FlightPO flightMagic;
     private Set<StewardPO> stewardSet = new HashSet<>();
+    private Set<FlightPO> flightSet = new HashSet<>();
 
     private static final LocalDate BIRTH_DATE = LocalDate.of(1996, Month.SEPTEMBER, 18);
     private static final LocalDateTime DEPARTURE = LocalDateTime.of(2018, Month.NOVEMBER, 6, 17, 30);
     private static final LocalDateTime ARRIVAL = LocalDateTime.of(2018, Month.NOVEMBER, 7, 11, 45);
+    private static final LocalDateTime TIME = LocalDateTime.of(2018, Month.NOVEMBER, 9, 9, 0);
 
-    @BeforeEach
+    @Before
     public void init() {
 
-        DestinationPO destination;
-        DestinationPO origin;
         StewardPO stewardGirl;
         StewardPO stewardBoy;
 
@@ -79,12 +84,16 @@ public class FlightDaoTest {
         origin.setCity("Tokyo");
         origin.setCountry("Japan");
 
+        flightSet.add(flight);
+        flightSet.add(flightMagic);
+
         stewardGirl = new StewardPO();
         stewardGirl.setBirthDate(BIRTH_DATE);
         stewardGirl.setGender("Woman");
         stewardGirl.setName("Marienka");
         stewardGirl.setSurname("Pernikova");
         stewardGirl.setNationality("Slovak");
+        stewardGirl.setFlights(flightSet);
 
         stewardBoy = new StewardPO();
         stewardBoy.setBirthDate(BIRTH_DATE);
@@ -92,6 +101,7 @@ public class FlightDaoTest {
         stewardBoy.setName("Juraj");
         stewardBoy.setSurname("Janosik");
         stewardBoy.setNationality("Slovak");
+        stewardBoy.setFlights(flightSet);
 
         stewardSet.add(stewardGirl);
         stewardSet.add(stewardBoy);
@@ -110,8 +120,8 @@ public class FlightDaoTest {
         flightMagic.setOrigin(destination);
         flightMagic.setDestination(origin);
         flightMagic.setFlightNumber("BJ-696");
-        flightMagic.setDepartureTime(ARRIVAL);
-        flightMagic.setArrivalTime(DEPARTURE);
+        flightMagic.setDepartureTime(DEPARTURE);
+        flightMagic.setArrivalTime(ARRIVAL);
         flightMagic.setStewards(stewardSet);
 
         airplaneDao.create(airplaneBig);
@@ -132,16 +142,24 @@ public class FlightDaoTest {
 
     @Test
     public void testFindNothing() {
-        FlightPO found = flightDao.findById(flight.getId() + 1);
+        FlightPO found = flightDao.findById(flight.getId() + 12345);
         Assert.assertNull(found);
     }
 
     @Test
-    public void testUpdatePlane() {
+    public void testUpdateAirplane() {
         Assert.assertEquals(flight.getAirplane(), airplaneBig);
         flight.setAirplane(airplaneSmall);
         flightDao.update(flight);
         Assert.assertEquals(flight.getAirplane(), airplaneSmall);
+    }
+
+    @Test
+    public void testUpdateArrivalTime() {
+        Assert.assertEquals(flight.getArrivalTime(), ARRIVAL);
+        flight.setArrivalTime(TIME);
+        flightDao.update(flight);
+        Assert.assertEquals(flight.getArrivalTime(), TIME);
     }
 
     @Test
@@ -157,5 +175,22 @@ public class FlightDaoTest {
         Assert.assertEquals(flights.size(), 2);
         Assert.assertTrue(flights.contains(flight));
         Assert.assertTrue(flights.contains(flightMagic));
+    }
+
+    @Test
+    public void testCreate() {
+        FlightPO flightTest = new FlightPO();
+        flightTest.setAirplane(airplaneSmall);
+        flightTest.setOrigin(origin);
+        flightTest.setDestination(destination);
+        flightTest.setFlightNumber("BB-169");
+        flightTest.setDepartureTime(DEPARTURE);
+        flightTest.setArrivalTime(ARRIVAL);
+        flightTest.setStewards(stewardSet);
+
+        flightDao.create(flightTest);
+
+        FlightPO found = flightDao.findById(flightTest.getId());
+        Assert.assertEquals(found, flightTest);
     }
 }
