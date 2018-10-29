@@ -27,22 +27,22 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name", "surname", "birthDate"})
 @Entity
-@Table(name="Stewards")
+@Table(name="Stewards", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "surname", "birthDate"}))
 public class StewardPO {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private String name;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private String surname;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDate birthDate;
 
     //String for now .. but who's supposed to enum 60+ genders ._.
