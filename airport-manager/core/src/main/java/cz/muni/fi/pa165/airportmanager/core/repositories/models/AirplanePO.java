@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.core.repositories.models;
 
 import lombok.*;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+@Wither
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
