@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.core.repositories.models;
 
 import lombok.*;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Wither
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -50,6 +52,6 @@ public class StewardPO {
     @Column(nullable = false)
     private String nationality;
 
-    @ManyToMany(mappedBy = "stewards")
+    @ManyToMany(mappedBy = "stewards", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<FlightPO> flights;
 }
