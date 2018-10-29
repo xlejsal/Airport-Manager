@@ -7,9 +7,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 /**
@@ -80,5 +82,26 @@ public class DestinationDaoTest {
         dao.delete(dest2);
         Assert.assertNull(dao.findById(dest2.getId()));
         Assert.assertEquals(dao.findAll().size(), 2);
+    }
+
+    @Test(expected = DataIntegrityViolationException.class )
+    public void uniqueCodeTest(){
+        DestinationPO dest4 = DestinationPO.builder()
+                .airportCode("BRB")
+                .city("London")
+                .country("Britain")
+                .build();
+
+        dao.create(dest4);
+    }
+
+    @Test(expected = ConstraintViolationException.class )
+    public void nullAttributeTest(){
+        DestinationPO dest5 = DestinationPO.builder()
+                .airportCode("UFF")
+                .country("Austrialia")
+                .build();
+
+        dao.create(dest5);
     }
 }
