@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="154.421875" y="174.703125">cz.muni.fi.pa165.airportmanager.core.repositories.models.StewardPO</node>
+    <node x="0.0" y="234.0">cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO</node>
+    <node x="34.0" y="11.0">cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO</node>
+    <node x="339.0" y="0.0">cz.muni.fi.pa165.airportmanager.core.repositories.models.AirplanePO</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="cz.muni.fi.pa165.airportmanager.core.repositories.models.StewardPO" target="cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO">
+      <point x="-110.25" y="-114.0" />
+      <point x="224.75" y="509.0" />
+      <point x="167.5" y="509.0" />
+      <point x="-167.5" y="125.0" />
+    </edge>
+    <edge source="cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO" target="cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO">
+      <point x="-167.5" y="-125.0" />
+      <point x="167.5" y="209.0" />
+      <point x="176.5" y="209.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO" target="cz.muni.fi.pa165.airportmanager.core.repositories.models.AirplanePO">
+      <point x="167.5" y="-125.0" />
+      <point x="502.5" y="209.0" />
+      <point x="493.5" y="209.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+    <edge source="cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO" target="cz.muni.fi.pa165.airportmanager.core.repositories.models.StewardPO">
+      <point x="167.5" y="125.0" />
+      <point x="502.5" y="509.0" />
+      <point x="445.25" y="509.0" />
+      <point x="110.25" y="-114.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8767123287671234" x="537.5" y="264.0" />
+  <SelectedNodes>
+    <node>cz.muni.fi.pa165.airportmanager.core.repositories.models.StewardPO</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
