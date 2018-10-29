@@ -52,10 +52,10 @@ public class FlightPO {
     private LocalDateTime arrivalTime;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
-    private AirportPO origin;
+    private DestinationPO origin;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
-    private AirportPO destination;
+    private DestinationPO destination;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
     private AirplanePO airplane;
