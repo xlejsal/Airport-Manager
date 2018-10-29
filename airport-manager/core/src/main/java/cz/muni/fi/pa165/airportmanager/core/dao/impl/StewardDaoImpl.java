@@ -23,8 +23,8 @@ public class StewardDaoImpl implements StewardDao {
     private StewardRepository repository;
 
     @Override
-    public void create(StewardPO s){
-        repository.save(s);
+    public StewardPO create(StewardPO steward){
+        return repository.save(steward);
     }
 
     @Override
@@ -40,14 +40,12 @@ public class StewardDaoImpl implements StewardDao {
     }
 
     @Override
-    public void updateGender(Long id, String g){
-        StewardPO s = findById(id);
-        s.setGender(g);
-        repository.save(s);
+    public StewardPO update(StewardPO steward){
+        return repository.save(steward);
     }
 
     @Override
-    public void remove(StewardPO s){
-        repository.delete(s);
+    public void remove(StewardPO steward){
+        repository.delete(steward);
     }
 }

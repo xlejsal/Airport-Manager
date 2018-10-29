@@ -23,8 +23,8 @@ public class AirplaneDaoImpl implements AirplaneDao {
     private AirplaneRepository repository;
 
     @Override
-    public void create(AirplanePO a){
-        repository.save(a);
+    public AirplanePO create(AirplanePO airplane){
+        return repository.save(airplane);
     }
 
     @Override
@@ -40,19 +40,17 @@ public class AirplaneDaoImpl implements AirplaneDao {
     }
 
     @Override
-    public AirplanePO findByName(String n){
-        return repository.findFirstByName(n);
+    public AirplanePO findByName(String name){
+        return repository.findFirstByName(name);
     }
 
     @Override
-    public void updateCompany(Long id, String c){
-        AirplanePO a = findById(id);
-        a.setCompany(c);
-        repository.save(a);
+    public AirplanePO update(AirplanePO airplane){
+        return repository.save(airplane);
     }
 
     @Override
-    public void remove(AirplanePO a){
-        repository.delete(a);
+    public void remove(AirplanePO airplane){
+        repository.delete(airplane);
     }
 }

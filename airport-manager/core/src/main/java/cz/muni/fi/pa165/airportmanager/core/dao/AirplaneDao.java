@@ -15,9 +15,9 @@ import java.util.List;
 public interface AirplaneDao {
     /**
      * Create an Airplane record
-     * @param a - given Airplane
+     * @param airplane - given Airplane
      */
-    public void create(AirplanePO a);
+    public AirplanePO create(AirplanePO airplane);
 
     /**
      * Find an Airplane by its Id
@@ -34,22 +34,20 @@ public interface AirplaneDao {
 
     /**
      * Find an Airplane by its unique name
-     * @param n - the sought after name
+     * @param name - the sought after name
      * @return found Airplane
      */
-    public AirplanePO findByName(String n);
+    public AirplanePO findByName(String name);
 
     /**
-     * Airplanes sometimes change hands,
-     * this method reflects that
-     * @param id - id of the Airplane that is being traded
-     * @param c the name of the new owner company
+     * Update an Airplane in the database with new given data
+     * @param airplane - the Airplane that is being updated
      */
-    public void updateCompany(Long id, String c);
+    public AirplanePO update(AirplanePO airplane);
 
     /**
      * Remove an Airplane record
-     * @param a - the Airplane to be removed
+     * @param airplane - the Airplane to be removed
      */
-    public void remove(AirplanePO a);
+    public void remove(AirplanePO airplane);
 }

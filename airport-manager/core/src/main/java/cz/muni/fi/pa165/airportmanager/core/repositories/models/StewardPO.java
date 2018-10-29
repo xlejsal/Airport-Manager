@@ -21,11 +21,10 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"name", "surname", "birthDay"})
 @Entity
 @Table(name="Stewards")
 public class StewardPO {
-    @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -43,12 +42,12 @@ public class StewardPO {
     private LocalDate birthDate;
 
     //String for now .. but who's supposed to enum 60+ genders ._.
-    @EqualsAndHashCode.Exclude
+    @Column(nullable = false)
     private String gender;
 
-    @EqualsAndHashCode.Exclude
+    @Column(nullable = false)
     private String nationality;
 
-    @ManyToMany(mappedBy = "stewards")
-    private Set<Flight> flights = new HashSet<Flight>();
+    //@ManyToMany(mappedBy = "stewards")
+    //private Set<Flight> flights = new HashSet<Flight>();
 }

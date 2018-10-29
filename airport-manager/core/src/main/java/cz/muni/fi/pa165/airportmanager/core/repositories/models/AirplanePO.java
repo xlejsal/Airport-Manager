@@ -19,30 +19,27 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"name"})
 @Entity
 @Table(name="Airplanes")
 public class AirplanePO {
-    @EqualsAndHashCode.Exclude
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, updatable = false)
     private String name;
 
     //Possibly make enums for type and company ?
-    @EqualsAndHashCode.Exclude
     @NotNull
     @Column(nullable = false)
     private String type;
 
-    @EqualsAndHashCode.Exclude
     @NotNull
     @Column(nullable = false)
     private String company;
 
-    @EqualsAndHashCode.Exclude
-    private int capacity;
+    @Column(nullable = false)
+    private Integer capacity;
 }

@@ -15,9 +15,9 @@ import java.util.List;
 public interface StewardDao {
     /**
      * Create a Steward record
-     * @param s - given Steward
+     * @param steward - given Steward
      */
-    public void create(StewardPO s);
+    public StewardPO create(StewardPO steward);
 
     /**
      * Find a Steward by given Id
@@ -33,15 +33,14 @@ public interface StewardDao {
     public List<StewardPO> findAll();
 
     /**
-     * A method for all the genderfluid folk
-     * @param id - the Id of the Steward that's subject to a change
-     * @param g - new gender to assign
+     * Update a Steward in the database with new given data
+     * @param steward - the Steward being updated
      */
-    public void updateGender(Long id, String g);
+    public StewardPO update(StewardPO steward);
 
     /**
      * Remove the record of a Steward
-     * @param s - Steward that's to be removed
+     * @param steward - Steward that's to be removed
      */
-    public void remove(StewardPO s);
+    public void remove(StewardPO steward);
 }
