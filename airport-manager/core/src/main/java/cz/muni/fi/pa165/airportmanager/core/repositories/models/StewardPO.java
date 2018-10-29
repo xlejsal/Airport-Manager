@@ -48,6 +48,6 @@ public class StewardPO {
     @Column(nullable = false)
     private String nationality;
 
-    //@ManyToMany(mappedBy = "stewards")
-    //private Set<Flight> flights = new HashSet<Flight>();
+    @ManyToMany(mappedBy = "stewards")
+    private Set<Flight> flights = new HashSet<Flight>();
 }
