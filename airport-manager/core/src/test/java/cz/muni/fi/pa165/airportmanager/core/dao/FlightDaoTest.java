@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.airportmanager.core.repositories.models.DestinationPO;
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.core.repositories.models.StewardPO;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
