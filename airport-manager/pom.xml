@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>core</module>
+        <module>persistence</module>
     </modules>
 
     <name>airport-manager</name>

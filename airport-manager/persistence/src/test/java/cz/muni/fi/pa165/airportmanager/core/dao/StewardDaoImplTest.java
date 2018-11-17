@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.airportmanager.core;
+package cz.muni.fi.pa165.airportmanager.core.dao;
 
 import cz.muni.fi.pa165.airportmanager.core.dao.StewardDao;
 import cz.muni.fi.pa165.airportmanager.core.repositories.StewardRepository;
