@@ -49,5 +49,5 @@ public interface AirplaneDao {
      * Remove an Airplane record
      * @param airplane - the Airplane to be removed
      */
-    public void remove(AirplanePO airplane);
+    public void delete(AirplanePO airplane);
 }

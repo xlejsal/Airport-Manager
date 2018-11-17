@@ -87,7 +87,7 @@ public class StewardDaoImplTest {
     public void removeTest() {
         repo.save(steward1);
         repo.save(steward2);
-        dao.remove(steward1);
+        dao.delete(steward1);
         assertThat(repo.findAll()).containsExactly(steward2);
     }
 }

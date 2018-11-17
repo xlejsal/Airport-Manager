@@ -42,5 +42,5 @@ public interface StewardDao {
      * Remove the record of a Steward
      * @param steward - Steward that's to be removed
      */
-    public void remove(StewardPO steward);
+    public void delete(StewardPO steward);
 }

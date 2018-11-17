@@ -45,7 +45,7 @@ public class StewardDaoImpl implements StewardDao {
     }
 
     @Override
-    public void remove(StewardPO steward){
+    public void delete(StewardPO steward){
         repository.delete(steward);
     }
 }

@@ -50,7 +50,7 @@ public class AirplaneDaoImpl implements AirplaneDao {
     }
 
     @Override
-    public void remove(AirplanePO airplane){
+    public void delete(AirplanePO airplane){
         repository.delete(airplane);
     }
 }

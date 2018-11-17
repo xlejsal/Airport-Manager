@@ -90,7 +90,7 @@ public class AirplaneDaoImplTest {
     public void removeTest() {
         repo.save(airplane1);
         repo.save(airplane2);
-        dao.remove(airplane1);
+        dao.delete(airplane1);
         assertThat(repo.findAll()).containsExactly(airplane2);
     }
 }
