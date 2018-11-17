@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>persistence</module>
+        <module>airport-manager-persistence</module>
+        <module>airport-manager-api</module>
     </modules>
 
     <name>airport-manager</name>
