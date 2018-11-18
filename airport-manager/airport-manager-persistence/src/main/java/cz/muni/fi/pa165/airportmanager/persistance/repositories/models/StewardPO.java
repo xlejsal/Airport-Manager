@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.persistance.repositories.models;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 import lombok.*;
 import lombok.experimental.Wither;
 
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Simple entity class modeling flight Steward,
@@ -54,4 +56,36 @@ public class StewardPO {
 
     @ManyToMany(mappedBy = "stewards", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<FlightPO> flights = new HashSet<>();
+
+    //TODO: WIP, probably gonna switch to Dozer
+    public StewardDTO toDTO() {
+        return StewardDTO.builder()
+                .id(getId())
+                .name(getName())
+                .surname(getSurname())
+                .birthDate(getBirthDate())
+                .gender(getGender())
+                .nationality(getNationality())
+                .flights(getFlights()
+                        .stream()
+                        .map(flight -> flight.withStewards(null).toDTO())
+                        .collect(Collectors.toSet()))
+                .build();
+    }
+
+    //TODO: WIP, probably gonna switch to Dozer
+    public static StewardPO of(StewardDTO steward) {
+        return StewardPO.builder()
+                .id(steward.getId())
+                .name(steward.getName())
+                .surname(steward.getSurname())
+                .birthDate(steward.getBirthDate())
+                .gender(steward.getGender())
+                .nationality(steward.getNationality())
+                .flights(steward.getFlights()
+                        .stream()
+                        .map(flight -> FlightPO.of(flight))
+                        .collect(Collectors.toSet()))
+                .build();
+    }
 }

@@ -31,3 +31,4 @@
 hs_err_pid*
 /airport-manager-persistence/target/
 /airport-manager-api/target/
+/airport-manager-service/target/
