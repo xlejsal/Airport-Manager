@@ -1,6 +1,6 @@
-package cz.muni.fi.pa165.airportmanager.persistance.dao;
+package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.DestinationPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ import java.util.List;
 public class DestinationDaoTest {
 
     @Autowired
-    private DestinationDao dao;
+    private DestinationRepository repo;
 
     private DestinationPO dest1;
     private DestinationPO dest2;
@@ -51,37 +52,40 @@ public class DestinationDaoTest {
                 .country("Czechia")
                 .build();
 
-        dao.create(dest1);
-        dao.create(dest2);
-        dao.create(dest3);
+        repo.save(dest1);
+        repo.save(dest2);
+        repo.save(dest3);
     }
 
     @Test
     public void findAll(){
-        List<DestinationPO> found = dao.findAll();
+        List<DestinationPO> found = new ArrayList<DestinationPO>();
+        repo.findAll().forEach(found::add);
         Assert.assertEquals(found.size(), 3);
     }
 
     @Test
     public void findById(){
-        Assert.assertNotNull(dao.findById(dest2.getId()));
+        Assert.assertNotNull(repo.findById(dest2.getId()));
     }
 
     @Test
     public void update(){
-        DestinationPO dest = dao.findById(dest3.getId());
+        DestinationPO dest = repo.findById(dest3.getId()).get();
         dest.setCountry("Moravia");
-        dao.update(dest);
+        repo.save(dest);
 
-        DestinationPO check = dao.findById(dest.getId());
+        DestinationPO check = repo.findById(dest.getId()).get();
         Assert.assertEquals(check.getCountry(), "Moravia");
     }
 
     @Test
     public void remove(){
-        dao.delete(dest2);
-        Assert.assertNull(dao.findById(dest2.getId()));
-        Assert.assertEquals(dao.findAll().size(), 2);
+        repo.delete(dest2);
+        Assert.assertNull(repo.findById(dest2.getId()).get());
+        List<DestinationPO> found = new ArrayList<DestinationPO>();
+        repo.findAll().forEach(found::add);
+        Assert.assertEquals(found.size(), 2);
     }
 
     @Test(expected = DataIntegrityViolationException.class )
@@ -92,7 +96,7 @@ public class DestinationDaoTest {
                 .country("Britain")
                 .build();
 
-        dao.create(dest4);
+        repo.save(dest4);
     }
 
     @Test(expected = ConstraintViolationException.class )
@@ -102,6 +106,6 @@ public class DestinationDaoTest {
                 .country("Austrialia")
                 .build();
 
-        dao.create(dest5);
+        repo.save(dest5);
     }
 }

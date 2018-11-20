@@ -1,6 +1,6 @@
-package cz.muni.fi.pa165.airportmanager.persistance.repositories;
+package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.AirplanePO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
 import org.springframework.data.repository.CrudRepository;
 
 /**

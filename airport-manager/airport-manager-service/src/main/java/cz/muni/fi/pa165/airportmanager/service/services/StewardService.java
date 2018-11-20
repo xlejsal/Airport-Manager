@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.service.services;
 
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.StewardPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 
 import java.util.List;
 

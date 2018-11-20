@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.airportmanager.persistance.repositories.models;
+package cz.muni.fi.pa165.airportmanager.persistence.repositories.models;
 
 import lombok.*;
 

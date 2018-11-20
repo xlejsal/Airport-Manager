@@ -11,7 +11,6 @@ import lombok.experimental.Wither;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Vojtech Lejsal (lejsal.vojtech@gmail.com)
