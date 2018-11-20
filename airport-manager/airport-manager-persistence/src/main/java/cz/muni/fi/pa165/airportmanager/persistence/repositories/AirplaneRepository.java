@@ -4,9 +4,11 @@ import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplaneP
 import org.springframework.data.repository.CrudRepository;
 
 /**
+ * Repository class to enable CRUD operations and more on Airplane entities
+ *
  * @author Stepan Benes
  * Created on 2018-10-28
  */
 public interface AirplaneRepository extends CrudRepository<AirplanePO, Long> {
-    public AirplanePO findFirstByName(String name);
+    public AirplanePO findByName(String name);
 }

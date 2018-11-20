@@ -51,7 +51,7 @@ public class StewardDaoImplTest {
     public void createTest() {
         repo.save(steward1);
         assertThat(steward1.getId()).isNotNull();
-        assertThat(repo.findById(steward1.getId()).get()).isEqualTo(steward1);
+        assertThat(repo.findById(steward1.getId()).orElse(null)).isEqualTo(steward1);
     }
 
     @Test
@@ -59,15 +59,15 @@ public class StewardDaoImplTest {
         repo.save(steward1);
         repo.save(steward2);
         StewardPO updatedSteward = repo.save(steward1.withGender("Female"));
-        assertThat(repo.findById(steward1.getId()).get()).isEqualTo(updatedSteward);
-        assertThat(repo.findById(steward2.getId()).get()).isEqualTo(steward2);
+        assertThat(repo.findById(steward1.getId()).orElse(null)).isEqualTo(updatedSteward);
+        assertThat(repo.findById(steward2.getId()).orElse(null)).isEqualTo(steward2);
     }
 
     @Test
     public void findByIdTest() {
         repo.save(steward1);
         repo.save(steward2);
-        StewardPO steward2Db = repo.findById(steward2.getId()).get();
+        StewardPO steward2Db = repo.findById(steward2.getId()).orElse(null);
         assertThat(steward2Db).isEqualTo(steward2);
     }
 

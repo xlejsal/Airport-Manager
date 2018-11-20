@@ -137,13 +137,13 @@ public class FlightDaoTest {
 
     @Test
     public void testFindById() {
-        FlightPO found = flightRepo.findById(flight.getId()).get();
+        FlightPO found = flightRepo.findById(flight.getId()).orElse(null);
         Assert.assertEquals(found, flight);
     }
 
     @Test
     public void testFindNothing() {
-        FlightPO found = flightRepo.findById(flight.getId() + 12345).get();
+        FlightPO found = flightRepo.findById(flight.getId() + 12345).orElse(null);
         Assert.assertNull(found);
     }
 
@@ -165,9 +165,9 @@ public class FlightDaoTest {
 
     @Test
     public void testDelete() {
-        Assert.assertNotNull(flightRepo.findById(flight.getId()).get());
+        Assert.assertNotNull(flightRepo.findById(flight.getId()).orElse(null));
         flightRepo.delete(flight);
-        Assert.assertNull(flightRepo.findById(flight.getId()).get());
+        Assert.assertNull(flightRepo.findById(flight.getId()).orElse(null));
     }
 
     @Test
@@ -192,7 +192,7 @@ public class FlightDaoTest {
 
         flightRepo.save(flightTest);
 
-        FlightPO found = flightRepo.findById(flightTest.getId()).get();
+        FlightPO found = flightRepo.findById(flightTest.getId()).orElse(null);
         Assert.assertEquals(found, flightTest);
     }
 }

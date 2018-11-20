@@ -47,7 +47,7 @@ public class AirplaneDaoImplTest {
     public void createTest() {
         repo.save(airplane1);
         assertThat(airplane1.getId()).isNotNull();
-        assertThat(repo.findById(airplane1.getId()).get()).isEqualTo(airplane1);
+        assertThat(repo.findById(airplane1.getId()).orElse(null)).isEqualTo(airplane1);
     }
 
     @Test
@@ -55,15 +55,15 @@ public class AirplaneDaoImplTest {
         repo.save(airplane1);
         repo.save(airplane2);
         AirplanePO updatedAirplane = repo.save(airplane1.withCapacity(300).withCompany("ČSA").withType("Airbus A380"));
-        assertThat(repo.findById(airplane1.getId()).get()).isEqualTo(updatedAirplane);
-        assertThat(repo.findById(airplane2.getId()).get()).isEqualTo(airplane2);
+        assertThat(repo.findById(airplane1.getId()).orElse(null)).isEqualTo(updatedAirplane);
+        assertThat(repo.findById(airplane2.getId()).orElse(null)).isEqualTo(airplane2);
     }
 
     @Test
     public void findByIdTest() {
         repo.save(airplane1);
         repo.save(airplane2);
-        AirplanePO airplane2Db = repo.findById(airplane2.getId()).get();
+        AirplanePO airplane2Db = repo.findById(airplane2.getId()).orElse(null);
         assertThat(airplane2Db).isEqualTo(airplane2);
     }
 
@@ -78,7 +78,7 @@ public class AirplaneDaoImplTest {
     public void findByName() {
         repo.save(airplane1);
         repo.save(airplane2);
-        assertThat(repo.findFirstByName(airplane2.getName())).isEqualTo(airplane2);
+        assertThat(repo.findByName(airplane2.getName())).isEqualTo(airplane2);
     }
 
     @Test

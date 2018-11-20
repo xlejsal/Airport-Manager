@@ -71,18 +71,18 @@ public class DestinationDaoTest {
 
     @Test
     public void update(){
-        DestinationPO dest = repo.findById(dest3.getId()).get();
+        DestinationPO dest = repo.findById(dest3.getId()).orElse(null);
         dest.setCountry("Moravia");
         repo.save(dest);
 
-        DestinationPO check = repo.findById(dest.getId()).get();
+        DestinationPO check = repo.findById(dest.getId()).orElse(null);
         Assert.assertEquals(check.getCountry(), "Moravia");
     }
 
     @Test
     public void remove(){
         repo.delete(dest2);
-        Assert.assertNull(repo.findById(dest2.getId()).get());
+        Assert.assertNull(repo.findById(dest2.getId()).orElse(null));
         List<DestinationPO> found = new ArrayList<DestinationPO>();
         repo.findAll().forEach(found::add);
         Assert.assertEquals(found.size(), 2);

@@ -32,7 +32,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     public StewardPO getStewardById(Long id) {
-        return stewardRepo.findById(id).get();
+        return stewardRepo.findById(id).orElse(null);
     }
 
     @Override
@@ -41,7 +41,5 @@ public class StewardServiceImpl implements StewardService {
     }
 
     @Override
-    public void deleteSteward(Long id) {
-        stewardRepo.delete(stewardRepo.findById(id).get());
-    }
+    public void deleteSteward(Long id) { stewardRepo.delete(stewardRepo.findById(id).orElse(null)); }
 }
