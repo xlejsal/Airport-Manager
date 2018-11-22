@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -79,6 +83,14 @@ public class AirplaneDaoImplTest {
         repo.save(airplane1);
         repo.save(airplane2);
         assertThat(repo.findByName(airplane2.getName())).isEqualTo(airplane2);
+    }
+
+    @Test
+    public void findByCompany(){
+        repo.save(airplane1);
+        repo.save(airplane2);
+        List<AirplanePO> found = repo.findByCompany("Ryan Air");
+        Assert.assertEquals(found.size(), 1);
     }
 
     @Test

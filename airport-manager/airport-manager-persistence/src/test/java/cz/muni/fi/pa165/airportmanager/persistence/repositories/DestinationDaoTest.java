@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,8 +58,7 @@ public class DestinationDaoTest {
 
     @Test
     public void findAll(){
-        List<DestinationPO> found = new ArrayList<DestinationPO>();
-        repo.findAll().forEach(found::add);
+        List<DestinationPO> found = repo.findAll();
         Assert.assertEquals(found.size(), 3);
     }
 
@@ -83,9 +81,20 @@ public class DestinationDaoTest {
     public void remove(){
         repo.delete(dest2);
         Assert.assertNull(repo.findById(dest2.getId()).orElse(null));
-        List<DestinationPO> found = new ArrayList<DestinationPO>();
-        repo.findAll().forEach(found::add);
+        List<DestinationPO> found = repo.findAll();
         Assert.assertEquals(found.size(), 2);
+    }
+
+    @Test
+    public void findByCountry(){
+        List<DestinationPO> found = repo.findByCountry("Faroe Isles");
+        Assert.assertEquals(found.size(), 1);
+    }
+
+    @Test
+    public void findByCity(){
+        List<DestinationPO> found = repo.findByCity("Brno");
+        Assert.assertEquals(found.size(), 1);
     }
 
     @Test(expected = DataIntegrityViolationException.class )

@@ -16,7 +16,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -172,8 +171,7 @@ public class FlightDaoTest {
 
     @Test
     public void testFindAll() {
-        List<FlightPO> flights = new ArrayList<FlightPO>();
-        flightRepo.findAll().forEach(flights::add);
+        List<FlightPO> flights = flightRepo.findAll();
         Assert.assertEquals(flights.size(), 2);
         Assert.assertTrue(flights.contains(flight));
         Assert.assertTrue(flights.contains(flightMagic));

@@ -4,8 +4,8 @@ import cz.muni.fi.pa165.airportmanager.persistence.repositories.DestinationRepos
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
 import cz.muni.fi.pa165.airportmanager.service.services.DestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +14,7 @@ import java.util.List;
  * Created on 2018-11-20
  */
 
+@Service
 public class DestinationServiceImpl implements DestinationService {
 
     private final DestinationRepository destinationRepo;
@@ -25,8 +26,7 @@ public class DestinationServiceImpl implements DestinationService {
 
     @Override
     public List<DestinationPO> getAllDestinations() {
-        List<DestinationPO> destinations = new ArrayList<DestinationPO>();
-        destinationRepo.findAll().forEach(destinations::add);
+        List<DestinationPO> destinations = destinationRepo.findAll();
         return destinations;
     }
 
@@ -40,4 +40,10 @@ public class DestinationServiceImpl implements DestinationService {
     public void deleteDestination(Long id) {
         destinationRepo.delete(destinationRepo.findById(id).orElse(null));
     }
+
+    @Override
+    public List<DestinationPO> findCityDestinations(String city){ return destinationRepo.findByCity(city); }
+
+    @Override
+    public List<DestinationPO> findCountryDestinations(String country){ return destinationRepo.findByCountry(country); }
 }

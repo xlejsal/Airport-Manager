@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.airportmanager.service.services.StewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,8 +24,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     public List<StewardPO> getAllStewards() {
-        List<StewardPO> stewards = new ArrayList<StewardPO>();
-        stewardRepo.findAll().forEach(stewards::add);
+        List<StewardPO> stewards = stewardRepo.findAll();
         return stewards;
     }
 

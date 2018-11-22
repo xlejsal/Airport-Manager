@@ -4,8 +4,8 @@ import cz.muni.fi.pa165.airportmanager.persistence.repositories.AirplaneReposito
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
 import cz.muni.fi.pa165.airportmanager.service.services.AirplaneService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,6 +14,7 @@ import java.util.List;
  * Created on 2018-11-20
  */
 
+@Service
 public class AirplaneServiceImpl implements AirplaneService {
 
     private final AirplaneRepository airplaneRepo;
@@ -25,8 +26,7 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public List<AirplanePO> getAllAirplanes() {
-        List<AirplanePO> airplanes = new ArrayList<AirplanePO>();
-        airplaneRepo.findAll().forEach(airplanes::add);
+        List<AirplanePO> airplanes = airplaneRepo.findAll();
         return airplanes;
     }
 
@@ -45,4 +45,7 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public AirplanePO findAirplaneByName(String name) { return airplaneRepo.findByName(name); }
+
+    @Override
+    public List<AirplanePO> findCompanyAirplanes(String company){ return airplaneRepo.findByCompany(company); }
 }
