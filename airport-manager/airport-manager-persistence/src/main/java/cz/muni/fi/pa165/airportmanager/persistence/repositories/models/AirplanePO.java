@@ -1,6 +1,11 @@
-package cz.muni.fi.pa165.airportmanager.persistance.repositories.models;
+package cz.muni.fi.pa165.airportmanager.persistence.repositories.models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Wither;
 
 import javax.persistence.*;

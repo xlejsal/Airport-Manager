@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.airportmanager.persistance;
+package cz.muni.fi.pa165.airportmanager.persistence;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

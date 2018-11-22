@@ -1,7 +1,6 @@
-package cz.muni.fi.pa165.airportmanager.persistance.dao;
+package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.StewardRepository;
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.StewardPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,9 +21,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @Transactional
 public class StewardDaoImplTest {
-
-    @Autowired
-    private StewardDao dao;
 
     @Autowired
     private StewardRepository repo;
@@ -53,25 +49,25 @@ public class StewardDaoImplTest {
 
     @Test
     public void createTest() {
-        dao.create(steward1);
+        repo.save(steward1);
         assertThat(steward1.getId()).isNotNull();
-        assertThat(repo.findById(steward1.getId()).get()).isEqualTo(steward1);
+        assertThat(repo.findById(steward1.getId()).orElse(null)).isEqualTo(steward1);
     }
 
     @Test
     public void updateTest() {
         repo.save(steward1);
         repo.save(steward2);
-        StewardPO updatedSteward = dao.update(steward1.withGender("Female"));
-        assertThat(repo.findById(steward1.getId()).get()).isEqualTo(updatedSteward);
-        assertThat(repo.findById(steward2.getId()).get()).isEqualTo(steward2);
+        StewardPO updatedSteward = repo.save(steward1.withGender("Female"));
+        assertThat(repo.findById(steward1.getId()).orElse(null)).isEqualTo(updatedSteward);
+        assertThat(repo.findById(steward2.getId()).orElse(null)).isEqualTo(steward2);
     }
 
     @Test
     public void findByIdTest() {
         repo.save(steward1);
         repo.save(steward2);
-        StewardPO steward2Db = dao.findById(steward2.getId());
+        StewardPO steward2Db = repo.findById(steward2.getId()).orElse(null);
         assertThat(steward2Db).isEqualTo(steward2);
     }
 
@@ -79,14 +75,14 @@ public class StewardDaoImplTest {
     public void findAllTest() {
         repo.save(steward1);
         repo.save(steward2);
-        assertThat(dao.findAll()).containsExactlyInAnyOrder(steward1, steward2);
+        assertThat(repo.findAll()).containsExactlyInAnyOrder(steward1, steward2);
     }
 
     @Test
     public void removeTest() {
         repo.save(steward1);
         repo.save(steward2);
-        dao.delete(steward1);
+        repo.delete(steward1);
         assertThat(repo.findAll()).containsExactly(steward2);
     }
 }

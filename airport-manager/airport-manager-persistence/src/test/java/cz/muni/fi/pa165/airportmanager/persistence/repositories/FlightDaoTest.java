@@ -1,9 +1,9 @@
-package cz.muni.fi.pa165.airportmanager.persistance.dao;
+package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.AirplanePO;
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.DestinationPO;
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.FlightPO;
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.StewardPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,16 +31,16 @@ import java.util.Set;
 public class FlightDaoTest {
 
     @Autowired
-    AirplaneDao airplaneDao;
+    AirplaneRepository airplaneRepo;
 
     @Autowired
-    DestinationDao destinationDao;
+    DestinationRepository destinationRepo;
 
     @Autowired
-    StewardDao stewardDao;
+    StewardRepository stewardRepo;
 
     @Autowired
-    FlightDao flightDao;
+    FlightRepository flightRepo;
 
     private AirplanePO airplaneBig;
     private AirplanePO airplaneSmall;
@@ -124,25 +124,25 @@ public class FlightDaoTest {
         flightMagic.setArrivalTime(ARRIVAL);
         flightMagic.setStewards(stewardSet);
 
-        airplaneDao.create(airplaneBig);
-        airplaneDao.create(airplaneSmall);
-        destinationDao.create(destination);
-        destinationDao.create(origin);
-        stewardDao.create(stewardGirl);
-        stewardDao.create(stewardBoy);
-        flightDao.create(flight);
-        flightDao.create(flightMagic);
+        airplaneRepo.save(airplaneBig);
+        airplaneRepo.save(airplaneSmall);
+        destinationRepo.save(destination);
+        destinationRepo.save(origin);
+        stewardRepo.save(stewardGirl);
+        stewardRepo.save(stewardBoy);
+        flightRepo.save(flight);
+        flightRepo.save(flightMagic);
     }
 
     @Test
     public void testFindById() {
-        FlightPO found = flightDao.findById(flight.getId());
+        FlightPO found = flightRepo.findById(flight.getId()).orElse(null);
         Assert.assertEquals(found, flight);
     }
 
     @Test
     public void testFindNothing() {
-        FlightPO found = flightDao.findById(flight.getId() + 12345);
+        FlightPO found = flightRepo.findById(flight.getId() + 12345).orElse(null);
         Assert.assertNull(found);
     }
 
@@ -150,7 +150,7 @@ public class FlightDaoTest {
     public void testUpdateAirplane() {
         Assert.assertEquals(flight.getAirplane(), airplaneBig);
         flight.setAirplane(airplaneSmall);
-        flightDao.update(flight);
+        flightRepo.save(flight);
         Assert.assertEquals(flight.getAirplane(), airplaneSmall);
     }
 
@@ -158,20 +158,20 @@ public class FlightDaoTest {
     public void testUpdateArrivalTime() {
         Assert.assertEquals(flight.getArrivalTime(), ARRIVAL);
         flight.setArrivalTime(TIME);
-        flightDao.update(flight);
+        flightRepo.save(flight);
         Assert.assertEquals(flight.getArrivalTime(), TIME);
     }
 
     @Test
     public void testDelete() {
-        Assert.assertNotNull(flightDao.findById(flight.getId()));
-        flightDao.delete(flight);
-        Assert.assertNull(flightDao.findById(flight.getId()));
+        Assert.assertNotNull(flightRepo.findById(flight.getId()).orElse(null));
+        flightRepo.delete(flight);
+        Assert.assertNull(flightRepo.findById(flight.getId()).orElse(null));
     }
 
     @Test
     public void testFindAll() {
-        List<FlightPO> flights = flightDao.findAll();
+        List<FlightPO> flights = flightRepo.findAll();
         Assert.assertEquals(flights.size(), 2);
         Assert.assertTrue(flights.contains(flight));
         Assert.assertTrue(flights.contains(flightMagic));
@@ -188,9 +188,9 @@ public class FlightDaoTest {
         flightTest.setArrivalTime(ARRIVAL);
         flightTest.setStewards(stewardSet);
 
-        flightDao.create(flightTest);
+        flightRepo.save(flightTest);
 
-        FlightPO found = flightDao.findById(flightTest.getId());
+        FlightPO found = flightRepo.findById(flightTest.getId()).orElse(null);
         Assert.assertEquals(found, flightTest);
     }
 }
