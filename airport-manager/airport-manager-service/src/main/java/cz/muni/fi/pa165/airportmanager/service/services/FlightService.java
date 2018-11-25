@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.service.services;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 
 import java.util.List;
 
@@ -41,4 +42,8 @@ public interface FlightService {
      * @param id id of the flight to be deleted
      */
     void deleteFlight(Long id);
+
+    void addSteward(StewardPO steward, FlightPO flight);
+
+    void removeSteward(StewardPO steward, FlightPO flight);
 }

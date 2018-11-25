@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.api.facades;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
+import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 
 import java.util.List;
 
@@ -41,4 +42,8 @@ public interface FlightFacade {
      * @param id id of the flight to be deleted
      */
     void deleteFlight(Long id);
+
+    void addSteward(StewardDTO steward, FlightDTO flight);
+
+    void removeSteward(StewardDTO steward, FlightDTO flight);
 }
