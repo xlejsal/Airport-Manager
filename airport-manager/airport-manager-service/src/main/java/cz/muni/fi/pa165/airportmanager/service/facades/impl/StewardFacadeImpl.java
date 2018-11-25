@@ -2,7 +2,7 @@ package cz.muni.fi.pa165.airportmanager.service.facades.impl;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.StewardFacade;
-import cz.muni.fi.pa165.airportmanager.persistance.repositories.models.StewardPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import cz.muni.fi.pa165.airportmanager.service.services.StewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
