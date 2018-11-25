@@ -1,11 +1,13 @@
 package cz.muni.fi.pa165.airportmanager.service.services.impl;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.StewardRepository;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import cz.muni.fi.pa165.airportmanager.service.services.StewardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,8 +26,7 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     public List<StewardPO> getAllStewards() {
-        List<StewardPO> stewards = stewardRepo.findAll();
-        return stewards;
+        return stewardRepo.findAll();
     }
 
     @Override
@@ -40,4 +41,18 @@ public class StewardServiceImpl implements StewardService {
 
     @Override
     public void deleteSteward(Long id) { stewardRepo.delete(stewardRepo.findById(id).orElse(null)); }
+
+    @Override
+    public boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to) {
+        StewardPO steward = stewardRepo.findById(id).orElse(null);
+        for (FlightPO flight : steward.getFlights()) {
+            LocalDateTime depTime = flight.getDepartureTime();
+            LocalDateTime arrTime = flight.getArrivalTime();
+            if (depTime.isAfter(from) && depTime.isBefore(to) || arrTime.isAfter(from) && arrTime.isBefore(to)
+                    || depTime.isBefore(from) && arrTime.isAfter(to)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
