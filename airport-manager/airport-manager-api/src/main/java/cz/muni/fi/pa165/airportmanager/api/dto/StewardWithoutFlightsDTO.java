@@ -9,12 +9,10 @@ import lombok.Setter;
 import lombok.experimental.Wither;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * @author Vojtech Lejsal (lejsal.vojtech@gmail.com)
- * Created on 2018-11-17
+ * Created on 2018-11-24
  */
 
 @Getter
@@ -24,12 +22,11 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name", "surname", "birthDate"})
-public class StewardDTO {
+public class StewardWithoutFlightsDTO {
     private Long id;
     private String name;
     private String surname;
     private LocalDate birthDate;
     private String gender;
     private String nationality;
-    private Set<FlightWithoutStewardsDTO> flights = new HashSet<>();
 }

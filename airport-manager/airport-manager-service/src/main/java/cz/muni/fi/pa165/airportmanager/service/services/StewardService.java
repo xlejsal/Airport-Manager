@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.airportmanager.service.services;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface StewardService {
     StewardPO createSteward(StewardPO steward);
 
     void deleteSteward(Long id);
+
+    boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to);
 }

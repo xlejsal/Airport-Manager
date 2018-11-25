@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.airportmanager.api.facades;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface StewardFacade {
     StewardDTO createSteward(StewardDTO steward);
 
     void deleteSteward(Long id);
+
+    boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to);
 }
