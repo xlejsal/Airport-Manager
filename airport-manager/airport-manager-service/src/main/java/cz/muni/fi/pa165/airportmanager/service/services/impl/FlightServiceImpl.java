@@ -40,7 +40,12 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public void createFlight(FlightPO flight) {
-        flightRepo.save(flight);
+        if (flightRepo.findAllFlightsFromToWithAirplaneId(flight.getDepartureTime(), flight.getArrivalTime(),
+                flight.getAirplane().getId()).isEmpty()) {
+            flightRepo.save(flight);
+        } else {
+            throw new IllegalArgumentException("Specified airplane already has a flight at the time of this flight.");
+        }
     }
 
     @Override
@@ -51,7 +56,8 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public void addSteward(StewardPO steward, FlightPO flight) {
         for (FlightPO flightPO : steward.getFlights()) {
-            if (flightPO.getDepartureTime().isAfter(flight.getArrivalTime()) && flightPO.getArrivalTime().isBefore(flight.getDepartureTime())) {
+            if (flightPO.getDepartureTime().isAfter(flight.getArrivalTime()) &&
+                    flightPO.getArrivalTime().isBefore(flight.getDepartureTime())) {
                 continue;
             } else {
                 throw new IllegalArgumentException("Steward already has a flight at the time of this flight.");

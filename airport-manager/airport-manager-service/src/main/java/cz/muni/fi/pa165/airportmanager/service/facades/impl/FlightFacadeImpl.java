@@ -53,11 +53,13 @@ public class FlightFacadeImpl implements FlightFacade {
 
     @Override
     public void addSteward(StewardDTO steward, FlightDTO flight) {
-        flightService.addSteward(beanMappingService.mapTo(steward, StewardPO.class), beanMappingService.mapTo(flight, FlightPO.class));
+        flightService.addSteward(beanMappingService.mapTo(steward, StewardPO.class),
+                beanMappingService.mapTo(flight, FlightPO.class));
     }
 
     @Override
     public void removeSteward(StewardDTO steward, FlightDTO flight) {
-        flightService.removeSteward(beanMappingService.mapTo(steward, StewardPO.class), beanMappingService.mapTo(flight, FlightPO.class));
+        flightService.removeSteward(beanMappingService.mapTo(steward, StewardPO.class),
+                beanMappingService.mapTo(flight, FlightPO.class));
     }
 }
