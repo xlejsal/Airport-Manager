@@ -95,6 +95,7 @@ public class AirplaneFacadeTest {
     @Test
     public void getAirplaneById() {
         AirplaneDTO airplaneDTO = Mockito.mock(AirplaneDTO.class);
+        Mockito.when(airplaneService.getAirplaneById(1L)).thenReturn(airplane1);
         Mockito.when(beanMappingService.mapTo(airplane1, AirplaneDTO.class)).thenReturn(airplaneDTO);
 
         assertEquals(airplaneFacade.getAirplaneById(1L), airplaneDTO);
@@ -124,7 +125,7 @@ public class AirplaneFacadeTest {
     public void findAirplaneByName() {
         AirplaneDTO airplaneDTO = Mockito.mock(AirplaneDTO.class);
         Mockito.when(airplaneService.findAirplaneByName("Hamburger")).thenReturn(airplane3);
-        Mockito.when(beanMappingService.mapTo(airplane1, AirplaneDTO.class)).thenReturn(airplaneDTO);
+        Mockito.when(beanMappingService.mapTo(airplane3, AirplaneDTO.class)).thenReturn(airplaneDTO);
 
         assertEquals(airplaneFacade.findAirplaneByName("Hamburger"), airplaneDTO);
         Mockito.verify(airplaneService).findAirplaneByName("Hamburger");

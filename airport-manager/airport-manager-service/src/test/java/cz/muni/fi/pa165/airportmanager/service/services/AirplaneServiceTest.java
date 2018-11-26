@@ -100,6 +100,7 @@ public class AirplaneServiceTest {
 
     @Test
     public void deleteAirplane() {
+        Mockito.when(airplaneRepository.findById(airplane1.getId())).thenReturn(Optional.of(airplane1));
         airplaneService.deleteAirplane(airplane1.getId());
         Mockito.verify(airplaneRepository).delete(airplane1);
     }
@@ -113,13 +114,13 @@ public class AirplaneServiceTest {
     public void findAirplaneByName() {
         Mockito.when(airplaneRepository.findByName("Hamburger")).thenReturn(airplane3);
         AirplanePO found = airplaneService.findAirplaneByName("Hamburger");
-        assertEquals(airplanes, found);
+        assertEquals(airplane3, found);
     }
 
     @Test
     public void findCompanyAirplanes() {
         Mockito.when(airplaneRepository.findByCompany("Ryan Air")).thenReturn(ryanAirplanes);
         List<AirplanePO> found = airplaneService.findCompanyAirplanes("Ryan Air");
-        assertEquals(airplanes, found);
+        assertEquals(ryanAirplanes, found);
     }
 }
