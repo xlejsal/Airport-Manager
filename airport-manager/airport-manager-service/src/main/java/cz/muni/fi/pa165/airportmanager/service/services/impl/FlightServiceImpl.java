@@ -45,10 +45,10 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public void createFlight(FlightPO flight) {
+    public FlightPO createFlight(FlightPO flight) {
         if (flightRepo.findAllFlightsFromToWithAirplaneId(flight.getDepartureTime(), flight.getArrivalTime(),
                 flight.getAirplane().getId()).isEmpty()) {
-            flightRepo.save(flight);
+            return flightRepo.save(flight);
         } else {
             throw new AirportManagerDataAccessException("Specified airplane already has a flight at the time of this flight.");
         }

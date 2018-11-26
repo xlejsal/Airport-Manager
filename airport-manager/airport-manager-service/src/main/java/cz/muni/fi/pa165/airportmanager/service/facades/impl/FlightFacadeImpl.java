@@ -42,8 +42,8 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public void createFlight(FlightDTO flight) {
-        flightService.createFlight(beanMappingService.mapTo(flight, FlightPO.class));
+    public FlightDTO createFlight(FlightDTO flight) {
+        return beanMappingService.mapTo(flightService.createFlight(beanMappingService.mapTo(flight, FlightPO.class)), FlightDTO.class);
     }
 
     @Override
