@@ -45,11 +45,14 @@ public class StewardServiceImplTest {
     private FlightPO flight1, flight2;
     private Set<StewardPO> flightStews = new HashSet<StewardPO>();
     private List<StewardPO> stews = new ArrayList<StewardPO>();
+    private LocalDateTime stamp;
 
     @Before
     public void init(){
         MockitoAnnotations.initMocks(this);
         service = new StewardServiceImpl(repo);
+
+        stamp = LocalDateTime.now();
 
 
         stew1 = StewardPO.builder()
@@ -89,8 +92,8 @@ public class StewardServiceImplTest {
         flight1 = FlightPO.builder()
                 .id(1L)
                 .flightNumber("333")
-                .departureTime(LocalDateTime.now())
-                .arrivalTime(LocalDateTime.now().plusHours(5))
+                .departureTime(stamp)
+                .arrivalTime(stamp.plusHours(5))
                 .origin((Mockito.mock(DestinationPO.class)))
                 .destination((Mockito.mock(DestinationPO.class)))
                 .airplane(Mockito.mock(AirplanePO.class))
@@ -100,8 +103,8 @@ public class StewardServiceImplTest {
         flight2 = FlightPO.builder()
                 .id(2L)
                 .flightNumber("757")
-                .departureTime(LocalDateTime.now().plusHours(16))
-                .arrivalTime(LocalDateTime.now().plusHours(24))
+                .departureTime(stamp.plusHours(16))
+                .arrivalTime(stamp.plusHours(24))
                 .origin((Mockito.mock(DestinationPO.class)))
                 .destination((Mockito.mock(DestinationPO.class)))
                 .airplane(Mockito.mock(AirplanePO.class))
@@ -148,12 +151,12 @@ public class StewardServiceImplTest {
     @Test
     public void stewardIsAvailable(){
         when(repo.findById(stew1.getId())).thenReturn(Optional.of(stew1));
-        assertEquals(true, service.isAvailableFromTo(stew1.getId(), LocalDateTime.now().plusHours(6), LocalDateTime.now().plusHours(8)));
+        assertEquals(true, service.isAvailableFromTo(stew1.getId(), stamp.plusHours(6), stamp.plusHours(8)));
     }
 
     @Test
     public void stewardIsNotAvailable(){
         when(repo.findById(stew1.getId())).thenReturn(Optional.of(stew1));
-        assertEquals(false, service.isAvailableFromTo(stew1.getId(), LocalDateTime.now().plusHours(16), LocalDateTime.now().plusHours(21)));
+        assertEquals(false, service.isAvailableFromTo(stew1.getId(), stamp.plusHours(16), stamp.plusHours(21)));
     }
 }
