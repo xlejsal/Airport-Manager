@@ -105,7 +105,7 @@ public class AirplaneServiceTest {
     }
 
     @Test(expected = AirportManagerDataAccessException.class)
-    public void DeleteNonExistentAirplane() {
+    public void DeleteNonExistingAirplane() {
         airplaneService.deleteAirplane(87L);
     }
 
