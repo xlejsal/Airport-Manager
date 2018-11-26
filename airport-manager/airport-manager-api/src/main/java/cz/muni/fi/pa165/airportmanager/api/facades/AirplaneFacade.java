@@ -27,8 +27,9 @@ public interface AirplaneFacade {
     /**
      * Create an airplane in the database
      * @param airplane - DTO of an airplane to be created
+     * @return - DTO of the created airplane
      */
-    void createAirplane(AirplaneDTO airplane);
+    AirplaneDTO createAirplane(AirplaneDTO airplane);
 
     /**
      * Delete an airplane for the database

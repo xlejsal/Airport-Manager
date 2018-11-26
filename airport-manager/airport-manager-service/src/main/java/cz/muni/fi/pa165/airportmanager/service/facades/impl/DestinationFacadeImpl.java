@@ -35,7 +35,7 @@ public class DestinationFacadeImpl implements DestinationFacade {
 
     public DestinationDTO getDestinationById(Long Id){ return beanMapper.mapTo(destinationService.getDestinationById(Id), DestinationDTO.class); }
 
-    public void createDestination(DestinationDTO destination){ destinationService.createDestination(beanMapper.mapTo(destination, DestinationPO.class)); }
+    public DestinationDTO createDestination(DestinationDTO destination){ return beanMapper.mapTo(destinationService.createDestination(beanMapper.mapTo(destination, DestinationPO.class)), DestinationDTO.class); }
 
     public void deleteDestination(Long Id){ destinationService.deleteDestination(Id); }
 
