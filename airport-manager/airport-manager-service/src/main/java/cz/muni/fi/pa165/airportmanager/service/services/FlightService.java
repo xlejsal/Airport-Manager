@@ -35,7 +35,7 @@ public interface FlightService {
      * Create flight entity
      * @param flight flight entity to be created
      */
-    void createFlight(FlightPO flight);
+    FlightPO createFlight(FlightPO flight);
 
     /**
      * Delete flight with set id
@@ -43,7 +43,17 @@ public interface FlightService {
      */
     void deleteFlight(Long id);
 
+    /**
+     * Add steward to flight
+     * @param steward steward to be added
+     * @param flight flight to add steward to
+     */
     void addSteward(StewardPO steward, FlightPO flight);
 
+    /**
+     * Remove steward from flight
+     * @param steward steward to be removed
+     * @param flight flight from which steward is to be removed
+     */
     void removeSteward(StewardPO steward, FlightPO flight);
 }

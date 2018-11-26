@@ -35,7 +35,7 @@ public interface FlightFacade {
      * Create flight entity in database
      * @param flight DTO of flight to be created
      */
-    void createFlight(FlightDTO flight);
+    FlightDTO createFlight(FlightDTO flight);
 
     /**
      * Delete flight from database
@@ -43,7 +43,17 @@ public interface FlightFacade {
      */
     void deleteFlight(Long id);
 
+    /**
+     * Add steward to flight
+     * @param steward steward to be added
+     * @param flight flight to add steward to
+     */
     void addSteward(StewardDTO steward, FlightDTO flight);
 
+    /**
+     * Remove steward from flight
+     * @param steward steward to be removed
+     * @param flight flight from which steward is to be removed
+     */
     void removeSteward(StewardDTO steward, FlightDTO flight);
 }
