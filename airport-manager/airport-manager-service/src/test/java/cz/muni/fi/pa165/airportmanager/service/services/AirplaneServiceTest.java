@@ -111,7 +111,7 @@ public class AirplaneServiceTest {
 
     @Test
     public void findAirplaneByName() {
-        Mockito.when(airplaneRepository.findByCompany("Ryan Air")).thenReturn(ryanAirplanes);
+        Mockito.when(airplaneRepository.findByName("Hamburger")).thenReturn(airplane3);
         AirplanePO found = airplaneService.findAirplaneByName("Hamburger");
         assertEquals(airplanes, found);
     }
