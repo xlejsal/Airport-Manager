@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.airportmanager.api.dto;
 import lombok.*;
 import lombok.experimental.Wither;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +22,8 @@ import java.util.Set;
 public class FlightDTO {
     private Long id;
     private String flightNumber;
-    private LocalDate departureTime;
-    private LocalDate arrivalTime;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
     private DestinationDTO origin;
     private DestinationDTO destination;
     private AirplaneDTO airplane;
