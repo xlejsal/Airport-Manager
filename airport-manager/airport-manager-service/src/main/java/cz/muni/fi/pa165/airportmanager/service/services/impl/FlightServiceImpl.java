@@ -73,6 +73,7 @@ public class FlightServiceImpl implements FlightService {
         Set<StewardPO> stewards = flight.getStewards();
         stewards.add(steward);
         flight.setStewards(stewards);
+        flightRepo.save(flight);
     }
 
     @Override
@@ -80,5 +81,6 @@ public class FlightServiceImpl implements FlightService {
         Set<StewardPO> stewards = flight.getStewards();
         stewards.remove(steward);
         flight.setStewards(stewards);
+        flightRepo.save(flight);
     }
 }
