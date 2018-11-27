@@ -43,10 +43,13 @@ public class StewardFacadeImplTest {
     @Mock
     private BeanMappingService mapper;
 
+    private LocalDateTime stamp;
+
     @Before
     public void init(){
         MockitoAnnotations.initMocks(this);
         facade = new StewardFacadeImpl(service, mapper);
+        stamp = LocalDateTime.now();
     }
 
     @Test
@@ -92,9 +95,9 @@ public class StewardFacadeImplTest {
 
     @Test
     public void isAvailableTest(){
-        when(service.isAvailableFromTo(24L, LocalDateTime.now(), LocalDateTime.now().plusHours(2))).thenReturn(true);
+        when(service.isAvailableFromTo(24L, stamp, stamp.plusHours(2))).thenReturn(true);
 
-        assertEquals(facade.isAvailableFromTo(24L, LocalDateTime.now(), LocalDateTime.now().plusHours(2)), true);
-        verify(service).isAvailableFromTo(24L, LocalDateTime.now(), LocalDateTime.now().plusHours(2));
+        assertEquals(facade.isAvailableFromTo(24L, stamp, stamp.plusHours(2)), true);
+        verify(service).isAvailableFromTo(24L, stamp, stamp.plusHours(2));
     }
 }

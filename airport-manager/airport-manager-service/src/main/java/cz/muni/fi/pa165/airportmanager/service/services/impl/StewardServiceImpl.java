@@ -49,7 +49,8 @@ public class StewardServiceImpl implements StewardService {
             LocalDateTime depTime = flight.getDepartureTime();
             LocalDateTime arrTime = flight.getArrivalTime();
             if (depTime.isAfter(from) && depTime.isBefore(to) || arrTime.isAfter(from) && arrTime.isBefore(to)
-                    || depTime.isBefore(from) && arrTime.isAfter(to)) {
+                    || depTime.isBefore(from) && arrTime.isAfter(to) || depTime.isEqual(from) || depTime.isEqual(to)
+                    || arrTime.isEqual(from) || arrTime.isEqual(to)) {
                 return false;
             }
         }
