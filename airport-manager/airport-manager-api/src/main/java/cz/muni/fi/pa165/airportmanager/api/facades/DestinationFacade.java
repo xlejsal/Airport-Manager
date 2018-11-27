@@ -27,8 +27,9 @@ public interface DestinationFacade {
     /**
      * Create a destination entity in the database
      * @param destination - DTO of a destination to be created
+     * @return - DTO of the created destination
      */
-    void createDestination(DestinationDTO destination);
+    DestinationDTO createDestination(DestinationDTO destination);
 
     /**
      * Delete a destination from the database

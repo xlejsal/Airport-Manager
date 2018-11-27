@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * @author kotrc
- * Created on 23.11.2018
+ * Created on 26.11.2018
  */
 
 @Getter
@@ -19,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"flightNumber", "departureTime"})
-public class FlightDTO {
+public class FlightWithoutStewardsDTO {
     private Long id;
     private String flightNumber;
     private LocalDateTime departureTime;
@@ -27,5 +27,4 @@ public class FlightDTO {
     private DestinationDTO origin;
     private DestinationDTO destination;
     private AirplaneDTO airplane;
-    private Set<StewardWithoutFlightsDTO> stewards = new HashSet<>();
 }

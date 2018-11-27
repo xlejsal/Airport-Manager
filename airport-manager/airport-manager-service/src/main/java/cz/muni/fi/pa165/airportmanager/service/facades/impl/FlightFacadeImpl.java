@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.airportmanager.service.facades.impl;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
+import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import cz.muni.fi.pa165.airportmanager.service.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +42,24 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public void createFlight(FlightDTO flight) {
-        flightService.createFlight(beanMappingService.mapTo(flight, FlightPO.class));
+    public FlightDTO createFlight(FlightDTO flight) {
+        return beanMappingService.mapTo(flightService.createFlight(beanMappingService.mapTo(flight, FlightPO.class)), FlightDTO.class);
     }
 
     @Override
     public void deleteFlight(Long id) {
         flightService.deleteFlight(id);
+    }
+
+    @Override
+    public void addSteward(StewardDTO steward, FlightDTO flight) {
+        flightService.addSteward(beanMappingService.mapTo(steward, StewardPO.class),
+                beanMappingService.mapTo(flight, FlightPO.class));
+    }
+
+    @Override
+    public void removeSteward(StewardDTO steward, FlightDTO flight) {
+        flightService.removeSteward(beanMappingService.mapTo(steward, StewardPO.class),
+                beanMappingService.mapTo(flight, FlightPO.class));
     }
 }

@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.service.services;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 
 import java.util.List;
 
@@ -34,11 +35,25 @@ public interface FlightService {
      * Create flight entity
      * @param flight flight entity to be created
      */
-    void createFlight(FlightPO flight);
+    FlightPO createFlight(FlightPO flight);
 
     /**
      * Delete flight with set id
      * @param id id of the flight to be deleted
      */
     void deleteFlight(Long id);
+
+    /**
+     * Add steward to flight
+     * @param steward steward to be added
+     * @param flight flight to add steward to
+     */
+    void addSteward(StewardPO steward, FlightPO flight);
+
+    /**
+     * Remove steward from flight
+     * @param steward steward to be removed
+     * @param flight flight from which steward is to be removed
+     */
+    void removeSteward(StewardPO steward, FlightPO flight);
 }

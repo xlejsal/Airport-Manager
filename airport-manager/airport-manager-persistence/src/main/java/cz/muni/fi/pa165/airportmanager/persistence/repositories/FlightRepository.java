@@ -21,6 +21,6 @@ public interface FlightRepository extends JpaRepository<FlightPO, Long> {
      * @param airplaneId Id of the plane.
      * @return All flights that intersect with the interval and use the specified plane.
      */
-    @Query("select f from FlightPO where ((f.departureTime between ?1 and ?2) or (f.arrivalTime between ?1 and ?2) or (f.departureTime <= ?1 and f.arrivalTime >= ?2)) and f.airplane.id = ?3")
+    @Query("select f from FlightPO f where ((f.departureTime between ?1 and ?2) or (f.arrivalTime between ?1 and ?2) or (f.departureTime <= ?1 and f.arrivalTime >= ?2)) and f.airplane.id = ?3")
     List<FlightPO> findAllFlightsFromToWithAirplaneId(LocalDateTime from, LocalDateTime to, Long airplaneId);
 }
