@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
+import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -25,9 +26,13 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name", "surname", "birthDate"})
 public class StewardDTO {
+    @NotNull
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String surname;
+    @NotNull
     private LocalDate birthDate;
     private String gender;
     private String nationality;

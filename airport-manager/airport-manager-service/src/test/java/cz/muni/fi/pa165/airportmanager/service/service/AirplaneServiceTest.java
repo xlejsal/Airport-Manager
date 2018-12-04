@@ -1,8 +1,9 @@
-package cz.muni.fi.pa165.airportmanager.service.services;
+package cz.muni.fi.pa165.airportmanager.service.service;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.AirplaneRepository;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
 import cz.muni.fi.pa165.airportmanager.service.exceptions.AirportManagerDataAccessException;
+import cz.muni.fi.pa165.airportmanager.service.services.AirplaneService;
 import cz.muni.fi.pa165.airportmanager.service.services.impl.AirplaneServiceImpl;
 import org.junit.Before;
 import org.junit.Test;

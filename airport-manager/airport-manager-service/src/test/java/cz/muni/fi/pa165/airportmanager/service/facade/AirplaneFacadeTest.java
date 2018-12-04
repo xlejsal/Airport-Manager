@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.airportmanager.service.facades;
+package cz.muni.fi.pa165.airportmanager.service.facade;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;

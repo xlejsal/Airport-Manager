@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
+import com.sun.istack.internal.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -23,9 +24,13 @@ import lombok.experimental.Wither;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name"})
 public class AirplaneDTO {
+    @NotNull
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String type;
+    @NotNull
     private String company;
     private Integer capacity;
 }

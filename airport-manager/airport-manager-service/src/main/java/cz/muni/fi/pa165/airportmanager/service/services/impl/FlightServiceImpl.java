@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.airportmanager.service.exceptions.AirportManagerDataAcce
 import cz.muni.fi.pa165.airportmanager.service.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
  * @author kotrc
  * Created on 23.11.2018
  */
+@Service
 public class FlightServiceImpl implements FlightService {
 
     private final FlightRepository flightRepo;
@@ -46,6 +48,16 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public FlightPO createFlight(FlightPO flight) {
+        if (flightRepo.findAllFlightsFromToWithAirplaneId(flight.getDepartureTime(), flight.getArrivalTime(),
+                flight.getAirplane().getId()).isEmpty()) {
+            return flightRepo.save(flight);
+        } else {
+            throw new AirportManagerDataAccessException("Specified airplane already has a flight at the time of this flight.");
+        }
+    }
+
+    @Override
+    public FlightPO updateFlight(FlightPO flight) {
         if (flightRepo.findAllFlightsFromToWithAirplaneId(flight.getDepartureTime(), flight.getArrivalTime(),
                 flight.getAirplane().getId()).isEmpty()) {
             return flightRepo.save(flight);

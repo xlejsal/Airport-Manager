@@ -46,6 +46,15 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
+    public AirplanePO updateAirplane(AirplanePO airplane) {
+        try{
+            return airplaneRepo.save(airplane);
+        } catch(DataAccessException e){
+            throw new AirportManagerDataAccessException("Cannot update Airplane", e);
+        }
+    }
+
+    @Override
     public void deleteAirplane(Long id) {
         airplaneRepo.delete(airplaneRepo.findById(id).orElseThrow(() -> new AirportManagerDataAccessException("Airplane of ID " + id + " does not exist")));
     }
