@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
