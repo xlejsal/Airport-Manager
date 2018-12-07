@@ -17,6 +17,8 @@ public interface StewardService {
 
     StewardPO createSteward(StewardPO steward);
 
+    StewardPO updateSteward(StewardPO steward);
+
     void deleteSteward(Long id);
 
     boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to);

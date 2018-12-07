@@ -38,6 +38,13 @@ public interface FlightService {
     FlightPO createFlight(FlightPO flight);
 
     /**
+     * Update flight
+     * @param flight flight entity to be updated
+     * @return
+     */
+    FlightPO updateFlight(FlightPO flight);
+
+    /**
      * Delete flight with set id
      * @param id id of the flight to be deleted
      */

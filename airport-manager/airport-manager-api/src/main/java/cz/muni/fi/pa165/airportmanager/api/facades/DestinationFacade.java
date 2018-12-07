@@ -32,6 +32,13 @@ public interface DestinationFacade {
     DestinationDTO createDestination(DestinationDTO destination);
 
     /**
+     * Update a destination
+     * @param destination - DTO of the destination to be updated
+     * @return - updated DTO
+     */
+    DestinationDTO updateDestination(DestinationDTO destination);
+
+    /**
      * Delete a destination from the database
      * @param Id - Id of the destination to be deleted
      */

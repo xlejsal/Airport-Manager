@@ -40,6 +40,11 @@ public class StewardServiceImpl implements StewardService {
     }
 
     @Override
+    public StewardPO updateSteward(StewardPO steward) {
+        return stewardRepo.save(steward);
+    }
+
+    @Override
     public void deleteSteward(Long id) { stewardRepo.delete(stewardRepo.findById(id).orElse(null)); }
 
     @Override

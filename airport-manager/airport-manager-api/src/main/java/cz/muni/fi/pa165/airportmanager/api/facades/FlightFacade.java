@@ -38,6 +38,13 @@ public interface FlightFacade {
     FlightDTO createFlight(FlightDTO flight);
 
     /**
+     * Update a flight
+     * @param flight DTO of the flight to be updated
+     * @return
+     */
+    FlightDTO updateFlight(FlightDTO flight);
+
+    /**
      * Delete flight from database
      * @param id id of the flight to be deleted
      */

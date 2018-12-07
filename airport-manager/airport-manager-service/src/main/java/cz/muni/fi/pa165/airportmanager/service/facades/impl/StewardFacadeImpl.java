@@ -50,6 +50,11 @@ public class StewardFacadeImpl implements StewardFacade {
     }
 
     @Override
+    public StewardDTO updateSteward(StewardDTO steward) {
+        return mapper.mapTo(stewardService.updateSteward(mapper.mapTo(steward, StewardPO.class)), StewardDTO.class);
+    }
+
+    @Override
     public void deleteSteward(Long id) {
         stewardService.deleteSteward(id);
     }

@@ -42,6 +42,9 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
     public AirplaneDTO createAirplane(AirplaneDTO airplane){ return beanMapper.mapTo(airplaneService.createAirplane(beanMapper.mapTo(airplane, AirplanePO.class)), AirplaneDTO.class); }
 
     @Override
+    public AirplaneDTO updateAirplane(AirplaneDTO airplane){ return beanMapper.mapTo(airplaneService.updateAirplane(beanMapper.mapTo(airplane, AirplanePO.class)), AirplaneDTO.class); }
+
+    @Override
     public void deleteAirplane(Long Id){ airplaneService.deleteAirplane(Id);  }
 
     @Override

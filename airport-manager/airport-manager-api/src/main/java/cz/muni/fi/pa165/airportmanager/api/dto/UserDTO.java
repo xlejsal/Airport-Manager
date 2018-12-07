@@ -10,10 +10,7 @@ import lombok.Setter;
 import lombok.experimental.Wither;
 
 /**
- * Destination DTO class, based on Destination entity
- *
  * @author Stepan Benes
- * Created on 2018-11-20
  */
 
 @Getter
@@ -22,14 +19,25 @@ import lombok.experimental.Wither;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"airportCode"})
-public class DestinationDTO {
+@EqualsAndHashCode(of = {"email", "login"})
+public class UserDTO {
     @NotNull
     private Long id;
+
     @NotNull
-    private String airportCode;
+    private String passwordHash;
+
     @NotNull
-    private String city;
+    private String login;
+
     @NotNull
-    private String country;
+    private String email;
+
+    @NotNull
+    private String name;
+
+    @NotNull
+    private String surname;
+
+    private boolean admin;
 }

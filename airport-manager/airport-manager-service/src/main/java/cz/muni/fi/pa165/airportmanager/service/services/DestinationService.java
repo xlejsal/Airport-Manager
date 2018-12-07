@@ -34,6 +34,13 @@ public interface DestinationService {
     DestinationPO createDestination(DestinationPO destination);
 
     /**
+     * Update a destination
+     * @param destination - Destination to be updated
+     * @return
+     */
+    DestinationPO updateDestination(DestinationPO destination);
+
+    /**
      * Deletes a Destination entity
      * @param Id - Id of the destination to be deleted
      */

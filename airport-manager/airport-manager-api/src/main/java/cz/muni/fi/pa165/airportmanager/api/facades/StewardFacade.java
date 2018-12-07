@@ -17,6 +17,8 @@ public interface StewardFacade {
 
     StewardDTO createSteward(StewardDTO steward);
 
+    StewardDTO updateSteward(StewardDTO steward);
+
     void deleteSteward(Long id);
 
     boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to);
