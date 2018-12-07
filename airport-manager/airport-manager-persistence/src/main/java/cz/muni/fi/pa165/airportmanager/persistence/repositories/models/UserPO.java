@@ -22,7 +22,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = {"email", "login"})
+@EqualsAndHashCode(of = {"login"})
 @Entity
 @Table(name="Users")
 public class UserPO {
