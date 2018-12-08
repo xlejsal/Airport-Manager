@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.airportmanager.service.services;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

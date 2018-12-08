@@ -34,7 +34,7 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public FlightPO getFlightById(Long id) {
         return flightRepo.findById(id).orElseThrow(() ->
-                new AirportManagerDataAccessException("Flight with ID: " + id + " does not exist"));
+                new AirportManagerDataAccessException("Flight with id: " + id + ", does not exist"));
     }
 
     @Override
@@ -42,7 +42,7 @@ public class FlightServiceImpl implements FlightService {
         try {
             return flightRepo.findByFlightNumber(flightNumber);
         } catch (DataAccessException e) {
-            throw new AirportManagerDataAccessException("Flight with flight number: " + flightNumber + " does not exist");
+            throw new AirportManagerDataAccessException("Flight with flight number: " + flightNumber + ", does not exist");
         }
     }
 
@@ -52,7 +52,7 @@ public class FlightServiceImpl implements FlightService {
                 flight.getAirplane().getId()).isEmpty()) {
             return flightRepo.save(flight);
         } else {
-            throw new AirportManagerDataAccessException("Specified airplane already has a flight at the time of this flight.");
+            throw new IllegalArgumentException("Specified airplane already has a flight at the time of this flight.");
         }
     }
 
@@ -62,7 +62,7 @@ public class FlightServiceImpl implements FlightService {
                 flight.getAirplane().getId()).isEmpty()) {
             return flightRepo.save(flight);
         } else {
-            throw new AirportManagerDataAccessException("Specified airplane already has a flight at the time of this flight.");
+            throw new IllegalArgumentException("Specified airplane already has a flight at the time of this flight.");
         }
     }
 
@@ -79,7 +79,7 @@ public class FlightServiceImpl implements FlightService {
                     flightPO.getDepartureTime().isAfter(flight.getDepartureTime())) ||
                     flightPO.getArrivalTime().isBefore(flight.getArrivalTime()) &&
                             flightPO.getArrivalTime().isAfter(flight.getDepartureTime())) {
-                throw new AirportManagerDataAccessException("Steward already has a flight at the time of this flight.");
+                throw new IllegalArgumentException("Steward already has a flight at the time of this flight.");
             }
         }
         Set<StewardPO> stewards = flight.getStewards();

@@ -41,7 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserPO getUserById(Long Id){
-        return userRepo.findById(Id).orElseThrow(() -> new AirportManagerDataAccessException("User of ID " + Id + " does not exist"));
+        return userRepo.findById(Id).orElseThrow(() -> new AirportManagerDataAccessException("User of ID " +
+                Id + " does not exist"));
     }
 
     @Override

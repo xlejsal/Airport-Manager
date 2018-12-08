@@ -32,23 +32,39 @@ public class DestinationFacadeImpl implements DestinationFacade {
     }
 
     @Override
-    public List<DestinationDTO> getAllDestinations(){ return beanMapper.mapTo(destinationService.getAllDestinations(), DestinationDTO.class); }
+    public List<DestinationDTO> getAllDestinations(){
+        return beanMapper.mapTo(destinationService.getAllDestinations(), DestinationDTO.class);
+    }
 
     @Override
-    public DestinationDTO getDestinationById(Long Id){ return beanMapper.mapTo(destinationService.getDestinationById(Id), DestinationDTO.class); }
+    public DestinationDTO getDestinationById(Long Id){
+        return beanMapper.mapTo(destinationService.getDestinationById(Id), DestinationDTO.class);
+    }
 
     @Override
-    public DestinationDTO createDestination(DestinationDTO destination){ return beanMapper.mapTo(destinationService.createDestination(beanMapper.mapTo(destination, DestinationPO.class)), DestinationDTO.class); }
+    public DestinationDTO createDestination(DestinationDTO destination){
+        return beanMapper.mapTo(destinationService.createDestination(beanMapper.mapTo(destination, DestinationPO.class)),
+                DestinationDTO.class);
+    }
 
     @Override
-    public DestinationDTO updateDestination(DestinationDTO destination){ return beanMapper.mapTo(destinationService.updateDestination(beanMapper.mapTo(destination, DestinationPO.class)), DestinationDTO.class); }
+    public DestinationDTO updateDestination(DestinationDTO destination){
+        return beanMapper.mapTo(destinationService.updateDestination(beanMapper.mapTo(destination, DestinationPO.class)),
+                DestinationDTO.class);
+    }
 
     @Override
-    public void deleteDestination(Long Id){ destinationService.deleteDestination(Id); }
+    public void deleteDestination(Long Id){
+        destinationService.deleteDestination(Id);
+    }
 
     @Override
-    public List<DestinationDTO> findCityDestinations(String city){ return beanMapper.mapTo(destinationService.findCityDestinations(city), DestinationDTO.class); }
+    public List<DestinationDTO> findCityDestinations(String city){
+        return beanMapper.mapTo(destinationService.findCityDestinations(city), DestinationDTO.class);
+    }
 
     @Override
-    public List<DestinationDTO> findCountryDestinations(String country){ return beanMapper.mapTo(destinationService.findCountryDestinations(country), DestinationDTO.class); }
+    public List<DestinationDTO> findCountryDestinations(String country){
+        return beanMapper.mapTo(destinationService.findCountryDestinations(country), DestinationDTO.class);
+    }
 }
