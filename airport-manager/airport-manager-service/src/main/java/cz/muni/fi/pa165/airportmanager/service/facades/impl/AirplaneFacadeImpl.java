@@ -6,8 +6,6 @@ import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplaneP
 import cz.muni.fi.pa165.airportmanager.service.services.AirplaneService;
 import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +25,7 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
     private BeanMappingService beanMapper;
 
     @Autowired
-    public AirplaneFacadeImpl(@Qualifier("airplaneService") AirplaneService service, BeanMappingService mapper){
+    public AirplaneFacadeImpl(AirplaneService service, BeanMappingService mapper){
         airplaneService = service;
         beanMapper = mapper;
     }
