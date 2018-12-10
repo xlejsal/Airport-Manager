@@ -29,9 +29,16 @@ public interface AirplaneService {
     /**
      * Creates an Airplane entity
      * @param airplane - Airplane entity to be created and stored
-     * @return
+     * @return created airplane
      */
     AirplanePO createAirplane(AirplanePO airplane);
+
+    /**
+     * Update an airplane
+     * @param airplane - updated airplane
+     * @return updated airplane
+     */
+    AirplanePO updateAirplane(AirplanePO airplane);
 
     /**
      * Deletes an Airplane entity

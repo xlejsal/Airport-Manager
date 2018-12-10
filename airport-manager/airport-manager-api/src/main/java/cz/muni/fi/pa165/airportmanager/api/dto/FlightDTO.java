@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
+import javax.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.Wither;
 
@@ -20,6 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"flightNumber", "departureTime"})
 public class FlightDTO {
+    @NotNull
     private Long id;
     private String flightNumber;
     private LocalDateTime departureTime;

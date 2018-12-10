@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.airportmanager.service;
+package cz.muni.fi.pa165.airportmanager.service.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

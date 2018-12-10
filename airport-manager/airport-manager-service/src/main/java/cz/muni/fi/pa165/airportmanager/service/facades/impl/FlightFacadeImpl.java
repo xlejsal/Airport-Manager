@@ -8,6 +8,8 @@ import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO
 import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import cz.muni.fi.pa165.airportmanager.service.services.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import java.util.List;
  * @author kotrc
  * Created on 23.11.2018
  */
+@Service
+@Transactional
 public class FlightFacadeImpl implements FlightFacade {
 
     private FlightService flightService;
@@ -43,7 +47,14 @@ public class FlightFacadeImpl implements FlightFacade {
 
     @Override
     public FlightDTO createFlight(FlightDTO flight) {
-        return beanMappingService.mapTo(flightService.createFlight(beanMappingService.mapTo(flight, FlightPO.class)), FlightDTO.class);
+        return beanMappingService.mapTo(flightService.createFlight(beanMappingService.mapTo(flight, FlightPO.class)),
+                FlightDTO.class);
+    }
+
+    @Override
+    public FlightDTO updateFlight(FlightDTO flight) {
+        return beanMappingService.mapTo(flightService.updateFlight(beanMappingService.mapTo(flight, FlightPO.class)),
+                FlightDTO.class);
     }
 
     @Override

@@ -33,7 +33,10 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public DestinationPO getDestinationById(Long id) { return destinationRepo.findById(id).orElseThrow(() -> new AirportManagerDataAccessException("Destination of the ID " + id + " does not exist")); }
+    public DestinationPO getDestinationById(Long id) {
+        return destinationRepo.findById(id).orElseThrow(() ->
+                new AirportManagerDataAccessException("Destination of the ID " + id + " does not exist"));
+    }
 
     @Override
     public DestinationPO createDestination(DestinationPO destination) {
@@ -45,8 +48,18 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
+    public DestinationPO updateDestination(DestinationPO destination) {
+        try{
+            return destinationRepo.save(destination);
+        } catch(DataAccessException e){
+            throw new AirportManagerDataAccessException("Cannot update Destination", e);
+        }
+    }
+
+    @Override
     public void deleteDestination(Long id) {
-        destinationRepo.delete(destinationRepo.findById(id).orElseThrow(() -> new AirportManagerDataAccessException("Destination of the ID " + id + " does not exist")));
+        destinationRepo.delete(destinationRepo.findById(id).orElseThrow(() ->
+                new AirportManagerDataAccessException("Destination of the ID " + id + " does not exist")));
     }
 
     @Override

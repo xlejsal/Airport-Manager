@@ -33,20 +33,39 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
     }
 
     @Override
-    public List<AirplaneDTO> getAllAirplanes(){ return beanMapper.mapTo(airplaneService.getAllAirplanes(), AirplaneDTO.class); }
+    public List<AirplaneDTO> getAllAirplanes(){
+        return beanMapper.mapTo(airplaneService.getAllAirplanes(), AirplaneDTO.class);
+    }
 
     @Override
-    public AirplaneDTO getAirplaneById(Long Id){ return beanMapper.mapTo(airplaneService.getAirplaneById(Id), AirplaneDTO.class); }
+    public AirplaneDTO getAirplaneById(Long Id){
+        return beanMapper.mapTo(airplaneService.getAirplaneById(Id), AirplaneDTO.class);
+    }
 
     @Override
-    public AirplaneDTO createAirplane(AirplaneDTO airplane){ return beanMapper.mapTo(airplaneService.createAirplane(beanMapper.mapTo(airplane, AirplanePO.class)), AirplaneDTO.class); }
+    public AirplaneDTO createAirplane(AirplaneDTO airplane){
+        return beanMapper.mapTo(airplaneService.createAirplane(beanMapper.mapTo(airplane, AirplanePO.class)),
+                AirplaneDTO.class);
+    }
 
     @Override
-    public void deleteAirplane(Long Id){ airplaneService.deleteAirplane(Id);  }
+    public AirplaneDTO updateAirplane(AirplaneDTO airplane){
+        return beanMapper.mapTo(airplaneService.updateAirplane(beanMapper.mapTo(airplane, AirplanePO.class)),
+                AirplaneDTO.class);
+    }
 
     @Override
-    public AirplaneDTO findAirplaneByName(String name){ return beanMapper.mapTo(airplaneService.findAirplaneByName(name), AirplaneDTO.class);  }
+    public void deleteAirplane(Long Id){
+        airplaneService.deleteAirplane(Id);
+    }
 
     @Override
-    public List<AirplaneDTO> findCompanyAirplanes(String company){ return beanMapper.mapTo(airplaneService.findCompanyAirplanes(company), AirplaneDTO.class);   }
+    public AirplaneDTO findAirplaneByName(String name){
+        return beanMapper.mapTo(airplaneService.findAirplaneByName(name), AirplaneDTO.class);
+    }
+
+    @Override
+    public List<AirplaneDTO> findCompanyAirplanes(String company){
+        return beanMapper.mapTo(airplaneService.findCompanyAirplanes(company), AirplaneDTO.class);
+    }
 }

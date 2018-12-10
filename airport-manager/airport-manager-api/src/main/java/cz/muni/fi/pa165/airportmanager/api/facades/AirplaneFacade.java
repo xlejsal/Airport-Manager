@@ -32,6 +32,13 @@ public interface AirplaneFacade {
     AirplaneDTO createAirplane(AirplaneDTO airplane);
 
     /**
+     * Update airplane in the database
+     * @param airplane - DTO of an airplane to be updated
+     * @return - DTO of an updated airplane
+     */
+    AirplaneDTO updateAirplane(AirplaneDTO airplane);
+
+    /**
      * Delete an airplane for the database
      * @param Id - Id of the airplane to be deleted
      */
