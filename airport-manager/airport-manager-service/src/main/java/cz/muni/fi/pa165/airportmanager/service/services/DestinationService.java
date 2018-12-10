@@ -10,7 +10,6 @@ import java.util.List;
  * Created on 2018-11-20
  */
 
-@Service
 public interface DestinationService {
 
     /**

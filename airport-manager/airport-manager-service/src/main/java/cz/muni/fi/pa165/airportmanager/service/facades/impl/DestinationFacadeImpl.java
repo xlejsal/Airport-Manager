@@ -6,7 +6,6 @@ import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.Destinati
 import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import cz.muni.fi.pa165.airportmanager.service.services.DestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +25,7 @@ public class DestinationFacadeImpl implements DestinationFacade {
     private BeanMappingService beanMapper;
 
     @Autowired
-    public DestinationFacadeImpl(@Qualifier("destinationService") DestinationService service, BeanMappingService mapper){
+    public DestinationFacadeImpl(DestinationService service, BeanMappingService mapper){
         destinationService = service;
         beanMapper = mapper;
     }
