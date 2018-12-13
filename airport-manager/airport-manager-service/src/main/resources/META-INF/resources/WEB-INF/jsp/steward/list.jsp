@@ -31,7 +31,8 @@
             <td><c:out value="${steward.name}"/></td>
             <td><c:out value="${steward.surname}"/></td>
             <td><c:out value="${steward.nationality}"/></td>
-            <td><fmt:formatDate value="${steward.birthDate}" pattern="yyyy-MM-dd"/></td>
+            <fmt:parseDate value="${steward.birthDate}" pattern="yyyy-MM-dd" var="Date"/>
+            <td><fmt:formatDate value="${Date}" pattern="yyyy-MM-dd"/></td>
         </tr>
     </c:forEach>
     </tbody>

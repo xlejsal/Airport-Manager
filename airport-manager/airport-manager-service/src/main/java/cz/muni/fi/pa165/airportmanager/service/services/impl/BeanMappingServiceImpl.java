@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.airportmanager.service.services.impl;
 
+import com.github.dozermapper.core.Mapper;
+import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
-import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class BeanMappingServiceImpl implements BeanMappingService {
 
-    private Mapper dozer = new DozerBeanMapper();
+    private Mapper dozer = DozerBeanMapperBuilder.buildDefault();
 
     public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
         List<T> mappedCollection = new LinkedList<>();
