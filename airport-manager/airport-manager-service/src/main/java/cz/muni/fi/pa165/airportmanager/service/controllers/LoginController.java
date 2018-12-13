@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("name")
 public class LoginController {
 
-    @RequestMapping(value="/login", method = RequestMethod.GET)
+    @RequestMapping(value={"/login","/"}, method = RequestMethod.GET)
     public String showLoginPage(ModelMap model){
         return "login";
     }
