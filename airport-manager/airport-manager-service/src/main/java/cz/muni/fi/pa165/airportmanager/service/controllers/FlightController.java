@@ -1,7 +1,13 @@
 package cz.muni.fi.pa165.airportmanager.service.controllers;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneDTO;
+import cz.muni.fi.pa165.airportmanager.api.dto.DestinationDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
+import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
+import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
+import cz.muni.fi.pa165.airportmanager.api.facades.DestinationFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
+import cz.muni.fi.pa165.airportmanager.api.facades.StewardFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author kotrc
@@ -30,6 +37,12 @@ public class FlightController {
 
     @Autowired
     FlightFacade flightFacade;
+    @Autowired
+    DestinationFacade destinationFacade;
+    @Autowired
+    StewardFacade stewardFacade;
+    @Autowired
+    AirplaneFacade airplaneFacade;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -42,6 +55,30 @@ public class FlightController {
         log.debug("new()");
         model.addAttribute("flightCreate", new FlightDTO());
         return "flight/new";
+    }
+
+    @ModelAttribute("origin")
+    public List<DestinationDTO> origin() {
+        log.debug("origin()");
+        return destinationFacade.getAllDestinations();
+    }
+
+    @ModelAttribute("destination")
+    public List<DestinationDTO> destination() {
+        log.debug("destination()");
+        return destinationFacade.getAllDestinations();
+    }
+
+    @ModelAttribute("airplane")
+    public List<AirplaneDTO> airplane() {
+        log.debug("airplane()");
+        return airplaneFacade.getAllAirplanes();
+    }
+
+    @ModelAttribute("stewards")
+    public List<StewardDTO> stewards() {
+        log.debug("stewards()");
+        return stewardFacade.getAllStewards();
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)

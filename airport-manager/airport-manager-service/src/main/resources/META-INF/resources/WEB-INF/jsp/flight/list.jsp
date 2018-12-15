@@ -12,14 +12,14 @@
     <caption>Flights</caption>
     <thead>
     <tr>
-        <th>id</th>
-        <th>flightNumber</th>
-        <th>origin</th>
-        <th>departure</th>
-        <th>destination</th>
-        <th>arrival</th>
-        <th>airplane</th>
-        <th>stewards</th>
+        <th>Id</th>
+        <th>Flight number</th>
+        <th>Origin</th>
+        <th>Departure</th>
+        <th>Destination</th>
+        <th>Arrival</th>
+        <th>Airplane</th>
+        <th>Stewards</th>
     </tr>
     </thead>
     <tbody>
