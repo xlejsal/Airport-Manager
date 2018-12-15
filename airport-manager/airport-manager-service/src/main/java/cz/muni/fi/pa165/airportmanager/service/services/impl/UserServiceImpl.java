@@ -4,11 +4,14 @@ import cz.muni.fi.pa165.airportmanager.persistence.repositories.UserRepository;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.UserPO;
 import cz.muni.fi.pa165.airportmanager.service.exceptions.AirportManagerDataAccessException;
 import cz.muni.fi.pa165.airportmanager.service.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 /**
@@ -18,6 +21,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
+    private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     public UserServiceImpl(UserRepository userRepo) {
@@ -29,8 +33,9 @@ public class UserServiceImpl implements UserService {
         if(userRepo.findByLogin(user.getLogin()) != null || userRepo.findByEmail(user.getEmail()) != null){
             throw new AirportManagerDataAccessException("User with this login or email already exists.");
         }
-        String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt(24));
+        String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
         user.setPasswordHash(hashedPassword);
+        log.info("Saving user:" + user.toString());
         userRepo.save(user);
     }
 
@@ -47,8 +52,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserPO getUserByLogin(String login){
-        try{
-            return userRepo.findByLogin(login);
+        try {
+            UserPO user = userRepo.findByLogin(login);
+            if (user == null)
+                throw new AirportManagerDataAccessException("Cannot find a user with the login " + login);
+            return user;
         } catch(DataAccessException e){
             throw new AirportManagerDataAccessException("Cannot find a user with the login " + login, e);
         }
