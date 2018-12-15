@@ -33,10 +33,7 @@ public class StewardFacadeImpl implements StewardFacade {
 
     @Override
     public List<StewardDTO> getAllStewards() {
-        return stewardService.getAllStewards()
-                .stream()
-                .map(s -> mapper.mapTo(s, StewardDTO.class))
-                .collect(Collectors.toList());
+        return mapper.mapTo(stewardService.getAllStewards(), StewardDTO.class);
     }
 
     @Override

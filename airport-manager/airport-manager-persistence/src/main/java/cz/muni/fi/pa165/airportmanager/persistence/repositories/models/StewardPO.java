@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.persistence.repositories.models;
 
-import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import lombok.*;
 import lombok.experimental.Wither;
 
@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Simple entity class modeling flight Steward,
@@ -49,7 +48,7 @@ public class StewardPO {
 
     //String for now .. but who's supposed to enum 60+ genders ._.
     @Column(nullable = false)
-    private String gender;
+    private Gender gender;
 
     @Column(nullable = false)
     private String nationality;

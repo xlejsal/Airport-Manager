@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
+import cz.muni.fi.pa165.airportmanager.api.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,6 @@ public class StewardWithoutFlightsDTO {
     private String name;
     private String surname;
     private LocalDate birthDate;
-    private String gender;
+    private Gender gender;
     private String nationality;
 }

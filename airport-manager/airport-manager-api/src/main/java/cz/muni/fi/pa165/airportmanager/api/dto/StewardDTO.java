@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
 import javax.validation.constraints.NotNull;
+
+import cz.muni.fi.pa165.airportmanager.api.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -34,7 +36,7 @@ public class StewardDTO {
     private String surname;
     @NotNull
     private LocalDate birthDate;
-    private String gender;
+    private Gender gender;
     private String nationality;
     private Set<FlightWithoutStewardsDTO> flights = new HashSet<>();
 }

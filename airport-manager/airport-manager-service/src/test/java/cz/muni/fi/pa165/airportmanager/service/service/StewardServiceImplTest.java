@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.service.service;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.StewardRepository;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
@@ -59,7 +60,7 @@ public class StewardServiceImplTest {
                     .id(1L)
                     .name("Andrej")
                     .surname("Danko")
-                    .gender("Kapitan")
+                    .gender(Gender.Kapitan)
                     .birthDate(LocalDate.of(1974, Month.SEPTEMBER, 15))
                     .nationality("SVK")
                     .flights(new HashSet<FlightPO>())
@@ -69,7 +70,7 @@ public class StewardServiceImplTest {
                 .id(2L)
                 .name("Thomas")
                 .surname("Dubois")
-                .gender("Man")
+                .gender(Gender.Male)
                 .birthDate(LocalDate.of(1994, Month.DECEMBER, 17))
                 .nationality("USA")
                 .flights(new HashSet<FlightPO>())
@@ -79,7 +80,7 @@ public class StewardServiceImplTest {
                 .id(3L)
                 .name("Rocky")
                 .surname("Balboa")
-                .gender("Man")
+                .gender(Gender.Male)
                 .birthDate(LocalDate.of(1966, Month.JUNE, 6))
                 .nationality("USA")
                 .flights(new HashSet<FlightPO>())

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
         if(userRepo.findByLogin(user.getLogin()) != null || userRepo.findByEmail(user.getEmail()) != null){
             throw new AirportManagerDataAccessException("User with this login or email already exists.");
         }
-        String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt(24));
+        String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt(4));
         user.setPasswordHash(hashedPassword);
         userRepo.save(user);
     }
