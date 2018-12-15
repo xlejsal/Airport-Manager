@@ -1,16 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="false" session="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<html>
+<my:pagetemplate title="Flights">
+<jsp:attribute name="body">
 
-<head>
-    <title>Flight List</title>
-</head>
-
-<body>
 <table class="table">
     <caption>Flights</caption>
     <thead>
@@ -30,11 +27,11 @@
         <tr>
             <td>${flight.id}</td>
             <td><c:out value="${flight.flightNumber}"/></td>
-            <td><c:out value="${flight.origin.country}"/> <c:out value="${flight.origin.city}"/></td>
+            <td><c:out value="${flight.origin.city}"/> <c:out value="${flight.origin.country}"/></td>
             <td><c:out value="${flight.departureTime}"/></td>
-            <td><c:out value="${flight.destination.country}"/> <c:out value="${flight.destination.city}" /></td>
+            <td><c:out value="${flight.destination.city}"/> <c:out value="${flight.destination.country}" /></td>
             <td><c:out value="${flight.arrivalTime}"/></td>
-            <td><c:out value="${flight.airplane.name}"/></td>
+            <td><c:out value="${flight.airplane.type}"/></td>
             <c:forEach items="${flight.stewards}" var="steward">
                 <td><c:out value="${steward.name}"/></td>
             </c:forEach>
@@ -42,6 +39,5 @@
     </c:forEach>
     </tbody>
 </table>
-</body>
-
-</html>
+</jsp:attribute>
+</my:pagetemplate>
