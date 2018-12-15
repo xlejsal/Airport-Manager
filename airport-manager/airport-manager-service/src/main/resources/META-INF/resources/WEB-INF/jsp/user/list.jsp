@@ -9,10 +9,8 @@
 <jsp:attribute name="body">
 
     <table class="table">
-        <caption>Users</caption>
         <thead>
         <tr>
-            <th>id</th>
             <th>login</th>
             <th>email</th>
             <th>admin</th>
@@ -21,7 +19,6 @@
         <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.id}</td>
                 <td><c:out value="${user.login}"/></td>
                 <td><c:out value="${user.email}"/></td>
                 <td><c:out value="${user.admin}"/></td>

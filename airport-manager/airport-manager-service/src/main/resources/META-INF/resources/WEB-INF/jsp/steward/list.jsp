@@ -9,20 +9,19 @@
 <jsp:attribute name="body">
 
 <table class="table">
-    <caption>Stewards</caption>
     <thead>
     <tr>
-        <th>id</th>
         <th>name</th>
         <th>surname</th>
+        <th>nationality</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${stewards}" var="steward">
         <tr>
-            <td>${steward.id}</td>
             <td><c:out value="${steward.name}"/></td>
             <td><c:out value="${steward.surname}"/></td>
+            <td><c:out value="${steward.nationality}"/></td>
             <td>
                 <my:a href="/steward/view/${steward.id}" class="btn btn-primary btn-sm">View</my:a>
             </td>

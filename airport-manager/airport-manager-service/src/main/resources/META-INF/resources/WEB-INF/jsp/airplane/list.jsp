@@ -9,10 +9,8 @@
 <jsp:attribute name="body">
 
 <table class="table">
-    <caption>Airplanes</caption>
     <thead>
     <tr>
-        <th>id</th>
         <th>type</th>
         <th>name</th>
         <th>company</th>
@@ -21,7 +19,6 @@
     <tbody>
     <c:forEach items="${airplanes}" var="airplane">
         <tr>
-            <td>${airplane.id}</td>
             <td><c:out value="${airplane.type}"/></td>
             <td><c:out value="${airplane.name}"/></td>
             <td><c:out value="${airplane.company}"/></td>
