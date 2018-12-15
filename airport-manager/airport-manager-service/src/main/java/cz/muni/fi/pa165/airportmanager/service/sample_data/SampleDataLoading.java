@@ -1,12 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.service.sample_data;
 
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.UserPO;
-import cz.muni.fi.pa165.airportmanager.service.services.AirplaneService;
-import cz.muni.fi.pa165.airportmanager.service.services.StewardService;
-import cz.muni.fi.pa165.airportmanager.service.services.UserService;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.*;
+import cz.muni.fi.pa165.airportmanager.service.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +11,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -36,9 +33,16 @@ public class SampleDataLoading {
     private StewardService stewardService;
     @Autowired
     private AirplaneService airplaneService;
+    @Autowired
+    private FlightService flightService;
+    @Autowired
+    private DestinationService destinationService;
 
     @EventListener
     public void createData(ApplicationReadyEvent event){
+
+        Set<StewardPO> stewards = new HashSet<>();
+
         log.info("Loading sample data.");
 
         UserPO admin = UserPO.builder()
@@ -96,6 +100,34 @@ public class SampleDataLoading {
                 .type("Airbus A370")
                 .build();
 
+        DestinationPO destination1 = DestinationPO.builder()
+                .id(1L)
+                .airportCode("KLM")
+                .city("Bratislava")
+                .country("Slovakia")
+                .build();
+
+        DestinationPO destination2 = DestinationPO.builder()
+                .id(2L)
+                .airportCode("QQQ")
+                .city("Brno")
+                .country("Czech Republic")
+                .build();
+
+        stewards.add(stew1);
+        stewards.add(stew2);
+
+        FlightPO flight1 = FlightPO.builder()
+                .id(1L)
+                .flightNumber("KDH-337")
+                .airplane(airplane1)
+                .departureTime(LocalDateTime.of(2018, 9, 10, 9, 35))
+                .arrivalTime(LocalDateTime.of(2018, 9, 10, 19, 50))
+                .origin(destination1)
+                .destination(destination2)
+                .stewards(stewards)
+                .build();
+
         /* needs fixing
         userService.registerUser(admin, "1234");
         userService.registerUser(fero, "tukabel");
@@ -104,6 +136,9 @@ public class SampleDataLoading {
         airplaneService.createAirplane(airplane2);
         stewardService.createSteward(stew1);
         stewardService.createSteward(stew2);
+        destinationService.createDestination(destination1);
+        destinationService.createDestination(destination2);
+        flightService.createFlight(flight1);
 
         log.info("Loaded sample data.");
     }
