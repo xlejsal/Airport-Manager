@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Wither;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -28,13 +29,10 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name", "surname", "birthDate"})
 public class StewardDTO {
-    @NotNull
     private Long id;
-    @NotNull
     private String name;
-    @NotNull
     private String surname;
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private Gender gender;
     private String nationality;

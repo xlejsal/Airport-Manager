@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.service.facades.impl;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.StewardFacade;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
@@ -59,5 +60,10 @@ public class StewardFacadeImpl implements StewardFacade {
     @Override
     public boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to) {
         return stewardService.isAvailableFromTo(id, from, to);
+    }
+
+    @Override
+    public List<FlightDTO> getFlightsOfSteward(Long id){
+        return mapper.mapTo(stewardService.getFlightsOfSteward(id), FlightDTO.class);
     }
 }

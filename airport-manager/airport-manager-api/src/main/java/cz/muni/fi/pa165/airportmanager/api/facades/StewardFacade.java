@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.facades;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 
 import java.time.LocalDateTime;
@@ -52,4 +53,11 @@ public interface StewardFacade {
      * @return true if steward is available in set time, false if not
      */
     boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to);
+
+    /**
+     * Get the list of flights of a certain steward
+     * @param id id of the steward
+     * @return a list of flights
+     */
+    List<FlightDTO> getFlightsOfSteward(Long id);
 }

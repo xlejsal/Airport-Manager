@@ -47,6 +47,5 @@ public class AirplanePO {
     @Column(nullable = false)
     private String company;
 
-    @Column(nullable = false)
     private Integer capacity;
 }

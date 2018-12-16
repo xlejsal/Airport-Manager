@@ -30,5 +30,10 @@
     </tbody>
 </table>
 
+    <my:a href="/steward/new" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Create new
+    </my:a>
+
 </jsp:attribute>
 </my:pagetemplate>

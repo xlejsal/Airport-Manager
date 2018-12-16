@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.airportmanager.persistence.repositories.models;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import lombok.*;
 import lombok.experimental.Wither;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -43,14 +44,15 @@ public class StewardPO {
     private String surname;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false, updatable = false)
     private LocalDate birthDate;
 
     //String for now .. but who's supposed to enum 60+ genders ._.
+    @NotNull
     @Column(nullable = false)
     private Gender gender;
 
-    @Column(nullable = false)
     private String nationality;
 
     @ManyToMany(mappedBy = "stewards", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
