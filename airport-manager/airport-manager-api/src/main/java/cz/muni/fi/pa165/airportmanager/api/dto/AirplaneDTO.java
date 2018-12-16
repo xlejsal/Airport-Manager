@@ -24,13 +24,9 @@ import lombok.experimental.Wither;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name"})
 public class AirplaneDTO {
-    @NotNull
     private Long id;
-    @NotNull
     private String name;
-    @NotNull
     private String type;
-    @NotNull
     private String company;
     private Integer capacity;
 }

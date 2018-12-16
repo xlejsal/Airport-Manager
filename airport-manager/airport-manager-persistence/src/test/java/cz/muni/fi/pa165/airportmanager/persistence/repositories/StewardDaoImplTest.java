@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class StewardDaoImplTest {
                 .name("John")
                 .surname("Smith")
                 .birthDate(LocalDate.of(1984, 4, 21))
-                .gender("Male")
+                .gender(Gender.Male)
                 .nationality("USA")
                 .build();
 
@@ -42,7 +43,7 @@ public class StewardDaoImplTest {
                 .name("Jane")
                 .surname("Doe")
                 .birthDate(LocalDate.of(1979, 9, 4))
-                .gender("Female")
+                .gender(Gender.Female)
                 .nationality("UK")
                 .build();
     }
@@ -58,7 +59,7 @@ public class StewardDaoImplTest {
     public void updateTest() {
         repo.save(steward1);
         repo.save(steward2);
-        StewardPO updatedSteward = repo.save(steward1.withGender("Female"));
+        StewardPO updatedSteward = repo.save(steward1.withGender(Gender.Female));
         assertThat(repo.findById(steward1.getId()).orElse(null)).isEqualTo(updatedSteward);
         assertThat(repo.findById(steward2.getId()).orElse(null)).isEqualTo(steward2);
     }

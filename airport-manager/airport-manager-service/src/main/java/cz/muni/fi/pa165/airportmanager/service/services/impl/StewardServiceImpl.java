@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -75,5 +76,10 @@ public class StewardServiceImpl implements StewardService {
             }
         }
         return true;
+    }
+
+    @Override
+    public List<FlightPO> getFlightsOfSteward(Long id){
+        return new ArrayList<FlightPO>(getStewardById(id).getFlights());
     }
 }
