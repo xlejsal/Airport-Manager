@@ -53,7 +53,7 @@ public class FlightController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newFlight(Model model) {
         log.debug("new()");
-        model.addAttribute("flightCreate", new FlightDTO());
+        model.addAttribute("flightDto", new FlightDTO());
         return "flight/new";
     }
 
@@ -82,9 +82,9 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("flightCreate") FlightDTO formBean, BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute("flightDto") FlightDTO flightDto, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
-        log.debug("create(formBean={})", formBean);
+        log.debug("create(flightDto={})", flightDto);
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 log.trace("ObjectError: {}", ge);
@@ -96,9 +96,9 @@ public class FlightController {
             return "flight/new";
         }
         //create product
-        FlightDTO flight = flightFacade.createFlight(formBean);
+        FlightDTO flight = flightFacade.createFlight(flightDto);
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Flight " + flight + " was created");
+        redirectAttributes.addFlashAttribute("alert_success", "Flight " + flight.getFlightNumber() + " was created");
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
     }
 }

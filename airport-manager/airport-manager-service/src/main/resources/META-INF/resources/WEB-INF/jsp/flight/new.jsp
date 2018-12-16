@@ -7,7 +7,7 @@
 
 <my:pagetemplate title="New Flight">
 <jsp:attribute name="body">
-<form:form method="post" action="${pageContext.request.contextPath}/flight/create" modelAttribute="flightCreate">
+<form:form method="post" action="${pageContext.request.contextPath}/flight/create" modelAttribute="flightDto">
 
 <table class="table">
     <tr>
@@ -21,38 +21,38 @@
     <tr>
         <td><form:label path="origin">Origin</form:label></td>
         <td><form:select path="origin">
-                    <c:forEach items="${origins}" var="o">
+                    <c:forEach items="${origin}" var="o">
                         <form:option value="${o.airportCode}">${o.airportCode}</form:option>
                     </c:forEach>
         </form:select></td>
     </tr>
     <tr>
-        <td><form:label type="date" path="departureTime">Departure</form:label></td>
+        <td><form:label path="departureTime">Departure</form:label></td>
         <td><form:input path="departureTime"/></td>
     </tr>
     <tr>
         <td><form:label path="destination">Destination</form:label></td>
         <td><form:select path="destination">
-                    <c:forEach items="${destinations}" var="d">
+                    <c:forEach items="${destination}" var="d">
                         <form:option value="${d.airportCode}">${d.airportCode}</form:option>
                     </c:forEach>
         </form:select></td>
     </tr>
     <tr>
-        <td><form:label type="date" path="arrivalTime">Arrival</form:label></td>
+        <td><form:label path="arrivalTime">Arrival</form:label></td>
         <td><form:input path="arrivalTime"/></td>
     </tr>
     <tr>
         <td><form:label path="airplane">Airplane</form:label></td>
         <td><form:select path="airplane">
-                    <c:forEach items="${airplanes}" var="a">
+                    <c:forEach items="${airplane}" var="a">
                         <form:option value="${a.name}">${a.name}</form:option>
                     </c:forEach>
         </form:select></td>
     </tr>
     <tr>
         <td><form:label path="stewards">Stewards</form:label></td>
-        <td><form:select path="stewards" multiple="rue">
+        <td><form:select path="stewards" multiple="true">
                     <c:forEach items="${stewards}" var="s">
                         <form:option value="${s.id}">${s.id}</form:option>
                     </c:forEach>

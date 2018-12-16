@@ -23,11 +23,17 @@ import java.util.Set;
 public class FlightDTO {
     @NotNull
     private Long id;
+    @NotNull
     private String flightNumber;
+    @NotNull
     private LocalDateTime departureTime;
+    @NotNull
     private LocalDateTime arrivalTime;
+    @NotNull
     private DestinationDTO origin;
+    @NotNull
     private DestinationDTO destination;
+    @NotNull
     private AirplaneDTO airplane;
     private Set<StewardWithoutFlightsDTO> stewards = new HashSet<>();
 }
