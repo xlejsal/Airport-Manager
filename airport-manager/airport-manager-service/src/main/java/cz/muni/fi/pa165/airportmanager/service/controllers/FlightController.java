@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.DestinationFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.StewardFacade;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -46,7 +48,9 @@ public class FlightController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("flights", flightFacade.getAllFlights());
+        List<FlightDTO> flightList = flightFacade.getAllFlights();
+        flightList.sort(Comparator.comparing(FlightDTO::getDepartureTime));
+        model.addAttribute("flights", flightList);
         return "flight/list";
     }
 
@@ -85,6 +89,12 @@ public class FlightController {
     public String create(@Valid @ModelAttribute("flightDto") FlightDTO flightDto, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("create(flightDto={})", flightDto);
+        //log.debug(flightDto.getFlightNumber());
+        //log.debug(flightDto.getAirplane().getName());
+        //log.debug(flightDto.getDepartureTime().toString());
+        log.debug(flightDto.getOrigin().getAirportCode());
+        log.debug(flightDto.getArrivalTime().toString());
+        log.debug(flightDto.getDestination().getAirportCode());
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 log.trace("ObjectError: {}", ge);

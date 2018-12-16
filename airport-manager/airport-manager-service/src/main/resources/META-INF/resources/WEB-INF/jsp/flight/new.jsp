@@ -7,7 +7,7 @@
 
 <my:pagetemplate title="New Flight">
 <jsp:attribute name="body">
-<form:form method="post" action="${pageContext.request.contextPath}/flight/create" modelAttribute="flightDto">
+<form:form method="POST" action="${pageContext.request.contextPath}/flight/create" modelAttribute="flightDto">
 
 <table class="table">
     <tr>
