@@ -9,28 +9,31 @@
 <jsp:attribute name="body">
 
 <table class="table">
-    <caption>Airplanes</caption>
     <thead>
     <tr>
-        <th>id</th>
         <th>type</th>
         <th>name</th>
         <th>company</th>
-        <th>capacity</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${airplanes}" var="airplane">
         <tr>
-            <td>${airplane.id}</td>
             <td><c:out value="${airplane.type}"/></td>
             <td><c:out value="${airplane.name}"/></td>
             <td><c:out value="${airplane.company}"/></td>
-            <td><c:out value="${airplane.capacity}"/></td>
+            <td>
+                <my:a href="/airplane/view/${airplane.id}" class="btn btn-primary btn-sm">View</my:a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+    <my:a href="/airplane/new" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Create new
+    </my:a>
 
 </jsp:attribute>
 </my:pagetemplate>

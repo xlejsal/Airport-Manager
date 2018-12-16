@@ -9,31 +9,31 @@
 <jsp:attribute name="body">
 
 <table class="table">
-    <caption>Stewards</caption>
     <thead>
     <tr>
-        <th>id</th>
-        <th>gender</th>
         <th>name</th>
         <th>surname</th>
         <th>nationality</th>
-        <th>birth date</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${stewards}" var="steward">
         <tr>
-            <td>${steward.id}</td>
-            <td><c:out value="${steward.gender}"/></td>
             <td><c:out value="${steward.name}"/></td>
             <td><c:out value="${steward.surname}"/></td>
             <td><c:out value="${steward.nationality}"/></td>
-            <fmt:parseDate value="${steward.birthDate}" pattern="yyyy-MM-dd" var="Date"/>
-            <td><fmt:formatDate value="${Date}" pattern="yyyy-MM-dd"/></td>
+            <td>
+                <my:a href="/steward/view/${steward.id}" class="btn btn-primary btn-sm">View</my:a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+    <my:a href="/steward/new" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Create new
+    </my:a>
 
 </jsp:attribute>
 </my:pagetemplate>

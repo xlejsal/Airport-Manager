@@ -9,24 +9,22 @@
 <jsp:attribute name="body">
 
     <table class="table">
-        <caption>Users</caption>
         <thead>
         <tr>
-            <th>id</th>
             <th>login</th>
-            <th>name</th>
-            <th>surname</th>
             <th>email</th>
+            <th>admin</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${users}" var="user">
             <tr>
-                <td>${user.id}</td>
                 <td><c:out value="${user.login}"/></td>
-                <td><c:out value="${user.name}"/></td>
-                <td><c:out value="${user.surname}"/></td>
                 <td><c:out value="${user.email}"/></td>
+                <td><c:out value="${user.admin}"/></td>
+                <td>
+                    <my:a href="/user/view/${user.id}" class="btn btn-primary btn-sm">View</my:a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
