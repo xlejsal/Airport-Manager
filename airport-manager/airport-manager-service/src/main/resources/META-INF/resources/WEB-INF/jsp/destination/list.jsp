@@ -8,11 +8,6 @@
 <my:pagetemplate title="Destinations">
 <jsp:attribute name="body">
 
-    <my:a href="/destination/new" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        New Destination
-    </my:a>
-
 <table class="table">
     <caption>Destinations</caption>
     <thead>
@@ -31,14 +26,15 @@
             <td>
                 <my:a href="/destination/view/${destination.id}" class="btn btn-primary">View</my:a>
             </td>
-            <td>
-                <form method="post" action="${pageContext.request.contextPath}/destination/delete/${destination.id}">
-                    <button type="submit" class="btn btn-primary">Delete</button>
-                </form>
-            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+    <my:a href="/destination/new" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        New Destination
+    </my:a>
+
 </jsp:attribute>
 </my:pagetemplate>

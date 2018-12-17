@@ -8,11 +8,6 @@
 <my:pagetemplate title="Destination Details">
 <jsp:attribute name="body">
 
-    <form method="post" action="${pageContext.request.contextPath}/destination/delete/${destination.id}">
-        <button type="submit" class="btn btn-primary">Delete</button>
-    </form>
-
-
     <table class="table">
         <thead>
         <tr>
@@ -31,6 +26,10 @@
         </tr>
         </tbody>
     </table>
+
+    <form method="post" action="${pageContext.request.contextPath}/destination/delete/${destination.id}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
 
 </jsp:attribute>
 </my:pagetemplate>
