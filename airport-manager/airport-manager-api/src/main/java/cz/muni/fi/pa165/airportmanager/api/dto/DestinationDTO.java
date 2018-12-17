@@ -25,10 +25,7 @@ import lombok.experimental.Wither;
 @EqualsAndHashCode(of = {"airportCode"})
 public class DestinationDTO {
     private Long id;
-    @NotNull
     private String airportCode;
-    @NotNull
     private String city;
-    @NotNull
     private String country;
 }

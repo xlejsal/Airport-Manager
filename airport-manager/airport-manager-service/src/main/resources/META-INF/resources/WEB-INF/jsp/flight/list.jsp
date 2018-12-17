@@ -12,32 +12,35 @@
     <caption>Flights</caption>
     <thead>
     <tr>
-        <th>id</th>
-        <th>flightNumber</th>
-        <th>origin</th>
-        <th>departure</th>
-        <th>destination</th>
-        <th>arrival</th>
-        <th>airplane</th>
-        <th>stewards</th>
+        <th>Flight number</th>
+        <th>Origin</th>
+        <th>Departure</th>
+        <th>Destination</th>
+        <th>Arrival</th>
+        <th>Airplane</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${flights}" var="flight">
         <tr>
-            <td>${flight.id}</td>
             <td><c:out value="${flight.flightNumber}"/></td>
-            <td><c:out value="${flight.origin.city}"/> <c:out value="${flight.origin.country}"/></td>
+            <td><c:out value="${flight.origin.city} ${flight.origin.country}"/></td>
             <td><c:out value="${flight.departureTime}"/></td>
-            <td><c:out value="${flight.destination.city}"/> <c:out value="${flight.destination.country}" /></td>
+            <td><c:out value="${flight.destination.city} ${flight.destination.country}"/></td>
             <td><c:out value="${flight.arrivalTime}"/></td>
             <td><c:out value="${flight.airplane.type}"/></td>
-            <c:forEach items="${flight.stewards}" var="steward">
-                <td><c:out value="${steward.name}"/></td>
-            </c:forEach>
+            <td>
+                <my:a href="/flight/view/${flight.id}" class="btn btn-primary btn-sm">View</my:a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+    <my:a href="/flight/new" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Create new
+    </my:a>
+
 </jsp:attribute>
 </my:pagetemplate>
