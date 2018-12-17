@@ -1,0 +1,11 @@
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+server:
+  servlet:
+    contextPath: /pa165
