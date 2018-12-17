@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.airportmanager.service.controllers;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneDTO;
+import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneUpdateDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
+import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import cz.muni.fi.pa165.airportmanager.service.validators.AirplaneDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +33,9 @@ public class AirplaneController {
 
     @Autowired
     AirplaneFacade airplaneFacade;
+
+    @Autowired
+    BeanMappingService beanMapper;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -77,10 +82,29 @@ public class AirplaneController {
             }
             return "airplane/new";
         }
-        //create product
         AirplaneDTO newAirplane = airplaneFacade.createAirplane(plane);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Airplane " + newAirplane.getName()+ " was created");
+        return "redirect:" + uriBuilder.path("/airplane/list").toUriString();
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("airplane") AirplaneUpdateDTO plane, BindingResult bindingResult, @PathVariable long id,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "airplane/edit";
+        }
+        AirplaneDTO newAirplane = airplaneFacade.updateAirplane(beanMapper.mapTo(plane, AirplaneDTO.class));
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Airplane " + newAirplane.getName()+ " was edited");
         return "redirect:" + uriBuilder.path("/airplane/list").toUriString();
     }
 
@@ -88,5 +112,11 @@ public class AirplaneController {
     public String newAirplane(Model model) {
         model.addAttribute("airplaneCreate", new AirplaneDTO());
         return "airplane/new";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable long id, Model model) {
+        model.addAttribute("airplane", airplaneFacade.getAirplaneById(id));
+        return "airplane/edit";
     }
 }

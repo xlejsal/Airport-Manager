@@ -1,19 +1,18 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
-import javax.validation.constraints.NotNull;
 import lombok.*;
 import lombok.experimental.Wither;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author kotrc
- * Created on 23.11.2018
+ * Created on 17.12.2018
  */
-
 @Getter
 @Setter
 @Wither
@@ -21,15 +20,21 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"flightNumber", "departureTime"})
-public class FlightDTO {
+public class FlightCreateDTO {
     private Long id;
+    @NotNull
     private String flightNumber;
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd-HH-mm")
     private LocalDateTime departureTime;
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd-HH-mm")
     private LocalDateTime arrivalTime;
-    private DestinationDTO origin;
-    private DestinationDTO destination;
-    private AirplaneDTO airplane;
-    private Set<StewardWithoutFlightsDTO> stewards = new HashSet<>();
+    @NotNull
+    private Long originId;
+    @NotNull
+    private Long destinationId;
+    @NotNull
+    private Long airplaneId;
+    private Set<Long> stewardIds = new HashSet<>();
 }

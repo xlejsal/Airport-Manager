@@ -13,7 +13,6 @@ import lombok.experimental.Wither;
  * Airplane DTO class, based on Airplane entity
  *
  * @author Stepan Benes
- * Created on 2018-11-20
  */
 
 @Getter
@@ -23,7 +22,7 @@ import lombok.experimental.Wither;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"name"})
-public class AirplaneDTO {
+public class AirplaneUpdateDTO {
     private Long id;
     @NotNull
     private String name;

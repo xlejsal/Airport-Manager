@@ -50,6 +50,26 @@ public class FlightServiceImpl implements FlightService {
     public FlightPO createFlight(FlightPO flight) {
         if (flightRepo.findAllFlightsFromToWithAirplaneId(flight.getDepartureTime(), flight.getArrivalTime(),
                 flight.getAirplane().getId()).isEmpty()) {
+            for (StewardPO steward : flight.getStewards()) {
+                for (FlightPO flightPO : steward.getFlights()) {
+                    if ((flightPO.getDepartureTime().isBefore(flight.getArrivalTime()) &&
+                            flightPO.getDepartureTime().isAfter(flight.getDepartureTime())) ||
+                            flightPO.getArrivalTime().isBefore(flight.getArrivalTime()) &&
+                                    flightPO.getArrivalTime().isAfter(flight.getDepartureTime()) ||
+                            flightPO.getArrivalTime().isEqual(flight.getDepartureTime()) ||
+                            flightPO.getDepartureTime().isEqual(flight.getArrivalTime()) ||
+                            flightPO.getDepartureTime().isEqual(flight.getDepartureTime()) ||
+                            flightPO.getArrivalTime().isEqual(flight.getArrivalTime())) {
+                        throw new IllegalArgumentException("Steward " + steward.getName() + " " + steward.getSurname() +
+                                " already has a flight at the time of this flight.");
+                    }
+                }
+            }
+            for (FlightPO f : flightRepo.findAll()) {
+                if (f.getFlightNumber().equals(flight.getFlightNumber())) {
+                    throw new IllegalArgumentException("Flight with this number already exists.");
+                }
+            }
             return flightRepo.save(flight);
         } else {
             throw new IllegalArgumentException("Specified airplane already has a flight at the time of this flight.");
@@ -78,7 +98,11 @@ public class FlightServiceImpl implements FlightService {
             if ((flightPO.getDepartureTime().isBefore(flight.getArrivalTime()) &&
                     flightPO.getDepartureTime().isAfter(flight.getDepartureTime())) ||
                     flightPO.getArrivalTime().isBefore(flight.getArrivalTime()) &&
-                            flightPO.getArrivalTime().isAfter(flight.getDepartureTime())) {
+                            flightPO.getArrivalTime().isAfter(flight.getDepartureTime()) ||
+                    flightPO.getArrivalTime().isEqual(flight.getDepartureTime()) ||
+                    flightPO.getDepartureTime().isEqual(flight.getArrivalTime()) ||
+                    flightPO.getDepartureTime().isEqual(flight.getDepartureTime()) ||
+                    flightPO.getArrivalTime().isEqual(flight.getArrivalTime())) {
                 throw new IllegalArgumentException("Steward already has a flight at the time of this flight.");
             }
         }

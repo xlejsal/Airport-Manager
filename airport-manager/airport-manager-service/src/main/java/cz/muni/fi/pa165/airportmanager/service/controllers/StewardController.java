@@ -46,6 +46,13 @@ public class StewardController {
         return "steward/view";
     }
 
+    @RequestMapping(value = "/view/{id}/flights", method = RequestMethod.GET)
+    public String flights(@PathVariable long id, Model model) {
+        model.addAttribute("flights", stewardFacade.getFlightsOfSteward(id));
+        model.addAttribute("steward", stewardFacade.getStewardById(id));
+        return "steward/flights";
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         StewardDTO steward = stewardFacade.getStewardById(id);
@@ -71,10 +78,28 @@ public class StewardController {
             }
             return "steward/new";
         }
-        //create product
         StewardDTO newSteward = stewardFacade.createSteward(steward);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Steward " + newSteward.getName()+ " " + newSteward.getSurname() + " was created");
+        return "redirect:" + uriBuilder.path("/steward/list").toUriString();
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("steward") StewardDTO steward, BindingResult bindingResult, @PathVariable long id,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "steward/edit";
+        }
+        StewardDTO newSteward = stewardFacade.createSteward(steward);
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Steward " + newSteward.getName()+ " " + newSteward.getSurname() + " was edited");
         return "redirect:" + uriBuilder.path("/steward/list").toUriString();
     }
 
@@ -82,6 +107,12 @@ public class StewardController {
     public String newAirplane(Model model) {
         model.addAttribute("stewardCreate", new StewardDTO());
         return "steward/new";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable long id, Model model) {
+        model.addAttribute("steward", stewardFacade.getStewardById(id));
+        return "steward/edit";
     }
 
     @ModelAttribute("genders")

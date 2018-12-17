@@ -135,6 +135,29 @@ public class SampleDataLoading {
                 .stewards(stewards)
                 .build();
 
+        FlightPO flight2 = FlightPO.builder()
+                .id(2L)
+                .flightNumber("AAA-Auto")
+                .airplane(airplane2)
+                .departureTime(LocalDateTime.of(2018, 8, 10, 9, 35))
+                .arrivalTime(LocalDateTime.of(2018, 8, 10, 19, 50))
+                .origin(destination2)
+                .destination(destination1)
+                .stewards(stewards)
+                .build();
+
+        FlightPO flight3 = FlightPO.builder()
+                .id(3L)
+                .flightNumber("pp-69")
+                .airplane(airplane1)
+                .departureTime(LocalDateTime.of(2017, 8, 10, 9, 35))
+                .arrivalTime(LocalDateTime.of(2017, 8, 10, 19, 50))
+                .origin(destination2)
+                .destination(destination1)
+                .stewards(stewards)
+                .build();
+
+
         airplaneService.createAirplane(airplane1);
         airplaneService.createAirplane(airplane2);
         stewardService.createSteward(stew1);
@@ -143,6 +166,8 @@ public class SampleDataLoading {
         destinationService.createDestination(destination1);
         destinationService.createDestination(destination2);
         flightService.createFlight(flight1);
+        flightService.createFlight(flight2);
+        flightService.createFlight(flight3);
 
         userService.registerUser(admin, "admin");
         userService.registerUser(user, "user");

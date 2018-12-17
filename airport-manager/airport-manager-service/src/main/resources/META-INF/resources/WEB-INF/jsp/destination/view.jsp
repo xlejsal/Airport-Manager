@@ -48,5 +48,9 @@
         <button class="btn btn-primary" type="submit">Update</button>
 </form:form>
 
+    <form method="post" action="${pageContext.request.contextPath}/destination/delete/${destination.id}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+
 </jsp:attribute>
 </my:pagetemplate>

@@ -24,13 +24,14 @@
             <td><c:out value="${steward.nationality}"/></td>
             <td>
                 <my:a href="/steward/view/${steward.id}" class="btn btn-primary btn-sm">View</my:a>
+                <my:a href="/steward/edit/${steward.id}" class="btn btn-warning btn-sm">Edit</my:a>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
-    <my:a href="/steward/new" class="btn btn-primary">
+    <my:a href="/steward/new" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         Create new
     </my:a>
