@@ -38,7 +38,7 @@
     </table>
 
     <form method="post" action="${pageContext.request.contextPath}/flight/delete/${flight.id}">
-        <button type="submit" class="btn btn-warning">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 
 </jsp:attribute>

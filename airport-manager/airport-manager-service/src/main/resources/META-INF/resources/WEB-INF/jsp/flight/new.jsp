@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <td><button class="btn btn-primary" type="submit">Create flight</button></td>
+    <td><button class="btn btn-success" type="submit">Create flight</button></td>
 
 </form:form>
 </jsp:attribute>
