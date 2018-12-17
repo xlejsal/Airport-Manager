@@ -12,25 +12,41 @@
         <button type="submit" class="btn btn-primary">Delete</button>
     </form>
 
+    <form:form method="post" action="${pageContext.request.contextPath}/destination/update"
+               modelAttribute="destinationUpdate" cssClass="form-horizontal">
+        <div class="form-group ${id_error ? 'has-error' : ''}">
+            <form:label path="id" cssClass="col-sm-2 control-label">Id</form:label>
+            <div class="col-sm-10">
+                <form:input path="id" cssClass="form-control" readonly="true"/>
+                <form:errors path="id" cssClass="help-block"/>
+                <p class="help-block"><form:errors path="id" cssClass="error"/></p>
+            </div>
+        </div>
+        <div class="form-group ${airportCode_error ? 'has-error' : ''}">
+        <form:label path="airportCode" cssClass="col-sm-2 control-label">Airport Code</form:label>
+        <div class="col-sm-10">
+            <form:input path="airportCode" cssClass="form-control" readonly="true"/>
+            <form:errors path="airportCode" cssClass="help-block"/>
+            <p class="help-block"><form:errors path="airportCode" cssClass="error"/></p>
+        </div>
+    </div>
+        <div class="form-group ${city_error ? 'has-error' : ''}">
+            <form:label path="city" cssClass="col-sm-2 control-label">City</form:label>
+            <div class="col-sm-10">
+                <form:input path="city" cssClass="form-control"/>
+                <form:errors path="city" cssClass="help-block"/>
+            </div>
+        </div>
+        <div class="form-group ${country_error?'has-error':''}">
+            <form:label path="country" cssClass="col-sm-2 control-label">Country</form:label>
+            <div class="col-sm-10">
+                <form:input path="country" cssClass="form-control"/>
+                <form:errors path="country" cssClass="help-block"/>
+            </div>
+        </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Airport Code</th>
-            <th>City</th>
-            <th>Country</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>${destination.id}</td>
-            <td><c:out value="${destination.airportCode}"/></td>
-            <td><c:out value="${destination.city}"/></td>
-            <td><c:out value="${destination.country}"/></td>
-        </tr>
-        </tbody>
-    </table>
+        <button class="btn btn-primary" type="submit">Update</button>
+</form:form>
 
 </jsp:attribute>
 </my:pagetemplate>
