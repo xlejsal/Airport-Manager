@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.DestinationFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.StewardFacade;
+import cz.muni.fi.pa165.airportmanager.service.validators.FlightCreateDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -65,6 +67,13 @@ public class FlightController {
             redirectAttributes.addFlashAttribute("alert_danger", "Flight \"" + flight.getFlightNumber() + "\" cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        if (binder.getTarget() instanceof FlightCreateDTO) {
+            binder.addValidators(new FlightCreateDTOValidator(flightFacade));
+        }
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.GET)
