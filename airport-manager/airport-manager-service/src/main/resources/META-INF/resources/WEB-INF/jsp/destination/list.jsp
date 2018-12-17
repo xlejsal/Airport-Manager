@@ -9,7 +9,6 @@
 <jsp:attribute name="body">
 
 <table class="table">
-    <caption>Destinations</caption>
     <thead>
     <tr>
         <th>Airport Code</th>
@@ -31,7 +30,7 @@
     </tbody>
 </table>
 
-    <my:a href="/destination/new" class="btn btn-primary">
+    <my:a href="/destination/new" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         New Destination
     </my:a>

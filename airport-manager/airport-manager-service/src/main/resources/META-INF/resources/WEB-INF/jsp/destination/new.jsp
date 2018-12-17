@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <button class="btn btn-success" type="submit">Create product</button>
+        <button class="btn btn-primary" type="submit">Create product</button>
 </form:form>
 
 </jsp:attribute>

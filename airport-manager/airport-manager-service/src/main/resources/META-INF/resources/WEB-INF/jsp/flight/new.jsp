@@ -65,7 +65,7 @@
         </div>
     </div>
     <div class="form-group">
-        <form:label path="stewardIds" cssClass="col-sm-2 control-label">Airplane</form:label>
+        <form:label path="stewardIds" cssClass="col-sm-2 control-label">Stewards</form:label>
         <div class="col-sm-10">
                 <form:select path="stewardIds" cssClass="form-control">
                     <c:forEach items="${stewards}" var="c">
@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    <td><button class="btn btn-success" type="submit">Create flight</button></td>
+    <td><button class="btn btn-primary" type="submit">Create flight</button></td>
 
 </form:form>
 </jsp:attribute>
