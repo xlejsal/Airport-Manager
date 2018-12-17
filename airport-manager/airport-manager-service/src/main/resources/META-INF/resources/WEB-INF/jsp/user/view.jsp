@@ -32,7 +32,7 @@
     </table>
 
     <form method="post" action="${pageContext.request.contextPath}/user/delete/${user.id}">
-        <button type="submit" class="btn btn-warning">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 
 </jsp:attribute>

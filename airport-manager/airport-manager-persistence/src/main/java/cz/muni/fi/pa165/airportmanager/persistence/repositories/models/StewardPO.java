@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.airportmanager.persistence.repositories.models;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import lombok.*;
 import lombok.experimental.Wither;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"name", "surname", "birthDate"})
 @Entity
 @Table(name="Stewards", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "surname", "birthDate"}))
+@DynamicUpdate
 public class StewardPO {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
