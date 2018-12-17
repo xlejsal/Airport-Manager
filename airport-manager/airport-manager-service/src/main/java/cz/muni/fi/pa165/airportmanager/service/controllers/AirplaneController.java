@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.airportmanager.service.controllers;
 import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneUpdateDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
+import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import cz.muni.fi.pa165.airportmanager.service.validators.AirplaneDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,9 @@ public class AirplaneController {
 
     @Autowired
     AirplaneFacade airplaneFacade;
+
+    @Autowired
+    BeanMappingService beanMapper;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -98,13 +102,7 @@ public class AirplaneController {
             }
             return "airplane/edit";
         }
-        AirplaneDTO airplane = new AirplaneDTO();
-        airplane.setCapacity(plane.getCapacity());
-        airplane.setCompany(plane.getCompany());
-        airplane.setType(plane.getType());
-        airplane.setName(plane.getName());
-        airplane.setId(plane.getId());
-        AirplaneDTO newAirplane = airplaneFacade.updateAirplane(airplane);
+        AirplaneDTO newAirplane = airplaneFacade.updateAirplane(beanMapper.mapTo(plane, AirplaneDTO.class));
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Airplane " + newAirplane.getName()+ " was edited");
         return "redirect:" + uriBuilder.path("/airplane/list").toUriString();
