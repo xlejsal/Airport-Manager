@@ -66,8 +66,30 @@ public class DestinationController {
     @GetMapping("/view/{id}")
     public String view(@PathVariable long id, Model model) {
         log.debug("view({})", id);
-        model.addAttribute("destination", facade.getDestinationById(id));
+        model.addAttribute("destinationUpdate", facade.getDestinationById(id));
         return "destination/view";
+    }
+
+    @PostMapping("/update")
+    public String update(@Valid @ModelAttribute("destinationUpdate") DestinationDTO destination, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        log.debug("update(destinationUpdate={})", destination.toString());
+        //in case of validation error forward back to the the form
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "destination/view";
+        }
+        //create destination
+        facade.updateDestination(destination);
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Destination " + destination.getId() + " was updated");
+        return "redirect:" + uriBuilder.path("/destination/view/{id}").buildAndExpand(destination.getId()).encode().toUriString();
     }
 
     @PostMapping("/delete/{id}")
