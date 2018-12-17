@@ -8,7 +8,6 @@ import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.DestinationFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.StewardFacade;
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -54,6 +52,24 @@ public class FlightController {
         return "flight/list";
     }
 
+    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    public String view(@PathVariable long id, Model model) {
+        model.addAttribute("flight", flightFacade.getFlightById(id));
+        return "flight/view";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+        FlightDTO flight = flightFacade.getFlightById(id);
+        try {
+            flightFacade.deleteFlight(id);
+            redirectAttributes.addFlashAttribute("alert_success", "Flight \"" + flight.getFlightNumber() + "\" was deleted.");
+        } catch (Exception ex) {
+            redirectAttributes.addFlashAttribute("alert_danger", "Flight \"" + flight.getFlightNumber() + "\" cannot be deleted.");
+        }
+        return "redirect:" + uriBuilder.path("/flight/list").toUriString();
+    }
+
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newFlight(Model model) {
         log.debug("new()");
@@ -61,9 +77,18 @@ public class FlightController {
         return "flight/new";
     }
 
+    /**
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        if (binder.getTarget() instanceof AirplaneDTO) {
+            binder.addValidators(new AirplaneDTOValidator(airplaneFacade));
+        }
+    }**/
+
     @ModelAttribute("origin")
     public List<DestinationDTO> origin() {
         log.debug("origin()");
+        log.debug(destinationFacade.getAllDestinations().toString());
         return destinationFacade.getAllDestinations();
     }
 
@@ -86,15 +111,9 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("flightDto") FlightDTO flightDto, BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute("flightDto") FlightDTO flight, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
-        log.debug("create(flightDto={})", flightDto);
-        //log.debug(flightDto.getFlightNumber());
-        //log.debug(flightDto.getAirplane().getName());
-        //log.debug(flightDto.getDepartureTime().toString());
-        log.debug(flightDto.getOrigin().getAirportCode());
-        log.debug(flightDto.getArrivalTime().toString());
-        log.debug(flightDto.getDestination().getAirportCode());
+        log.debug("create(flightDto={})", flight);
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 log.trace("ObjectError: {}", ge);
@@ -106,9 +125,9 @@ public class FlightController {
             return "flight/new";
         }
         //create product
-        FlightDTO flight = flightFacade.createFlight(flightDto);
+        FlightDTO newFlight = flightFacade.createFlight(flight);
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Flight " + flight.getFlightNumber() + " was created");
+        redirectAttributes.addFlashAttribute("alert_success", "Flight " + newFlight.getFlightNumber() + " was created");
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
     }
 }

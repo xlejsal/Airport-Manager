@@ -140,7 +140,7 @@ public class SampleDataLoading {
                 .build();
 
         FlightPO flight2 = FlightPO.builder()
-                .id(4L)
+                .id(2L)
                 .flightNumber("AAA-Auto")
                 .airplane(airplane2)
                 .departureTime(LocalDateTime.of(2018, 8, 10, 9, 35))
@@ -151,7 +151,7 @@ public class SampleDataLoading {
                 .build();
 
         FlightPO flight3 = FlightPO.builder()
-                .id(4L)
+                .id(3L)
                 .flightNumber("pp-69")
                 .airplane(airplane1)
                 .departureTime(LocalDateTime.of(2017, 8, 10, 9, 35))
