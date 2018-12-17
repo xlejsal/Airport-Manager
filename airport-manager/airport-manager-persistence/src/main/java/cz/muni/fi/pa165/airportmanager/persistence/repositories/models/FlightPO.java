@@ -43,7 +43,7 @@ public class FlightPO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, unique = true, updatable = false)
     private String flightNumber;
 
     @Column(nullable = false, updatable = false)
