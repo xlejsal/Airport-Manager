@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.airportmanager.service.services;
 
+import org.modelmapper.ModelMapper;
+
 import java.util.Collection;
 import java.util.List;
-
-import org.modelmapper.ModelMapper;
 
 
 public interface BeanMappingService {
