@@ -8,11 +8,6 @@
 <my:pagetemplate title="Destinations">
 <jsp:attribute name="body">
 
-    <my:a href="/destination/new" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        New Destination
-    </my:a>
-
 <table class="table">
     <caption>Destinations</caption>
     <thead>
@@ -40,5 +35,11 @@
     </c:forEach>
     </tbody>
 </table>
+
+    <my:a href="/destination/new" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        New Destination
+    </my:a>
+
 </jsp:attribute>
 </my:pagetemplate>
