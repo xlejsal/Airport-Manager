@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.airportmanager.service.validators;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
