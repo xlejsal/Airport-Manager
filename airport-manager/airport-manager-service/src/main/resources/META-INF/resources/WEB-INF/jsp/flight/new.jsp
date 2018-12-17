@@ -18,14 +18,14 @@
         </div>
     </div>
     <div class="form-group">
-        <form:label path="origin" cssClass="col-sm-2 control-label">Origin</form:label>
+        <form:label path="originId" cssClass="col-sm-2 control-label">Origin</form:label>
         <div class="col-sm-10">
-                <form:select path="origin" cssClass="form-control" required="true">
+                <form:select path="originId" cssClass="form-control" required="true">
                     <c:forEach items="${origin}" var="c">
-                        <form:option value="${c}">${c.airportCode}</form:option>
+                        <form:option value="${c.id}">${c.airportCode}</form:option>
                     </c:forEach>
                 </form:select>
-            <p class="help-block"><form:errors path="origin" cssClass="error"/></p>
+            <p class="help-block"><form:errors path="originId" cssClass="error"/></p>
         </div>
     </div>
     <div class="form-group ${departureTime_error?'has-error':''}">
@@ -36,14 +36,14 @@
         </div>
     </div>
     <div class="form-group">
-        <form:label path="destination" cssClass="col-sm-2 control-label">Destination</form:label>
+        <form:label path="destinationId" cssClass="col-sm-2 control-label">Destination</form:label>
         <div class="col-sm-10">
-                <form:select path="destination" cssClass="form-control" required="true">
+                <form:select path="destinationId" cssClass="form-control" required="true">
                     <c:forEach items="${destination}" var="c">
-                        <form:option value="${c}">${c.airportCode}</form:option>
+                        <form:option value="${c.id}">${c.airportCode}</form:option>
                     </c:forEach>
                 </form:select>
-            <p class="help-block"><form:errors path="destination" cssClass="error"/></p>
+            <p class="help-block"><form:errors path="destinationId" cssClass="error"/></p>
         </div>
     </div>
     <div class="form-group ${arrivalTime_error?'has-error':''}">
@@ -54,25 +54,25 @@
         </div>
     </div>
     <div class="form-group">
-        <form:label path="airplane" cssClass="col-sm-2 control-label">Airplane</form:label>
+        <form:label path="airplaneId" cssClass="col-sm-2 control-label">Airplane</form:label>
         <div class="col-sm-10">
-                <form:select path="airplane" cssClass="form-control" required="true">
+                <form:select path="airplaneId" cssClass="form-control" required="true">
                     <c:forEach items="${airplane}" var="c">
-                        <form:option value="${c}">${c.name}</form:option>
+                        <form:option value="${c.id}">${c.name}</form:option>
                     </c:forEach>
                 </form:select>
-            <p class="help-block"><form:errors path="airplane" cssClass="error"/></p>
+            <p class="help-block"><form:errors path="airplaneId" cssClass="error"/></p>
         </div>
     </div>
     <div class="form-group">
-        <form:label path="stewards" cssClass="col-sm-2 control-label">Airplane</form:label>
+        <form:label path="stewardIds" cssClass="col-sm-2 control-label">Airplane</form:label>
         <div class="col-sm-10">
-                <form:select path="stewards" cssClass="form-control">
+                <form:select path="stewardIds" cssClass="form-control">
                     <c:forEach items="${stewards}" var="c">
-                        <form:option value="${c}">${c.name}${c.surname}</form:option>
+                        <form:option value="${c.id}">${c.name}${c.surname}</form:option>
                     </c:forEach>
                 </form:select>
-            <p class="help-block"><form:errors path="stewards" cssClass="error"/></p>
+            <p class="help-block"><form:errors path="stewardIds" cssClass="error"/></p>
         </div>
     </div>
 

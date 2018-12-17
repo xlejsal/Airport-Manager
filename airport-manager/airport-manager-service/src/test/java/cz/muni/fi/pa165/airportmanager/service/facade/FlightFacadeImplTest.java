@@ -1,13 +1,13 @@
 package cz.muni.fi.pa165.airportmanager.service.facade;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.FlightCreateDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import cz.muni.fi.pa165.airportmanager.service.facades.impl.FlightFacadeImpl;
-import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
-import cz.muni.fi.pa165.airportmanager.service.services.FlightService;
+import cz.muni.fi.pa165.airportmanager.service.services.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,18 +42,24 @@ public class FlightFacadeImplTest {
     @Mock
     private FlightService service;
     @Mock
+    private AirplaneService airplaneService;
+    @Mock
+    private DestinationService destinationService;
+    @Mock
+    private StewardService stewardService;
+    @Mock
     private BeanMappingService mapper;
 
     @Before
     public void init(){
         MockitoAnnotations.initMocks(this);
-        facade = new FlightFacadeImpl(service, mapper);
+        facade = new FlightFacadeImpl(service, mapper, airplaneService, destinationService, stewardService);
     }
 
     @Test
     public void createFlightTest() {
         FlightPO mockFlight = Mockito.mock(FlightPO.class);
-        FlightDTO mockDTO = Mockito.mock(FlightDTO.class);
+        FlightCreateDTO mockDTO = Mockito.mock(FlightCreateDTO.class);
         when(mapper.mapTo(mockDTO, FlightPO.class)).thenReturn(mockFlight);
 
         facade.createFlight(mockDTO);

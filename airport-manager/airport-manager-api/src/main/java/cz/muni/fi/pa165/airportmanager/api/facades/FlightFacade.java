@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.facades;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.FlightCreateDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 
@@ -35,7 +36,7 @@ public interface FlightFacade {
      * Create flight entity in database
      * @param flight DTO of flight to be created
      */
-    FlightDTO createFlight(FlightDTO flight);
+    FlightDTO createFlight(FlightCreateDTO flight);
 
     /**
      * Update a flight

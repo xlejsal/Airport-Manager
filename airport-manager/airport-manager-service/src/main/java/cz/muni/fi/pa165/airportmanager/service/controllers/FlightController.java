@@ -1,9 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.service.controllers;
 
-import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneDTO;
-import cz.muni.fi.pa165.airportmanager.api.dto.DestinationDTO;
-import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
-import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
+import cz.muni.fi.pa165.airportmanager.api.dto.*;
 import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.DestinationFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
@@ -16,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -61,6 +57,7 @@ public class FlightController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         FlightDTO flight = flightFacade.getFlightById(id);
+        log.debug("delete()");
         try {
             flightFacade.deleteFlight(id);
             redirectAttributes.addFlashAttribute("alert_success", "Flight \"" + flight.getFlightNumber() + "\" was deleted.");
@@ -73,22 +70,13 @@ public class FlightController {
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public String newFlight(Model model) {
         log.debug("new()");
-        model.addAttribute("flightDto", new FlightDTO());
+        model.addAttribute("flightDto", new FlightCreateDTO());
         return "flight/new";
     }
-
-    /**
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        if (binder.getTarget() instanceof AirplaneDTO) {
-            binder.addValidators(new AirplaneDTOValidator(airplaneFacade));
-        }
-    }**/
 
     @ModelAttribute("origin")
     public List<DestinationDTO> origin() {
         log.debug("origin()");
-        log.debug(destinationFacade.getAllDestinations().toString());
         return destinationFacade.getAllDestinations();
     }
 
@@ -111,7 +99,7 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("flightDto") FlightDTO flight, BindingResult bindingResult,
+    public String create(@Valid @ModelAttribute("flightDto") FlightCreateDTO flight, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("create(flightDto={})", flight);
         if (bindingResult.hasErrors()) {
