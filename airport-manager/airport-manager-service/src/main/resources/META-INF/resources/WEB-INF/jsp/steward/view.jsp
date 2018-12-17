@@ -28,12 +28,15 @@
             <td><c:out value="${steward.nationality}"/></td>
             <fmt:parseDate value="${steward.birthDate}" pattern="yyyy-MM-dd" var="Date"/>
             <td><fmt:formatDate value="${Date}" pattern="yyyy-MM-dd"/></td>
+            <td>
+                <my:a href="/steward/view/${steward.id}/flights" class="btn btn-primary btn-sm">Flights</my:a>
+            </td>
         </tr>
         </tbody>
     </table>
 
     <form method="post" action="${pageContext.request.contextPath}/steward/delete/${steward.id}">
-        <button type="submit" class="btn btn-warning">Delete</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 
 </jsp:attribute>

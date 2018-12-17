@@ -5,19 +5,17 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<my:pagetemplate title="Flights">
+<my:pagetemplate title="Flights of Steward ${steward.name} ${steward.surname}">
 <jsp:attribute name="body">
 
 <table class="table">
-    <caption>Flights</caption>
     <thead>
     <tr>
-        <th>Flight number</th>
-        <th>Origin</th>
-        <th>Departure</th>
-        <th>Destination</th>
-        <th>Arrival</th>
-        <th>Airplane</th>
+        <th>flight number</th>
+        <th>origin</th>
+        <th>destination</th>
+        <th>departure</th>
+        <th>arrival</th>
     </tr>
     </thead>
     <tbody>
@@ -25,22 +23,13 @@
         <tr>
             <td><c:out value="${flight.flightNumber}"/></td>
             <td><c:out value="${flight.origin.city}"/>, <c:out value="${flight.origin.country}"/></td>
+            <td><c:out value="${flight.destination.city}"/>, <c:out value="${flight.destination.country}"/></td>
             <td><c:out value="${flight.departureTime}"/></td>
-            <td><c:out value="${flight.destination.city}"/>, <c:out value="${flight.destination.country}" /></td>
             <td><c:out value="${flight.arrivalTime}"/></td>
-            <td><c:out value="${flight.airplane.type}"/></td>
-            <td>
-                <my:a href="/flight/view/${flight.id}" class="btn btn-primary btn-sm">View</my:a>
-            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-
-    <my:a href="/flight/new" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        Create new
-    </my:a>
 
 </jsp:attribute>
 </my:pagetemplate>

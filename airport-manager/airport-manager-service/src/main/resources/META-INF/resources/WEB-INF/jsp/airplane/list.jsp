@@ -11,26 +11,27 @@
 <table class="table">
     <thead>
     <tr>
-        <th>type</th>
         <th>name</th>
+        <th>type</th>
         <th>company</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${airplanes}" var="airplane">
         <tr>
-            <td><c:out value="${airplane.type}"/></td>
             <td><c:out value="${airplane.name}"/></td>
+            <td><c:out value="${airplane.type}"/></td>
             <td><c:out value="${airplane.company}"/></td>
             <td>
                 <my:a href="/airplane/view/${airplane.id}" class="btn btn-primary btn-sm">View</my:a>
+                <my:a href="/airplane/edit/${airplane.id}" class="btn btn-warning btn-sm">Edit</my:a>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
-    <my:a href="/airplane/new" class="btn btn-primary">
+    <my:a href="/airplane/new" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         Create new
     </my:a>

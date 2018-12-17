@@ -30,8 +30,11 @@ import java.util.Set;
 @EqualsAndHashCode(of = {"name", "surname", "birthDate"})
 public class StewardDTO {
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String surname;
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private Gender gender;
