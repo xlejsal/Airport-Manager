@@ -34,7 +34,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">admin<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><my:a href="/flight/list">Flights</my:a></li>
                         <li><my:a href="/airplane/list">Airplanes</my:a></li>
@@ -47,6 +47,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">About<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="https://is.muni.cz/predmet/fi/podzim2018/PA165">PA165</a></li>
+                        <li><a href="https://is.muni.cz/auth/rozpis/tema?sorter=vedouci;balik=336601;tema=336636;predmet=1144638;kod=PA165;obdobi=7403;fakulta=1433;uplne_info=1">Task description</a></li>
                         <li><a href="https://github.com/xlejsal/Airport-Manager">GitHub</a></li>
                     </ul>
                 </li>
