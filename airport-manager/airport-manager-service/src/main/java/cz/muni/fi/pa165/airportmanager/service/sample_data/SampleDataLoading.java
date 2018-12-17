@@ -47,8 +47,6 @@ public class SampleDataLoading {
         log.info("Loading sample data.");
 
         UserPO admin = UserPO.builder()
-                .id(1L)
-                .passwordHash("1611651561")
                 .login("admin")
                 .email("admin@yahoo.com")
                 .name("Administratorus")
@@ -56,10 +54,8 @@ public class SampleDataLoading {
                 .admin(true)
                 .build();
 
-        UserPO fero = UserPO.builder()
-                .id(2L)
-                .login("fero14")
-                .passwordHash("1515665")
+        UserPO user = UserPO.builder()
+                .login("user")
                 .email("lakatos14@seznam.cz")
                 .name("Ferrus")
                 .surname("Lakatos")
@@ -161,8 +157,7 @@ public class SampleDataLoading {
                 .stewards(stewards)
                 .build();
 
-        userService.registerUser(admin, "1234");
-        userService.registerUser(fero, "tukabel");
+
         airplaneService.createAirplane(airplane1);
         airplaneService.createAirplane(airplane2);
         stewardService.createSteward(stew1);
@@ -173,6 +168,9 @@ public class SampleDataLoading {
         flightService.createFlight(flight1);
         flightService.createFlight(flight2);
         flightService.createFlight(flight3);
+
+        userService.registerUser(admin, "admin");
+        userService.registerUser(user, "user");
 
         log.info("Loaded sample data.");
     }
