@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
@@ -89,7 +90,7 @@ public class FlightDaoTest {
 
         stewardGirl = new StewardPO();
         stewardGirl.setBirthDate(BIRTH_DATE);
-        stewardGirl.setGender("Woman");
+        stewardGirl.setGender(Gender.Female);
         stewardGirl.setName("Marienka");
         stewardGirl.setSurname("Pernikova");
         stewardGirl.setNationality("Slovak");
@@ -97,7 +98,7 @@ public class FlightDaoTest {
 
         stewardBoy = new StewardPO();
         stewardBoy.setBirthDate(BIRTH_DATE);
-        stewardBoy.setGender("Man");
+        stewardBoy.setGender(Gender.Male);
         stewardBoy.setName("Juraj");
         stewardBoy.setSurname("Janosik");
         stewardBoy.setNationality("Slovak");

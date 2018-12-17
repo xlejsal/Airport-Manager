@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.service.sample_data;
 
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.*;
 import cz.muni.fi.pa165.airportmanager.service.services.*;
 import org.slf4j.Logger;
@@ -64,7 +65,7 @@ public class SampleDataLoading {
                 .id(1L)
                 .name("Andrej")
                 .surname("Danko")
-                .gender("Kapitan")
+                .gender(Gender.Kapitan)
                 .birthDate(LocalDate.of(1974, Month.SEPTEMBER, 15))
                 .nationality("SVK")
                 .flights(new HashSet<FlightPO>())
@@ -74,8 +75,18 @@ public class SampleDataLoading {
                 .id(2L)
                 .name("Thomas")
                 .surname("Dubois")
-                .gender("Man")
+                .gender(Gender.Male)
                 .birthDate(LocalDate.of(1994, Month.DECEMBER, 17))
+                .nationality("USA")
+                .flights(new HashSet<FlightPO>())
+                .build();
+
+        StewardPO stew3 = StewardPO.builder()
+                .id(3L)
+                .name("Arthur")
+                .surname("Morgan")
+                .gender(Gender.Male)
+                .birthDate(LocalDate.of(1856, Month.MAY, 24))
                 .nationality("USA")
                 .flights(new HashSet<FlightPO>())
                 .build();
@@ -124,16 +135,11 @@ public class SampleDataLoading {
                 .stewards(stewards)
                 .build();
 
-
-
-        /* needs fixing
-        userService.registerUser(admin, "1234");
-        userService.registerUser(fero, "tukabel");
-        */
         airplaneService.createAirplane(airplane1);
         airplaneService.createAirplane(airplane2);
         stewardService.createSteward(stew1);
         stewardService.createSteward(stew2);
+        stewardService.createSteward(stew3);
         destinationService.createDestination(destination1);
         destinationService.createDestination(destination2);
         flightService.createFlight(flight1);

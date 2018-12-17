@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.service.services;
 
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 
 import java.time.LocalDateTime;
@@ -52,4 +53,11 @@ public interface StewardService {
      * @return true if steward is available in set time, false if not
      */
     boolean isAvailableFromTo(Long id, LocalDateTime from, LocalDateTime to);
+
+    /**
+     * Get the list of flight for a certain steward
+     * @param id - id of the steward
+     * @return - a list of flights
+     */
+    List<FlightPO> getFlightsOfSteward(Long id);
 }
