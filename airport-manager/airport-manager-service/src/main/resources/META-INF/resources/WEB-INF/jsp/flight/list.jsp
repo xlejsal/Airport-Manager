@@ -9,7 +9,6 @@
 <jsp:attribute name="body">
 
 <table class="table">
-    <caption>Flights</caption>
     <thead>
     <tr>
         <th>Flight number</th>
@@ -37,7 +36,7 @@
     </tbody>
 </table>
 
-    <my:a href="/flight/new" class="btn btn-primary">
+    <my:a href="/flight/new" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         Create new
     </my:a>
