@@ -2,6 +2,16 @@
 
 Team project for the university course PA165 at FI MUNI
 
+### Login
+##### User
+username: user
+
+password: password
+##### Admin
+username: admin
+
+password: adminPassword
+
 ### Team members:
 * Vojtěch Lejsal (učo 445629)
 * Štěpán Beneš (učo 433725)
