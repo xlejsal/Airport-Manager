@@ -15,6 +15,14 @@ username: admin
 
 password: adminPassword
 
+### Curl commands
+##### Get a destination: `curl http://localhost:8080/pa165/rest/1`
+##### Get destinations around a city:`curl http://localhost:8080/pa165/rest/city/Brno`
+##### Get destinations in a country: `curl http://localhost:8080/pa165/rest/country/Czechia`
+##### Create a destination: `curl -d "{\"airportCode\":\"HEL\",\"city\":\"Helsinki\",\"country\":\"Finland\"}" -H "Content-Type: application/json" http://localhost:8080/pa165/rest`
+##### Update a destination: `curl -d "{\"id\":\"1\",\"airportCode\":\"KLM\",\"city\":\"East Vienna\",\"country\":\"Austria\"}" -H "Content-Type: application/json" -X PUT http://localhost:8080/pa165/rest`
+##### Delete a destination: `curl -X DELETE http://localhost:8080/pa165/rest/4`
+
 
 ### Team members:
 * Vojtěch Lejsal (učo 445629)
