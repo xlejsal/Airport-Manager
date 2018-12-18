@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.service.sample_data;
 
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
+import cz.muni.fi.pa165.airportmanager.api.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.*;
 import cz.muni.fi.pa165.airportmanager.service.services.*;
 import org.slf4j.Logger;

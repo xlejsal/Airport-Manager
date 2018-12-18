@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.persistence.repositories.models;
 
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
+import cz.muni.fi.pa165.airportmanager.api.enums.Gender;
 import lombok.*;
 import lombok.experimental.Wither;
 import org.hibernate.annotations.DynamicUpdate;

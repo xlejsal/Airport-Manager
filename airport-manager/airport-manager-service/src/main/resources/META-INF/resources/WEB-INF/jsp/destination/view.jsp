@@ -8,7 +8,7 @@
 <my:pagetemplate title="Destination Details">
 <jsp:attribute name="body">
 
-    <form method="post" action="${pageContext.request.contextPath}/destination/delete/${destination.id}">
+    <form method="post" action="${pageContext.request.contextPath}/destination/delete/${id}">
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
 
