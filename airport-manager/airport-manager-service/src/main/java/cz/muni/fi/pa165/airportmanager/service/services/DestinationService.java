@@ -26,6 +26,13 @@ public interface DestinationService {
     DestinationPO getDestinationById(Long Id);
 
     /**
+     * Finds a Destination with the given airport code
+     * @param airportCode Airport code to be searched for
+     * @return Destination with the given airport code
+     */
+    DestinationPO findByAirportCode(String airportCode);
+
+    /**
      * Creates a Destination entity
      * @param destination - Destination entity to be created and stored
      * @return
