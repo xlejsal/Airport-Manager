@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.service.service;
 
+import cz.muni.fi.pa165.airportmanager.api.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.FlightRepository;
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;

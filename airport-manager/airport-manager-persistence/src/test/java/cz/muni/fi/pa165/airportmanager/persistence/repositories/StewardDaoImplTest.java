@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.persistence.repositories;
 
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
+import cz.muni.fi.pa165.airportmanager.api.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
 import org.junit.Before;
 import org.junit.Test;

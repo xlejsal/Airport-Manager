@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Wither;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -47,21 +48,23 @@ public class FlightPO {
     private String flightNumber;
 
     @Column(nullable = false, updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd-HH-mm")
     private LocalDateTime departureTime;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd-HH-mm")
     private LocalDateTime arrivalTime;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
+    @ManyToOne(cascade = {CascadeType.PERSIST}, optional = false)
     private DestinationPO origin;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
+    @ManyToOne(cascade = {CascadeType.PERSIST}, optional = false)
     private DestinationPO destination;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
+    @ManyToOne(cascade = {CascadeType.PERSIST}, optional = false)
     private AirplanePO airplane;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinTable(name = "Flight_Steward",
             joinColumns = @JoinColumn(name = "flight_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "steward_id", referencedColumnName = "id"))

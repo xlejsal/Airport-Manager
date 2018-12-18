@@ -60,7 +60,7 @@ public class DestinationController {
         Long id = facade.createDestination(destination).getId();
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Destination " + id + " was created");
-        return "redirect:" + uriBuilder.path("/destination/view/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriBuilder.path("/destination/list").toUriString();
     }
 
     @GetMapping("/view/{id}")
