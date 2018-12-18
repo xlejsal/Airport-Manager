@@ -12,4 +12,5 @@ import java.util.List;
 public interface DestinationRepository extends JpaRepository<DestinationPO, Long> {
     public List<DestinationPO> findByCity(String city);
     public List<DestinationPO> findByCountry(String country);
+    DestinationPO findByAirportCode(String airportCode);
 }

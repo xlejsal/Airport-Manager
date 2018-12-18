@@ -30,6 +30,7 @@
             <td><c:out value="${flight.airplane.type}"/></td>
             <td>
                 <my:a href="/flight/view/${flight.id}" class="btn btn-primary btn-sm">View</my:a>
+                <my:a href="/flight/update/${flight.id}" class="btn btn-warning btn-sm">Update</my:a>
             </td>
         </tr>
     </c:forEach>

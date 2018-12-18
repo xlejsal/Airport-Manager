@@ -25,6 +25,13 @@ public interface DestinationFacade {
     DestinationDTO getDestinationById(Long Id);
 
     /**
+     * Finds a Destination with the given airport code
+     * @param airportCode Airport code to be searched for
+     * @return Destination with the given airport code
+     */
+    DestinationDTO findDestinationByAirportCode(String airportCode);
+
+    /**
      * Create a destination entity in the database
      * @param destination - DTO of a destination to be created
      * @return - DTO of the created destination
