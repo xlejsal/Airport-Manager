@@ -118,7 +118,21 @@ public class SampleDataLoading {
                 .id(2L)
                 .airportCode("QQQ")
                 .city("Brno")
-                .country("Czech Republic")
+                .country("Czechia")
+                .build();
+
+        DestinationPO destination3 = DestinationPO.builder()
+                .id(3L)
+                .airportCode("QQW")
+                .city("Brno")
+                .country("Czechia")
+                .build();
+
+        DestinationPO destination4 = DestinationPO.builder()
+                .id(4L)
+                .airportCode("PRG")
+                .city("PRAGUE")
+                .country("Czechia")
                 .build();
 
         stewards.add(stew1);
@@ -165,6 +179,8 @@ public class SampleDataLoading {
         stewardService.createSteward(stew3);
         destinationService.createDestination(destination1);
         destinationService.createDestination(destination2);
+        destinationService.createDestination(destination3);
+        destinationService.createDestination(destination4);
         flightService.createFlight(flight1);
         flightService.createFlight(flight2);
         flightService.createFlight(flight3);

@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
-@RestController("/pa165/rest")
-public class DestinationController {
+@RestController
+@RequestMapping("/rest")
+public class DestinationRestController {
 
     private final DestinationFacade facade;
 
     @Autowired
-    public DestinationController(DestinationFacade facade) {
+    public DestinationRestController(DestinationFacade facade) {
         this.facade = facade;
     }
 

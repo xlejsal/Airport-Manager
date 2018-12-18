@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/destination/list", "/airplane/list", "/flight/list").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/steward/**", "/user/**", "/destination/**", "/airplane/**", "/flight/**").hasRole("ADMIN")
-                .antMatchers("/", "/login*", "/error*").permitAll()
+                .antMatchers("/", "/login*", "/error*", "/rest/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
