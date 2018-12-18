@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.DestinationFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
 import cz.muni.fi.pa165.airportmanager.api.facades.StewardFacade;
+import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import cz.muni.fi.pa165.airportmanager.service.validators.FlightCreateDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author kotrc
@@ -41,6 +43,8 @@ public class FlightController {
     StewardFacade stewardFacade;
     @Autowired
     AirplaneFacade airplaneFacade;
+    @Autowired
+    BeanMappingService beanMapper;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
@@ -54,6 +58,12 @@ public class FlightController {
     public String view(@PathVariable long id, Model model) {
         model.addAttribute("flight", flightFacade.getFlightById(id));
         return "flight/view";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable long id, Model model) {
+        model.addAttribute("flight", flightFacade.getFlightById(id));
+        return "flight/edit";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
@@ -126,5 +136,33 @@ public class FlightController {
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Flight " + newFlight.getFlightNumber() + " was created");
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("flight") FlightDTO flight, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "flight/view";
+        }
+
+        FlightDTO dbFlight = flightFacade.getFlightById(flight.getId());
+        dbFlight.setFlightNumber(flight.getFlightNumber());
+        dbFlight.setArrivalTime(flight.getArrivalTime());
+        dbFlight.setDepartureTime(flight.getDepartureTime());
+        dbFlight.setOrigin(destinationFacade.getDestinationById(flight.getOrigin().getId()));
+        dbFlight.setDestination(destinationFacade.getDestinationById(flight.getDestination().getId()));
+        dbFlight.setAirplane(airplaneFacade.getAirplaneById(flight.getAirplane().getId()));
+
+        flightFacade.updateFlight(dbFlight);
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Flight " + flight.getFlightNumber() + " was edited");
+        return "redirect:" + uriBuilder.path("/flight/view/{id}").buildAndExpand(flight.getId()).encode().toUriString();
     }
 }

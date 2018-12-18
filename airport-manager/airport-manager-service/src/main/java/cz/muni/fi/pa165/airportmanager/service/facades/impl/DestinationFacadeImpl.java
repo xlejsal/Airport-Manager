@@ -41,6 +41,11 @@ public class DestinationFacadeImpl implements DestinationFacade {
     }
 
     @Override
+    public DestinationDTO findDestinationByAirportCode(String airportCode) {
+        return beanMapper.mapTo(destinationService.findByAirportCode(airportCode), DestinationDTO.class);
+    }
+
+    @Override
     public DestinationDTO createDestination(DestinationDTO destination){
         return beanMapper.mapTo(destinationService.createDestination(beanMapper.mapTo(destination, DestinationPO.class)),
                 DestinationDTO.class);

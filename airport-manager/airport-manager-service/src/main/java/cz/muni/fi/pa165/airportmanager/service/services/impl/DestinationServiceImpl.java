@@ -39,6 +39,11 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
+    public DestinationPO findByAirportCode(String code) {
+        return destinationRepo.findByAirportCode(code);
+    }
+
+    @Override
     public DestinationPO createDestination(DestinationPO destination) {
         try{
             return destinationRepo.save(destination);

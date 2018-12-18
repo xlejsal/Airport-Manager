@@ -78,8 +78,9 @@ public class FlightServiceImpl implements FlightService {
 
     @Override
     public FlightPO updateFlight(FlightPO flight) {
-        if (flightRepo.findAllFlightsFromToWithAirplaneId(flight.getDepartureTime(), flight.getArrivalTime(),
-                flight.getAirplane().getId()).isEmpty()) {
+        List<FlightPO> flights = flightRepo.findAllFlightsFromToWithAirplaneId(flight.getDepartureTime(),
+                                            flight.getArrivalTime(), flight.getAirplane().getId());
+        if (flights.isEmpty() || (flights.size() == 1 && flights.get(0).equals(flight))) {
             return flightRepo.save(flight);
         } else {
             throw new IllegalArgumentException("Specified airplane already has a flight at the time of this flight.");
