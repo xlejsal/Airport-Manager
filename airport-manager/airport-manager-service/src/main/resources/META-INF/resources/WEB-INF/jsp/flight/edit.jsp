@@ -21,7 +21,7 @@
         <div class="form-group ${originId_error?'has-error':''}">
             <form:label path="originId" cssClass="col-sm-2 control-label">Origin</form:label>
             <div class="col-sm-10">
-                <form:input path="originId" cssClass="form-control" readonly="true" value="${flight.origin.id}">${flight.origin.airportCode}</form:input>
+                <form:input path="originId" cssClass="form-control" readonly="true" value="${flight.origin}"/>
                 <form:errors path="originId" cssClass="help-block"/>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="form-group ${destinationId_error?'has-error':''}">
             <form:label path="destinationId" cssClass="col-sm-2 control-label">Destination</form:label>
             <div class="col-sm-10">
-                <form:input path="destinationId" cssClass="form-control" readonly="true" value="${flight.destination.id}">${flight.destination.airportCode}</form:input>
+                <form:input path="destinationId" cssClass="form-control" readonly="true" value="${flight.destination}"/>
                 <form:errors path="destinationId" cssClass="help-block"/>
             </div>
         </div>

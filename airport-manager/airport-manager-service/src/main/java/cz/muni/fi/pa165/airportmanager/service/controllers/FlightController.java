@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author kotrc
@@ -137,10 +138,9 @@ public class FlightController {
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
     }
 
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("flight") FlightCreateDTO flight, BindingResult bindingResult, @PathVariable long id,
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("flight") FlightCreateDTO flight, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
-
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
                 log.trace("ObjectError: {}", ge);
@@ -149,11 +149,24 @@ public class FlightController {
                 model.addAttribute(fe.getField() + "_error", true);
                 log.trace("FieldError: {}", fe);
             }
-            return "flight/edit";
+            return "flight/view";
         }
-        FlightDTO newFlight = flightFacade.updateFlight(beanMapper.mapTo(flight, FlightDTO.class));
+        FlightDTO f = FlightDTO.builder()
+                .id(flight.getId())
+                .arrivalTime(flight.getArrivalTime())
+                .departureTime(flight.getDepartureTime())
+                .destination(destinationFacade.getDestinationById(flight.getDestinationId()))
+                .origin(destinationFacade.getDestinationById(flight.getOriginId()))
+                .airplane(airplaneFacade.getAirplaneById(flight.getAirplaneId()))
+                .flightNumber(flight.getFlightNumber())
+                .stewards(flight.getStewardIds()
+                                .stream()
+                                .map(id -> beanMapper.mapTo(stewardFacade.getStewardById(id), StewardWithoutFlightsDTO.class))
+                                .collect(Collectors.toSet()))
+                .build();
+        flightFacade.updateFlight(f);
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Flight " + newFlight.getFlightNumber() + " was edited");
-        return "redirect:" + uriBuilder.path("/flight/list").toUriString();
+        redirectAttributes.addFlashAttribute("alert_success", "Flight " + flight.getFlightNumber() + " was edited");
+        return "redirect:" + uriBuilder.path("/flight/view/{id}").buildAndExpand(flight.getId()).encode().toUriString();
     }
 }
