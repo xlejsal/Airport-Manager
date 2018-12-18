@@ -8,34 +8,9 @@
 <my:pagetemplate title="Flight Administration">
 <jsp:attribute name="body">
 
-    <%--<table class="table">--%>
-        <%--<thead>--%>
-        <%--<tr>--%>
-            <%--<th>Id</th>--%>
-            <%--<th>Flight number</th>--%>
-            <%--<th>Origin</th>--%>
-            <%--<th>Departure Time</th>--%>
-            <%--<th>Destination</th>--%>
-            <%--<th>Arrival Time</th>--%>
-            <%--<th>Airplane</th>--%>
-            <%--<th>Stewards</th>--%>
-        <%--</tr>--%>
-        <%--</thead>--%>
-        <%--<tbody>--%>
-        <%--<tr>--%>
-            <%--<td>${flight.id}</td>--%>
-            <%--<td><c:out value="${flight.flightNumber}"/></td>--%>
-            <%--<td><c:out value="${flight.origin.city}"/> <c:out value="${flight.origin.country}"/></td>--%>
-            <%--<td><c:out value="${flight.departureTime}"/></td>--%>
-            <%--<td><c:out value="${flight.destination.city}"/> <c:out value="${flight.destination.country}" /></td>--%>
-            <%--<td><c:out value="${flight.arrivalTime}"/></td>--%>
-            <%--<td><c:out value="${flight.airplane.name}"/></td>--%>
-            <%--<c:forEach items="${flight.stewards}" var="steward">--%>
-                <%--<td><c:out value="${steward.name} ${steward.surname}"/></td>--%>
-            <%--</c:forEach>--%>
-        <%--</tr>--%>
-        <%--</tbody>--%>
-    <%--</table>--%>
+    <form method="post" action="${pageContext.request.contextPath}/flight/delete/${flight.id}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
 
     <form:form method="POST" action="${pageContext.request.contextPath}/flight/update" modelAttribute="flight"
                cssClass="form-horizontal">
@@ -69,37 +44,37 @@
         </div>
     </div>
     <div class="form-group">
-        <form:label path="originId" cssClass="col-sm-2 control-label">Origin</form:label>
+        <form:label path="origin.id" cssClass="col-sm-2 control-label">Origin</form:label>
         <div class="col-sm-10">
-                <form:select path="originId" cssClass="form-control" required="true">
+                <form:select path="origin.id" cssClass="form-control" required="true">
                     <c:forEach items="${origin}" var="c">
                         <form:option value="${c.id}">${c.airportCode}</form:option>
                     </c:forEach>
                 </form:select>
-            <p class="help-block"><form:errors path="originId" cssClass="error"/></p>
+            <p class="help-block"><form:errors path="origin.id" cssClass="error"/></p>
         </div>
     </div>
 
     <div class="form-group">
-        <form:label path="destinationId" cssClass="col-sm-2 control-label">Destination</form:label>
+        <form:label path="destination.id" cssClass="col-sm-2 control-label">Destination</form:label>
         <div class="col-sm-10">
-                <form:select path="destinationId" cssClass="form-control" required="true">
+                <form:select path="destination.id" cssClass="form-control" required="true">
                     <c:forEach items="${destination}" var="c">
                         <form:option value="${c.id}">${c.airportCode}</form:option>
                     </c:forEach>
                 </form:select>
-            <p class="help-block"><form:errors path="destinationId" cssClass="error"/></p>
+            <p class="help-block"><form:errors path="destination.id" cssClass="error"/></p>
         </div>
     </div>
     <div class="form-group">
-        <form:label path="airplaneId" cssClass="col-sm-2 control-label">Airplane</form:label>
+        <form:label path="airplane.id" cssClass="col-sm-2 control-label">Airplane</form:label>
         <div class="col-sm-10">
-                <form:select path="airplaneId" cssClass="form-control" required="true">
+                <form:select path="airplane.id" cssClass="form-control" required="true">
                     <c:forEach items="${airplane}" var="c">
                         <form:option value="${c.id}">${c.name}</form:option>
                     </c:forEach>
                 </form:select>
-            <p class="help-block"><form:errors path="airplaneId" cssClass="error"/></p>
+            <p class="help-block"><form:errors path="airplane.id" cssClass="error"/></p>
         </div>
     </div>
     <div class="form-group">
@@ -114,13 +89,11 @@
         </div>
     </div>
 
-    <td><button class="btn btn-primary" type="submit">Create flight</button></td>
+    <td><button class="btn btn-primary" type="submit">Update</button></td>
 
 </form:form>
 
-    <form method="post" action="${pageContext.request.contextPath}/flight/delete/${flight.id}">
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
+
 
 </jsp:attribute>
 </my:pagetemplate>

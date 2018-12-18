@@ -9,9 +9,11 @@
 <jsp:attribute name="body">
 
     <h3>An application for management of flights.</h3>
-    <p>
-         You need to log in in order to access the pages.
-    </p>
+
+    <p>You need to log in in order to access the pages.</p>
+    <p>User can access only flight, airplane and destination lists.</p>
+    <p>Admin can access everything.</p>
+
 
 </jsp:attribute>
 </my:pagetemplate>

@@ -139,7 +139,7 @@ public class FlightController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute("flight") FlightCreateDTO flight, BindingResult bindingResult,
+    public String update(@Valid @ModelAttribute("flight") FlightDTO flight, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
@@ -151,20 +151,16 @@ public class FlightController {
             }
             return "flight/view";
         }
-        FlightDTO f = FlightDTO.builder()
-                .id(flight.getId())
-                .arrivalTime(flight.getArrivalTime())
-                .departureTime(flight.getDepartureTime())
-                .destination(destinationFacade.getDestinationById(flight.getDestinationId()))
-                .origin(destinationFacade.getDestinationById(flight.getOriginId()))
-                .airplane(airplaneFacade.getAirplaneById(flight.getAirplaneId()))
-                .flightNumber(flight.getFlightNumber())
-                .stewards(flight.getStewardIds()
-                                .stream()
-                                .map(id -> beanMapper.mapTo(stewardFacade.getStewardById(id), StewardWithoutFlightsDTO.class))
-                                .collect(Collectors.toSet()))
-                .build();
-        flightFacade.updateFlight(f);
+
+        FlightDTO dbFlight = flightFacade.getFlightById(flight.getId());
+        dbFlight.setFlightNumber(flight.getFlightNumber());
+        dbFlight.setArrivalTime(flight.getArrivalTime());
+        dbFlight.setDepartureTime(flight.getDepartureTime());
+        dbFlight.setOrigin(destinationFacade.getDestinationById(flight.getOrigin().getId()));
+        dbFlight.setDestination(destinationFacade.getDestinationById(flight.getDestination().getId()));
+        dbFlight.setAirplane(airplaneFacade.getAirplaneById(flight.getAirplane().getId()));
+
+        flightFacade.updateFlight(dbFlight);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Flight " + flight.getFlightNumber() + " was edited");
         return "redirect:" + uriBuilder.path("/flight/view/{id}").buildAndExpand(flight.getId()).encode().toUriString();

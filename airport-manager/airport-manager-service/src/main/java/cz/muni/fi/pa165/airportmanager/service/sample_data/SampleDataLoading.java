@@ -65,7 +65,7 @@ public class SampleDataLoading {
                 .id(1L)
                 .name("Andrej")
                 .surname("Danko")
-                .gender(Gender.Kapitan)
+                .gender(Gender.Male)
                 .birthDate(LocalDate.of(1974, Month.SEPTEMBER, 15))
                 .nationality("SVK")
                 .flights(new HashSet<FlightPO>())

@@ -50,7 +50,6 @@ public class StewardPO {
     @Column(nullable = false, updatable = false)
     private LocalDate birthDate;
 
-    //String for now .. but who's supposed to enum 60+ genders ._.
     @NotNull
     @Column(nullable = false)
     private Gender gender;
