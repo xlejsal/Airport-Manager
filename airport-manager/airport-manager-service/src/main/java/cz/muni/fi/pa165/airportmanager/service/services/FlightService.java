@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.airportmanager.service.services;
 
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -36,6 +37,13 @@ public interface FlightService {
      * @param flight flight entity to be created
      */
     FlightPO createFlight(FlightPO flight);
+
+    /**
+     * Update flight
+     * @param flight flight entity to be updated
+     * @return
+     */
+    FlightPO updateFlight(FlightPO flight);
 
     /**
      * Delete flight with set id

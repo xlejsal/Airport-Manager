@@ -10,7 +10,6 @@ import java.util.List;
  * Created on 2018-11-20
  */
 
-@Service
 public interface DestinationService {
 
     /**
@@ -32,6 +31,13 @@ public interface DestinationService {
      * @return
      */
     DestinationPO createDestination(DestinationPO destination);
+
+    /**
+     * Update a destination
+     * @param destination - Destination to be updated
+     * @return
+     */
+    DestinationPO updateDestination(DestinationPO destination);
 
     /**
      * Deletes a Destination entity

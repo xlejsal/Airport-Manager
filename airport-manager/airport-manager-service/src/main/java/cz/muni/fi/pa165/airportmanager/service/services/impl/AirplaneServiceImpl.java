@@ -33,7 +33,8 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public AirplanePO getAirplaneById(Long id) {
-        return airplaneRepo.findById(id).orElseThrow(() -> new AirportManagerDataAccessException("Airplane of ID " + id + " does not exist"));
+        return airplaneRepo.findById(id).orElseThrow(() -> new AirportManagerDataAccessException("Airplane of ID " +
+                id + " does not exist"));
     }
 
     @Override
@@ -46,8 +47,18 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
+    public AirplanePO updateAirplane(AirplanePO airplane) {
+        try{
+            return airplaneRepo.save(airplane);
+        } catch(DataAccessException e){
+            throw new AirportManagerDataAccessException("Cannot update Airplane", e);
+        }
+    }
+
+    @Override
     public void deleteAirplane(Long id) {
-        airplaneRepo.delete(airplaneRepo.findById(id).orElseThrow(() -> new AirportManagerDataAccessException("Airplane of ID " + id + " does not exist")));
+        airplaneRepo.delete(airplaneRepo.findById(id).orElseThrow(() ->
+                new AirportManagerDataAccessException("Airplane of ID " + id + " does not exist")));
     }
 
     @Override
@@ -64,7 +75,8 @@ public class AirplaneServiceImpl implements AirplaneService {
         try{
             return airplaneRepo.findByCompany(company);
         } catch(DataAccessException e){
-            throw new AirportManagerDataAccessException("Cannot find any Airplanes belonging to the Company " + company, e);
+            throw new AirportManagerDataAccessException("Cannot find any Airplanes belonging to the Company " +
+                    company, e);
         }
     }
 }

@@ -1,28 +1,42 @@
 package cz.muni.fi.pa165.airportmanager.service.facades.impl;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.FlightCreateDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.FlightDTO;
 import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.FlightFacade;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
-import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
-import cz.muni.fi.pa165.airportmanager.service.services.FlightService;
+import cz.muni.fi.pa165.airportmanager.service.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author kotrc
  * Created on 23.11.2018
  */
+@Service
+@Transactional
 public class FlightFacadeImpl implements FlightFacade {
 
     private FlightService flightService;
+    private AirplaneService airplaneService;
+    private DestinationService destinationService;
+    private StewardService stewardService;
     private BeanMappingService beanMappingService;
 
     @Autowired
-    public FlightFacadeImpl(FlightService flightService, BeanMappingService beanMappingService) {
+    public FlightFacadeImpl(FlightService flightService, BeanMappingService beanMappingService,
+                            AirplaneService airplaneService, DestinationService destinationService,
+                            StewardService stewardService) {
         this.flightService = flightService;
+        this.airplaneService = airplaneService;
+        this.destinationService = destinationService;
+        this.stewardService = stewardService;
         this.beanMappingService = beanMappingService;
     }
 
@@ -42,8 +56,24 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public FlightDTO createFlight(FlightDTO flight) {
-        return beanMappingService.mapTo(flightService.createFlight(beanMappingService.mapTo(flight, FlightPO.class)), FlightDTO.class);
+    public FlightDTO createFlight(FlightCreateDTO flight) {
+        FlightPO mappedFlight = beanMappingService.mapTo(flight, FlightPO.class);
+        mappedFlight.setAirplane(airplaneService.getAirplaneById(flight.getAirplaneId()));
+        mappedFlight.setOrigin(destinationService.getDestinationById(flight.getOriginId()));
+        mappedFlight.setDestination(destinationService.getDestinationById(flight.getDestinationId()));
+        Set<StewardPO> stewards = new HashSet<>();
+        for (Long id : flight.getStewardIds()) {
+            stewards.add(stewardService.getStewardById(id));
+        }
+        mappedFlight.setStewards(stewards);
+        FlightPO newFlight = flightService.createFlight(mappedFlight);
+        return beanMappingService.mapTo(newFlight, FlightDTO.class);
+    }
+
+    @Override
+    public FlightDTO updateFlight(FlightDTO flight) {
+        return beanMappingService.mapTo(flightService.updateFlight(beanMappingService.mapTo(flight, FlightPO.class)),
+                FlightDTO.class);
     }
 
     @Override

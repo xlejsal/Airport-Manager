@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.api.dto;
 
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -24,8 +25,11 @@ import lombok.experimental.Wither;
 @EqualsAndHashCode(of = {"name"})
 public class AirplaneDTO {
     private Long id;
+    @NotNull
     private String name;
+    @NotNull
     private String type;
+    @NotNull
     private String company;
     private Integer capacity;
 }

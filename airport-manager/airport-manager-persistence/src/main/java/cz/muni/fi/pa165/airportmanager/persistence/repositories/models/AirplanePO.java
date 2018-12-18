@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Wither;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode(of = {"name"})
 @Entity
 @Table(name="Airplanes")
+@DynamicUpdate
 public class AirplanePO {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -47,6 +49,5 @@ public class AirplanePO {
     @Column(nullable = false)
     private String company;
 
-    @Column(nullable = false)
     private Integer capacity;
 }

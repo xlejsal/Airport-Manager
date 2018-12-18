@@ -1,15 +1,16 @@
 package cz.muni.fi.pa165.airportmanager.persistence.repositories.models;
 
-import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
+import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import lombok.*;
 import lombok.experimental.Wither;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Simple entity class modeling flight Steward,
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(of = {"name", "surname", "birthDate"})
 @Entity
 @Table(name="Stewards", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "surname", "birthDate"}))
+@DynamicUpdate
 public class StewardPO {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -44,14 +46,15 @@ public class StewardPO {
     private String surname;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false, updatable = false)
     private LocalDate birthDate;
 
     //String for now .. but who's supposed to enum 60+ genders ._.
+    @NotNull
     @Column(nullable = false)
-    private String gender;
+    private Gender gender;
 
-    @Column(nullable = false)
     private String nationality;
 
     @ManyToMany(mappedBy = "stewards", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
