@@ -3,14 +3,18 @@
 Team project for the university course PA165 at FI MUNI
 
 ### Login
-##### User
+User can access only login page, index page, flight, airplane and destination lists.
+
+Admin can access everything.
+#### User
 username: user
 
 password: password
-##### Admin
+#### Admin
 username: admin
 
 password: adminPassword
+
 
 ### Team members:
 * Vojtěch Lejsal (učo 445629)
