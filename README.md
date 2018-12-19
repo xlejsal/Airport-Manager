@@ -2,6 +2,8 @@
 
 Team project for the university course PA165 at FI MUNI
 
+## It appears the security service doesn't work when the project is run via mvn cargo:run. The service however works when the project is run via IDE. We have no idea why is that the case.
+
 ### Login
 User can access only login page, index page, flight, airplane and destination lists.
 
