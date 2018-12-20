@@ -30,9 +30,9 @@
             <td><c:out value="${flight.destination.city}"/> <c:out value="${flight.destination.country}" /></td>
             <td><c:out value="${flight.arrivalTime}"/></td>
             <td><c:out value="${flight.airplane.name}"/></td>
-            <c:forEach items="${flight.stewards}" var="steward">
-                <td><c:out value="${steward.name} ${steward.surname}"/></td>
-            </c:forEach>
+            <td>
+                <my:a href="/flight/view/${flight.id}/stewards" class="btn btn-primary btn-sm">Stewards</my:a>
+            </td>
         </tr>
         </tbody>
     </table>

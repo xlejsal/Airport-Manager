@@ -19,10 +19,10 @@
             </div>
         </div>
         <div class="form-group ${originId_error?'has-error':''}">
-            <form:label path="originId" cssClass="col-sm-2 control-label">Origin</form:label>
+            <form:label path="origin" cssClass="col-sm-2 control-label">Origin</form:label>
             <div class="col-sm-10">
-                <form:input path="originId" cssClass="form-control" readonly="true" value="${flight.origin.id}">${flight.origin.airportCode}</form:input>
-                <form:errors path="originId" cssClass="help-block"/>
+                <form:input path="origin" cssClass="form-control" readonly="true" value="${flight.origin.airportCode}"/>
+                <form:errors path="origin" cssClass="help-block"/>
             </div>
         </div>
         <div class="form-group ${departureTime_error?'has-error':''}">
@@ -33,10 +33,10 @@
             </div>
         </div>
         <div class="form-group ${destinationId_error?'has-error':''}">
-            <form:label path="destinationId" cssClass="col-sm-2 control-label">Destination</form:label>
+            <form:label path="destination" cssClass="col-sm-2 control-label">Destination</form:label>
             <div class="col-sm-10">
-                <form:input path="destinationId" cssClass="form-control" readonly="true" value="${flight.destination.id}">${flight.destination.airportCode}</form:input>
-                <form:errors path="destinationId" cssClass="help-block"/>
+                <form:input path="destination" cssClass="form-control" readonly="true" value="${flight.destination.airportCode}"/>
+                <form:errors path="destination" cssClass="help-block"/>
             </div>
         </div>
         <div class="form-group ${arrivalTime_error?'has-error':''}">
@@ -47,25 +47,25 @@
             </div>
         </div>
         <div class="form-group">
-            <form:label path="airplaneId" cssClass="col-sm-2 control-label">Airplane</form:label>
+            <form:label path="airplane" cssClass="col-sm-2 control-label">Airplane</form:label>
             <div class="col-sm-10">
-                    <form:select path="airplaneId" cssClass="form-control" value="${flight.airplane.name}">
+                    <form:select path="airplane" cssClass="form-control">
                         <c:forEach items="${airplane}" var="c">
                             <form:option value="${c.id}">${c.name}</form:option>
                         </c:forEach>
                     </form:select>
-                <p class="help-block"><form:errors path="airplaneId" cssClass="error"/></p>
+                <p class="help-block"><form:errors path="airplane" cssClass="error"/></p>
             </div>
         </div>
         <div class="form-group">
-            <form:label path="stewardIds" cssClass="col-sm-2 control-label">Stewards</form:label>
+            <form:label path="stewards" cssClass="col-sm-2 control-label">Stewards</form:label>
             <div class="col-sm-10">
-                    <form:select path="stewardIds" cssClass="form-control" value="${flight.stewards}">
+                    <form:select path="stewards" cssClass="form-control">
                         <c:forEach items="${stewards}" var="c">
                             <form:option value="${c.id}">${c.name}${c.surname}</form:option>
                         </c:forEach>
                     </form:select>
-                <p class="help-block"><form:errors path="stewardIds" cssClass="error"/></p>
+                <p class="help-block"><form:errors path="stewards" cssClass="error"/></p>
             </div>
         </div>
 
