@@ -25,10 +25,15 @@ public class AirplaneDTOValidator implements Validator {
         AirplaneDTO plane = (AirplaneDTO) target;
         List<AirplaneDTO> planes = facade.getAllAirplanes();
 
+        if(plane.getCapacity() < 0){
+            errors.rejectValue("capacity", "invalid.capacity","Capacity below 0...");
+        }
+
         for(AirplaneDTO ap : planes){
             if(ap.getName().equals(plane.getName())) {
-                errors.rejectValue("name", "invalid.name","Name already exists");
+                errors.rejectValue("name", "invalid.name","Name already exists!");
             }
+            break;
         }
     }
 }

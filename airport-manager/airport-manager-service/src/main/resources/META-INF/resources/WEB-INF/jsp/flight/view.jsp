@@ -82,7 +82,7 @@
         <div class="col-sm-10">
                 <form:select path="stewards" cssClass="form-control">
                     <c:forEach items="${stewards}" var="c">
-                        <form:option value="${c.id}">${c.name}${c.surname}</form:option>
+                        <form:option value="${c.id}">${c.name} ${c.surname}</form:option>
                     </c:forEach>
                 </form:select>
             <p class="help-block"><form:errors path="stewards" cssClass="error"/></p>

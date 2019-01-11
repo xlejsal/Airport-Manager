@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <my:pagetemplate title="Destinations">
 <jsp:attribute name="body">
@@ -22,9 +23,11 @@
             <td><c:out value="${destination.airportCode}"/></td>
             <td><c:out value="${destination.city}"/></td>
             <td><c:out value="${destination.country}"/></td>
+            <sec:authorize access="hasRole('ADMIN')">
             <td>
                 <my:a href="/destination/view/${destination.id}" class="btn btn-primary">View</my:a>
             </td>
+            </sec:authorize>
         </tr>
     </c:forEach>
     </tbody>

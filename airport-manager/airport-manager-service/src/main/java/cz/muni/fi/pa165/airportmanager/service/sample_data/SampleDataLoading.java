@@ -47,7 +47,7 @@ public class SampleDataLoading {
         log.info("Loading sample data.");
 
         UserPO admin = UserPO.builder()
-                .login("admin")
+                .login("sample_admin")
                 .email("admin@yahoo.com")
                 .name("Administratorus")
                 .surname("Rex")
