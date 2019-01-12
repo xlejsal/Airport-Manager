@@ -59,14 +59,14 @@
         </div>
     </div>
     <div class="form-group ${departureTime_error?'has-error':''}">
-        <form:label path="departureTime" cssClass="col-sm-2 control-label">Departure Time</form:label>
+        <form:label path="departureTime" cssClass="col-sm-2 control-label">Departure Time (format: yyyy-MM-dd-HH-mm)</form:label>
         <div class="col-sm-10">
             <form:input path="departureTime" cssClass="form-control" required="true" readonly="true"/>
             <form:errors path="departureTime" cssClass="help-block"/>
         </div>
     </div>
     <div class="form-group ${arrivalTime_error?'has-error':''}">
-        <form:label path="arrivalTime" cssClass="col-sm-2 control-label">Arrival Time</form:label>
+        <form:label path="arrivalTime" cssClass="col-sm-2 control-label">Arrival Time (format: yyyy-MM-dd-HH-mm)</form:label>
         <div class="col-sm-10">
             <form:input path="arrivalTime" cssClass="form-control" required="true"/>
             <form:errors path="arrivalTime" cssClass="help-block"/>
