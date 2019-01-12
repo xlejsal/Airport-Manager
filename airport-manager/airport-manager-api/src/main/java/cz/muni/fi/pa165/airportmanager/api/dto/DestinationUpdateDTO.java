@@ -12,7 +12,6 @@ import lombok.experimental.Wither;
  * Destination DTO class, based on Destination entity
  *
  * @author Stepan Benes
- * Created on 2018-11-20
  */
 
 @Getter
@@ -22,7 +21,7 @@ import lombok.experimental.Wither;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"airportCode"})
-public class DestinationDTO {
+public class DestinationUpdateDTO {
     private Long id;
     private String airportCode;
     private String city;

@@ -60,14 +60,15 @@ public class FlightController {
         return "flight/view";
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable long id, Model model) {
+    @RequestMapping(value = "/view/{id}/stewards", method = RequestMethod.GET)
+    public String stewards(@PathVariable long id, Model model) {
+        model.addAttribute("stewards", flightFacade.getFlightById(id).getStewards());
         model.addAttribute("flight", flightFacade.getFlightById(id));
-        return "flight/edit";
+        return "flight/stewards";
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         FlightDTO flight = flightFacade.getFlightById(id);
         log.debug("delete()");
         try {

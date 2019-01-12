@@ -15,7 +15,6 @@
             <div class="col-sm-10">
                 <form:input path="airportCode" cssClass="form-control" required="true"/>
                 <form:errors path="airportCode" cssClass="help-block"/>
-                <p class="help-block"><form:errors path="airportCode" cssClass="error"/></p>
             </div>
         </div>
         <div class="form-group ${city_error ? 'has-error' : ''}">
