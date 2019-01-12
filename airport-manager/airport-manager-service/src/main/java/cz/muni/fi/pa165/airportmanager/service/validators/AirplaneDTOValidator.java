@@ -32,8 +32,8 @@ public class AirplaneDTOValidator implements Validator {
         for(AirplaneDTO ap : planes){
             if(ap.getName().equals(plane.getName())) {
                 errors.rejectValue("name", "invalid.name","Name already exists!");
+                break;
             }
-            break;
         }
     }
 }

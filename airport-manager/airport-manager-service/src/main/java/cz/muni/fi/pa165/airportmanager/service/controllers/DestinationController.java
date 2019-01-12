@@ -1,7 +1,10 @@
 package cz.muni.fi.pa165.airportmanager.service.controllers;
 
 import cz.muni.fi.pa165.airportmanager.api.dto.DestinationDTO;
+import cz.muni.fi.pa165.airportmanager.api.dto.DestinationUpdateDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.DestinationFacade;
+import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
+import cz.muni.fi.pa165.airportmanager.service.validators.DestinationDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,6 +27,9 @@ public class DestinationController {
 
     private final DestinationFacade facade;
     private final static Logger log = LoggerFactory.getLogger(DestinationController.class);
+
+    @Autowired
+    BeanMappingService beanMapper;
 
     @Autowired
     public DestinationController(DestinationFacade facade) {
@@ -41,7 +48,14 @@ public class DestinationController {
         return "destination/new";
     }
 
-    @PostMapping("/create")
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        if (binder.getTarget() instanceof DestinationDTO) {
+            binder.addValidators(new DestinationDTOValidator(facade));
+        }
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(@Valid @ModelAttribute("destinationCreate") DestinationDTO destination, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("create(destinationCreate={})", destination);
@@ -59,7 +73,7 @@ public class DestinationController {
         //create destination
         Long id = facade.createDestination(destination).getId();
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Destination " + id + " was created");
+        redirectAttributes.addFlashAttribute("alert_success", "Destination " + destination.getAirportCode() + " was created");
         return "redirect:" + uriBuilder.path("/destination/list").toUriString();
     }
 
@@ -71,7 +85,7 @@ public class DestinationController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("destinationUpdate") DestinationDTO destination, BindingResult bindingResult,
+    public String update(@Valid @ModelAttribute("destinationUpdate") DestinationUpdateDTO destination, BindingResult bindingResult,
                          Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
         log.debug("update(destinationUpdate={})", destination.toString());
         //in case of validation error forward back to the the form
@@ -86,10 +100,10 @@ public class DestinationController {
             return "destination/view";
         }
         //create destination
-        facade.updateDestination(destination);
+        DestinationDTO newDestination = facade.updateDestination(beanMapper.mapTo(destination, DestinationDTO.class));
         //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Destination " + destination.getId() + " was updated");
-        return "redirect:" + uriBuilder.path("/destination/view/{id}").buildAndExpand(destination.getId()).encode().toUriString();
+        redirectAttributes.addFlashAttribute("alert_success", "Destination " + newDestination.getAirportCode() + " was updated");
+        return "redirect:" + uriBuilder.path("/destination/list").toUriString();
     }
 
     @PostMapping("/delete/{id}")
