@@ -6,6 +6,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="my" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="${pageContext.request.locale}">
 <head>
     <meta charset="utf-8">
@@ -38,9 +39,13 @@
                     <ul class="dropdown-menu">
                         <li><my:a href="/flight/list">Flights</my:a></li>
                         <li><my:a href="/airplane/list">Airplanes</my:a></li>
+                        <sec:authorize access="hasRole('ADMIN')">
                         <li><my:a href="/steward/list">Stewards</my:a></li>
+                        </sec:authorize>
                         <li><my:a href="/destination/list">Destinations</my:a></li>
+                        <sec:authorize access="hasRole('ADMIN')">
                         <li><my:a href="/user/list">Users</my:a></li>
+                        </sec:authorize>
                     </ul>
                 </li>
                 <li class="dropdown">

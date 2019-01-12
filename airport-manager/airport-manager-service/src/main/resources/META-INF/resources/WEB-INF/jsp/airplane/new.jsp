@@ -34,7 +34,7 @@
         <div class="form-group ${capacity_error?'has-error':''}">
             <form:label path="capacity" cssClass="col-sm-2 control-label">Capacity</form:label>
             <div class="col-sm-10">
-                <form:input type="number" path="capacity" cssClass="form-control"/>
+                <form:input type="number" path="capacity" cssClass="form-control" required="true"/>
                 <form:errors path="capacity" cssClass="help-block"/>
             </div>
         </div>

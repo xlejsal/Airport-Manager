@@ -38,6 +38,12 @@ public class UserController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         UserDTO user = userFacade.getUserById(id);
+
+        if(user.isAdmin()){
+            redirectAttributes.addFlashAttribute("alert_danger", "User \"" + user.getLogin() + "\" cannot be deleted - it's an admin!");
+            return "redirect:" + uriBuilder.path("/user/view/" + id + "").toUriString();
+        }
+
         try {
             userFacade.deleteUser(id);
             redirectAttributes.addFlashAttribute("alert_success", "User \"" + user.getLogin() + "\" was deleted.");

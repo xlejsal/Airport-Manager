@@ -13,7 +13,7 @@
         <div class="form-group ${airportCode_error ? 'has-error' : ''}">
             <form:label path="airportCode" cssClass="col-sm-2 control-label">Airport Code</form:label>
             <div class="col-sm-10">
-                <form:input path="airportCode" cssClass="form-control"/>
+                <form:input path="airportCode" cssClass="form-control" required="true"/>
                 <form:errors path="airportCode" cssClass="help-block"/>
                 <p class="help-block"><form:errors path="airportCode" cssClass="error"/></p>
             </div>
@@ -21,7 +21,7 @@
         <div class="form-group ${city_error ? 'has-error' : ''}">
             <form:label path="city" cssClass="col-sm-2 control-label">City</form:label>
             <div class="col-sm-10">
-                <form:input path="city" cssClass="form-control"/>
+                <form:input path="city" cssClass="form-control" required="true"/>
                 <form:errors path="city" cssClass="help-block"/>
             </div>
         </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Create product</button>
+        <button class="btn btn-primary" type="submit">Create destination</button>
 </form:form>
 
 </jsp:attribute>

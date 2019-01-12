@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.airportmanager.service.service;
 
+import cz.muni.fi.pa165.airportmanager.api.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.StewardRepository;
-import cz.muni.fi.pa165.airportmanager.persistence.repositories.enums.Gender;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.AirplanePO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.DestinationPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
@@ -23,9 +23,9 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.*;
 
-import static org.testng.Assert.assertEquals;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
 
 /**
  * A set of tests to check the functionality of StewardServiceImpl
@@ -60,7 +60,7 @@ public class StewardServiceImplTest {
                     .id(1L)
                     .name("Andrej")
                     .surname("Danko")
-                    .gender(Gender.Kapitan)
+                    .gender(Gender.Male)
                     .birthDate(LocalDate.of(1974, Month.SEPTEMBER, 15))
                     .nationality("SVK")
                     .flights(new HashSet<FlightPO>())

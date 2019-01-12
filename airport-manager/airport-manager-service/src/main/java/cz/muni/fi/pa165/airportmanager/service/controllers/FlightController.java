@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author kotrc
@@ -136,5 +137,33 @@ public class FlightController {
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Flight " + newFlight.getFlightNumber() + " was created");
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("flight") FlightDTO flight, BindingResult bindingResult,
+                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "flight/view";
+        }
+
+        FlightDTO dbFlight = flightFacade.getFlightById(flight.getId());
+        dbFlight.setFlightNumber(flight.getFlightNumber());
+        dbFlight.setArrivalTime(flight.getArrivalTime());
+        dbFlight.setDepartureTime(flight.getDepartureTime());
+        dbFlight.setOrigin(destinationFacade.getDestinationById(flight.getOrigin().getId()));
+        dbFlight.setDestination(destinationFacade.getDestinationById(flight.getDestination().getId()));
+        dbFlight.setAirplane(airplaneFacade.getAirplaneById(flight.getAirplane().getId()));
+
+        flightFacade.updateFlight(dbFlight);
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Flight " + flight.getFlightNumber() + " was edited");
+        return "redirect:" + uriBuilder.path("/flight/view/{id}").buildAndExpand(flight.getId()).encode().toUriString();
     }
 }
