@@ -66,45 +66,6 @@ public class FlightController {
         return "flight/stewards";
     }
 
-    @RequestMapping(value = "/view/{id}/stewards/add", method = RequestMethod.GET)
-    public String allStewards(@PathVariable long id, Model model) {
-        model.addAttribute("stewards", stewardFacade.getAllStewards());
-        model.addAttribute("flight", flightFacade.getFlightById(id));
-        return "flight/stewards/add";
-    }
-
-    @RequestMapping(value = "/view/{id}/stewards/remove/{sid}", method = RequestMethod.POST)
-    public String remove(@PathVariable long id, @PathVariable long sid, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        FlightDTO flight = flightFacade.getFlightById(id);
-        StewardDTO steward = stewardFacade.getStewardById(sid);
-        try {
-            flightFacade.removeSteward(steward, flight);
-            redirectAttributes.addFlashAttribute("alert_success", "Steward \"" + steward.getName() + steward.getSurname() + "\" was removed.");
-        } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Steward \"" + steward.getName() + steward.getSurname() + "\" cannot be removed.");
-        }
-        return "redirect:" + uriBuilder.path("/flight/stewards").toUriString();
-    }
-
-    @RequestMapping(value = "/view/{id}/stewards/add/{sid}", method = RequestMethod.POST)
-    public String add(@PathVariable long id, @PathVariable long sid, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        FlightDTO flight = flightFacade.getFlightById(id);
-        StewardDTO steward = stewardFacade.getStewardById(sid);
-        try {
-            flightFacade.addSteward(steward, flight);
-            redirectAttributes.addFlashAttribute("alert_success", "Steward \"" + steward.getName() + steward.getSurname() + "\" was added to flight.");
-        } catch (Exception ex) {
-            redirectAttributes.addFlashAttribute("alert_danger", "Steward \"" + steward.getName() + steward.getSurname() + "\" cannot be added to flight.");
-        }
-        return "redirect:" + uriBuilder.path("/flight/stewards/add").toUriString();
-    }
-
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable long id, Model model) {
-        model.addAttribute("flight", flightFacade.getFlightById(id));
-        return "flight/edit";
-    }
-
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         FlightDTO flight = flightFacade.getFlightById(id);
@@ -176,27 +137,4 @@ public class FlightController {
         redirectAttributes.addFlashAttribute("alert_success", "Flight " + newFlight.getFlightNumber() + " was created");
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
     }
-
-
-
-    /**
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public String update(@Valid @ModelAttribute("flight") FlightDTO flight, BindingResult bindingResult, @PathVariable long id,
-                         Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
-
-        if (bindingResult.hasErrors()) {
-            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-                log.trace("ObjectError: {}", ge);
-            }
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-                log.trace("FieldError: {}", fe);
-            }
-            return "flight/edit";
-        }
-        FlightDTO newFlight = flightFacade.updateFlight(beanMapper.mapTo(flight, FlightDTO.class));
-        //report success
-        redirectAttributes.addFlashAttribute("alert_success", "Flight " + newFlight.getFlightNumber() + " was edited");
-        return "redirect:" + uriBuilder.path("/flight/list").toUriString();
-    }**/
 }

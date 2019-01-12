@@ -20,20 +20,10 @@
         <tr>
             <td><c:out value="${steward.name}"/></td>
             <td><c:out value="${steward.surname}"/></td>
-            <td>
-                <form method="post" action="${pageContext.request.contextPath}/flight/view/${flight.id}/stewards/remove/${steward.id}">
-                    <button type="submit" class="btn btn-danger">Remove from flight</button>
-                </form>
-            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-
-    <my:a href="/flight/view/${flight.id}/stewards/add" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        Add steward
-    </my:a>
 
 </jsp:attribute>
 </my:pagetemplate>
