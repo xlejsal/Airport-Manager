@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,6 +79,53 @@ public class FlightController {
             redirectAttributes.addFlashAttribute("alert_danger", "Flight \"" + flight.getFlightNumber() + "\" cannot be deleted.");
         }
         return "redirect:" + uriBuilder.path("/flight/list").toUriString();
+    }
+
+    @GetMapping("/{flightNumber}/remove/steward/{stewardId}")
+    public String removeSteward(@PathVariable String flightNumber, @PathVariable long stewardId, Model model) {
+        FlightDTO flight = flightFacade.getFlightByFlightNumber(flightNumber);
+        StewardDTO steward = stewardFacade.getStewardById(stewardId);
+        StewardWithoutFlightsDTO stewardNoFlights = beanMapper.mapTo(steward, StewardWithoutFlightsDTO.class);
+        flight.getStewards().remove(stewardNoFlights);
+        flightFacade.updateFlight(flight);
+
+        if (model.containsAttribute("availableStewards")) {
+            List<StewardDTO> availableStewards = stewardFacade.getAvailableStewardsFromTo(flight.getDepartureTime(), flight.getArrivalTime());
+            if (!availableStewards.contains(steward)) {
+                availableStewards.add(steward);
+            }
+            model.addAttribute("availableStewards", availableStewards);
+        }
+        model.addAttribute("flight", flight);
+        model.addAttribute("stewards", flight.getStewards());
+        return "flight/stewards";
+    }
+
+    @GetMapping("/{flightNumber}/add/steward/{stewardId}")
+    public String addSteward(@PathVariable String flightNumber, @PathVariable long stewardId, Model model) {
+        FlightDTO flight = flightFacade.getFlightByFlightNumber(flightNumber);
+        StewardDTO steward = stewardFacade.getStewardById(stewardId);
+        StewardWithoutFlightsDTO stewardNoFlights = beanMapper.mapTo(steward, StewardWithoutFlightsDTO.class);
+        flight.getStewards().add(stewardNoFlights);
+        flightFacade.updateFlight(flight);
+
+        if (model.containsAttribute("availableStewards")) {
+            List<StewardDTO> availableStewards = stewardFacade.getAvailableStewardsFromTo(flight.getDepartureTime(), flight.getArrivalTime());
+            availableStewards.remove(steward);
+            model.addAttribute("availableStewards", availableStewards);
+        }
+        model.addAttribute("flight", flight);
+        model.addAttribute("stewards", flight.getStewards());
+        return "flight/stewards";
+    }
+
+    @GetMapping("/{flightNumber}/stewards/toggle")
+    public String toggleAvailableStewardsTable(@PathVariable String flightNumber, Model model) {
+        FlightDTO flight = flightFacade.getFlightByFlightNumber(flightNumber);
+        model.addAttribute("availableStewards", stewardFacade.getAvailableStewardsFromTo(flight.getDepartureTime(), flight.getArrivalTime()));
+        model.addAttribute("flight", flight);
+        model.addAttribute("stewards", flight.getStewards());
+        return "flight/stewards";
     }
 
     @InitBinder

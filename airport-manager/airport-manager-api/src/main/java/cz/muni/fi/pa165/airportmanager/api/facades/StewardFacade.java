@@ -60,4 +60,12 @@ public interface StewardFacade {
      * @return a list of flights
      */
     List<FlightDTO> getFlightsOfSteward(Long id);
+
+    /**
+     * Get all stewards that don't have any flight in the given interval
+     * @param from start of the interval
+     * @param to end of the interval
+     * @return List of all available stewards
+     */
+    List<StewardDTO> getAvailableStewardsFromTo(LocalDateTime from, LocalDateTime to);
 }

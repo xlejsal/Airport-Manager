@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.airportmanager.api.dto.AirplaneUpdateDTO;
 import cz.muni.fi.pa165.airportmanager.api.facades.AirplaneFacade;
 import cz.muni.fi.pa165.airportmanager.service.services.BeanMappingService;
 import cz.muni.fi.pa165.airportmanager.service.validators.AirplaneDTOValidator;
+import cz.muni.fi.pa165.airportmanager.service.validators.AirplaneUpdateDTOValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,9 @@ public class AirplaneController {
     protected void initBinder(WebDataBinder binder) {
         if (binder.getTarget() instanceof AirplaneDTO) {
             binder.addValidators(new AirplaneDTOValidator(airplaneFacade));
+        }
+        if (binder.getTarget() instanceof AirplaneUpdateDTO) {
+            binder.addValidators(new AirplaneUpdateDTOValidator(airplaneFacade));
         }
     }
 

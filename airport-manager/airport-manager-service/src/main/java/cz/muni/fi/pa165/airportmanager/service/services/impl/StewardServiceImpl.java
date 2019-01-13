@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.airportmanager.service.services.impl;
 
+import cz.muni.fi.pa165.airportmanager.api.dto.StewardDTO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.StewardRepository;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.FlightPO;
 import cz.muni.fi.pa165.airportmanager.persistence.repositories.models.StewardPO;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -81,5 +83,16 @@ public class StewardServiceImpl implements StewardService {
     @Override
     public List<FlightPO> getFlightsOfSteward(Long id){
         return new ArrayList<FlightPO>(getStewardById(id).getFlights());
+    }
+
+    @Override
+    public List<StewardPO> getAvailableStewardsFromTo(LocalDateTime from, LocalDateTime to) {
+        List<StewardPO> availableStewards = new LinkedList<>();
+        for (StewardPO steward : stewardRepo.findAll()) {
+            if (isAvailableFromTo(steward.getId(), from, to)) {
+                availableStewards.add(steward);
+            }
+        }
+        return availableStewards;
     }
 }

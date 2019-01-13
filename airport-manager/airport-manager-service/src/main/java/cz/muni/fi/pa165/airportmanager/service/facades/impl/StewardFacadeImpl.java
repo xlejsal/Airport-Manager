@@ -66,4 +66,9 @@ public class StewardFacadeImpl implements StewardFacade {
     public List<FlightDTO> getFlightsOfSteward(Long id){
         return mapper.mapTo(stewardService.getFlightsOfSteward(id), FlightDTO.class);
     }
+
+    @Override
+    public List<StewardDTO> getAvailableStewardsFromTo(LocalDateTime from, LocalDateTime to) {
+        return mapper.mapTo(stewardService.getAvailableStewardsFromTo(from, to), StewardDTO.class);
+    }
 }

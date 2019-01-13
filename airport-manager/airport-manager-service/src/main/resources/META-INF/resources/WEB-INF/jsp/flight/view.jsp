@@ -106,17 +106,6 @@
             <p class="help-block"><form:errors path="airplane.id" cssClass="error"/></p>
         </div>
     </div>
-    <div class="form-group">
-        <form:label path="stewards" cssClass="col-sm-2 control-label">Stewards</form:label>
-        <div class="col-sm-10">
-                <form:select path="stewards" cssClass="form-control">
-                    <c:forEach items="${stewards}" var="c">
-                        <form:option value="${c.id}">${c.name} ${c.surname}</form:option>
-                    </c:forEach>
-                </form:select>
-            <p class="help-block"><form:errors path="stewards" cssClass="error"/></p>
-        </div>
-    </div>
 
     <td><button class="btn btn-primary" type="submit">Update</button></td>
 
